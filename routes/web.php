@@ -48,7 +48,52 @@ Route::prefix('admin')->name('admin.')->group(function() {
             return redirect()->route('admin.categories.list');
         }) ->name('categories.show');
     });
-    
+    Route::get('blog', function () {
+        return view('blog/list');
+    }) ->name('blog.list');
+    Route::prefix('blog')->group(function() {
+        Route::get('create', function () {
+            return view('blog/create');
+        }) ->name('blog.create');
+        Route::get('store', function () {
+            return redirect()->route('admin.blog.list');
+        }) ->name('blog.store');
+        Route::post('save', function () {
+            return redirect()->route('admin.blog.list');
+        }) ->name('blog.save');
+        Route::get('edit/{id?}', function ($id = null) {
+            if($id == null) {
+                return 'nhập id';
+            }else {
+                return 'id:' . $id ;
+            };
+            return redirect()->route('admin.blog.list');
+        }) ->name('blog.edit');
+        Route::put('update/{id?}', function ($id = null) {
+            if($id == null) {
+                return 'nhập id';
+            }else {
+                return 'id:' . $id ;
+            };
+            return redirect()->route('admin.blog.list');
+        }) ->name('blog.update');
+        Route::get('delete/{id?}', function ($id = null) {
+            if($id == null) {
+                return 'nhập id';
+            }else {
+                return 'id:' . $id ;
+            };
+            return redirect()->route('admin.blog.list');
+        }) ->name('blog.delete');
+        Route::get('show/{id?}', function ($id= null) {
+            if($id == null) {
+                return 'nhập id';
+            }else {
+                return 'id:' . $id ;
+            };
+            return redirect()->route('admin.blog.list');
+        }) ->name('blog.show');
+    });
     
 });
 
