@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\View;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,11 +13,40 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::prefix('admin')->name('admin.')->group(function() {
+Route::get('/users/index' , function() {
+    return view('backend.users.index');
+    // return 'dsdsd';
+})->name('frontend.posts.show') ;
+Route::get('/posts/show' , function() {
+    return view('frontend.posts.show');
+    // return 'dsdsd';
+})->name('frontend.posts.show') ;
+Route::get('/' , function() {
+    return view('home.index')->with('name','le cong minh');
+    // return 'dsdsd';
+})->name('home') ;
+Route::prefix('backend')->name('backend.')->group(function() {
     Route::get('dashboard', function () {
         return view('dashboard');
     }) ->name('dashboard.index');
+    Route::prefix('users')->name('users.')->group(function() {
+        Route::get('index', function () {
+            return view('backend.users.index');
+            // return ('dsdsd');
+        })->name('index');
+        Route::get('create', function () {
+            return view('backend.users.create');
+            // return ('dsdsd');
+        })->name('create');
+        Route::get('edit', function () {
+            return view('backend.users.edit');
+            // return ('dsdsd');
+        })->name('edit');
+    });
+    // Route::get('users', function () {
+    //     return view('backend.users.index');
+    // }) ->name('users.index');
+
     Route::get('categories', function () {
         return view('categories/list');
     }) ->name('categories.list');
