@@ -13,22 +13,13 @@ use Illuminate\Support\Facades\View;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/users/index' , function() {
-    return view('backend.users.index');
-    // return 'dsdsd';
-})->name('frontend.posts.show') ;
-Route::get('/posts/show' , function() {
-    return view('frontend.posts.show');
-    // return 'dsdsd';
-})->name('frontend.posts.show') ;
-Route::get('/' , function() {
-    return view('home.index')->with('name','le cong minh');
-    // return 'dsdsd';
-})->name('home') ;
 Route::prefix('backend')->name('backend.')->group(function() {
     Route::get('dashboard', function () {
         return view('dashboard');
     }) ->name('dashboard.index');
+    Route::get('home', function () {
+        return view('home.index');
+    }) ->name('home.index');
     Route::prefix('users')->name('users.')->group(function() {
         Route::get('index', function () {
             return view('backend.users.index');
@@ -42,6 +33,12 @@ Route::prefix('backend')->name('backend.')->group(function() {
             return view('backend.users.edit');
             // return ('dsdsd');
         })->name('edit');
+    });
+    Route::prefix('posts')->name('posts.')->group(function() {
+        Route::get('create', function () {
+            return view('posts.create');
+            // return ('dsdsd');
+        })->name('create');
     });
     // Route::get('users', function () {
     //     return view('backend.users.index');

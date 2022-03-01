@@ -17,9 +17,7 @@
     </div>
 @endsection
 @section('content')
-<section class="content">
-  <div class="container-fluid">
-      <div class="row">
+    <div class="row">
       <div class="card-body table-responsive p-0">
                 <table class="table table-hover text-nowrap">
                   <thead>
@@ -63,7 +61,5 @@
                   </tbody>
                 </table>
               </div>
-      </div>
-  </div>     
-</section>
+    </div>
 @endsection
