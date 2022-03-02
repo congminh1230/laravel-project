@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,13 +14,14 @@ use Illuminate\Support\Facades\View;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::prefix('backend')->name('backend.')->group(function() {
-    Route::get('dashboard', function () {
-        return view('dashboard');
-    }) ->name('dashboard.index');
-    Route::get('home', function () {
-        return view('home.index');
-    }) ->name('home.index');
+Route::get('/','HomeController@index');
+
+Route::prefix('backend')->name('backend.')->namespace('Backend')->group(function() {
+    Route::get('dashboard','DashboardController@index');
+    // Route::get('home',HomeController::class , 'index' );
+    // Route::get('home', function () {
+    //     return view('home.index');
+    // }) ->name('home.index');
     Route::prefix('users')->name('users.')->group(function() {
         Route::get('index', function () {
             return view('backend.users.index');
