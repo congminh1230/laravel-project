@@ -40,7 +40,13 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
-        dd(1);
+        $data= true;
+        if($data) {
+                // return redirect()->route('backend.users.index');
+                return redirect()->action([UserController::class , 'index']);
+        }else {
+            return redirect()->back();
+        }
     }
 
     /**
@@ -79,6 +85,13 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $data= true;
+        if($data) {
+                // return redirect()->route('backend.users.index');
+                return redirect()->action([UserController::class , 'index']);
+        }else {
+            return redirect()->back();
+        }
     }
 
     /**

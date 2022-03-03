@@ -15,7 +15,7 @@ class PostController extends Controller
     public function index(Request $request)
     {
         // dd(1);
-        dd($request->fullUrl()());
+        // dd($request->fullUrl()());
         return view('backend.posts.index');
     }
 
@@ -38,6 +38,13 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $data= true;
+        if($data) {
+                return redirect()->route('backend.posts.index');
+                // return redirect()->action([PostController::class , 'index']);
+        }else {
+            return redirect()->back();
+        }
        if($request->is('backend/*')) {
            dd('dung');
        }else {
@@ -82,6 +89,13 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $data= true;
+        if($data) {
+                return redirect()->route('backend.posts.index');
+                // return redirect()->action([PostController::class , 'index']);
+        }else {
+            return redirect()->back();
+        }
     }
 
     /**

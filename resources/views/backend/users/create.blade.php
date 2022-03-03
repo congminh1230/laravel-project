@@ -17,7 +17,8 @@
     </div>
 @endsection
 @section('content')
-<form id="quickForm">
+<form id="quickForm" method="POST" action="{{route('backend.users.store')}}" >
+@csrf
                 <div class="card-body">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Email address</label>
