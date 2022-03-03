@@ -12,9 +12,10 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         // dd(1);
+        dd($request->fullUrl()());
         return view('backend.posts.index');
     }
 
@@ -37,9 +38,13 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        dd(1);
-        echo 'minh';
+       if($request->is('backend/*')) {
+           dd('dung');
+       }else {
+            dd('error');
+       };
+       dd($request->path());
+       dd($request->except('_token'));
     }
 
     /**

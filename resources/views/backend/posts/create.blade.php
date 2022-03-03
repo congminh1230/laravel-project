@@ -28,11 +28,11 @@
                 <div class="card-body">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Tiêu đề</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter...">
+                    <input type="text" name="title" class="form-control" id="exampleInputEmail1" placeholder="Enter...">
                   </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1">Text area</label>
-                    <textarea  id="summernote"class="col-12" name="" id="text_area" cols="30" rows="10"></textarea>
+                    <textarea  id="summernote"class="col-12" name="content" id="text_area" cols="30" rows="10"></textarea>
                   </div>
                   <div class= "row">
                     <div class="form-group col-6">
@@ -74,6 +74,7 @@
       </div><!-- /.container-fluid -->
 @endsection
 @section('script')
+push('stack_scripts')
 <script>
   $(function () {
     // Summernote
