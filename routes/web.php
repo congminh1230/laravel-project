@@ -2,9 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
-use App\Http\Controllers\HomeController;
-// use App\Http\Controllers\Backend\PostController;
-// use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\App;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +39,7 @@ Route::prefix('backend')->name('backend.')->namespace('Backend')->middleware([])
     Route::resources([
         'posts' => PostController::class,
         'users' => UserController::class,
+        'categories' => CategoryControler::class,
     ]);
     // Route::resources([
         

@@ -63,6 +63,14 @@ class PostController extends Controller
     public function show($id)
     {
         //
+        
+        if($id) {
+            return view('backend.posts.index');
+        }else {
+            return 'dungh';
+        }
+        
+
     }
 
     /**

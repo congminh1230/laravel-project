@@ -77,7 +77,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="" class="nav-link  @if (request()->routeIs('backend.users.edit')) active @endif ">
+                <a href="{{ route('backend.users.edit', ['user' => '1']) }}" class="nav-link  @if (request()->routeIs('backend.users.edit')) active @endif ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Chỉnh sửa user</p>
                 </a>
@@ -86,6 +86,36 @@
                 <a href="{{ route('backend.users.index') }}" class="nav-link  @if (request()->routeIs('backend.users.index')) active @endif ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Danh sách users</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item  @if (request()->routeIs('backend.categories.*')) menu-open @endif ">
+            <a href="" class="nav-link  @if (request()->routeIs('backend.categories.*')) active @endif ">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Quản lý Categories
+                <i class="fas fa-angle-left right"></i>
+
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('backend.categories.create') }}" class="nav-link  @if (request()->routeIs('backend.categories.create')) active @endif ">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Tạo mới Categories</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('backend.categories.edit', ['category' => '1']) }}" class="nav-link  @if (request()->routeIs('backend.categories.edit')) active @endif ">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Chỉnh sửa Categories</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('backend.categories.index') }}" class="nav-link  @if (request()->routeIs('backend.categories.index')) active @endif ">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Danh sách Categories</p>
                 </a>
               </li>
             </ul>

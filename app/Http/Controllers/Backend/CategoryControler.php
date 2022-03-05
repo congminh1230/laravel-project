@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class CategoryControler extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,7 @@ class UserController extends Controller
     public function index()
     {
         //
-        // dd(1);
-        return view('backend.users.index');
+        return view('backend.categories.index');
     }
 
     /**
@@ -27,8 +26,7 @@ class UserController extends Controller
     public function create()
     {
         //
-        return view('Backend.users.create');
-        
+        return view('backend.categories.create');
     }
 
     /**
@@ -40,13 +38,6 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
-        $data= true;
-        if($data) {
-                // return redirect()->route('backend.users.index');
-                return redirect()->action([UserController::class , 'index']);
-        }else {
-            return redirect()->back();
-        }
     }
 
     /**
@@ -58,6 +49,7 @@ class UserController extends Controller
     public function show($id)
     {
         //
+        
     }
 
     /**
@@ -69,9 +61,7 @@ class UserController extends Controller
     public function edit($id)
     {
         //
-        return view('Backend.users.edit');
-        // dd(1);
-        // echo 'fsds';
+        return view('backend.categories.edit');
 
     }
 
@@ -87,8 +77,8 @@ class UserController extends Controller
         //
         $data= true;
         if($data) {
-                // return redirect()->route('backend.users.index');
-                return redirect()->action([UserController::class , 'index']);
+                return redirect()->route('backend.categories.index');
+                // return redirect()->action([PostController::class , 'index']);
         }else {
             return redirect()->back();
         }
