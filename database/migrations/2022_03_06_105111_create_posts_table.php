@@ -19,6 +19,7 @@ class CreatePostsTable extends Migration
             $table->string('slug');
             $table->string('image_url')->nullable();
             $table->text('content');
+            $table->integer('user_create_id');
             $table->integer('status')->default();
             $table->timestamps();
         });
