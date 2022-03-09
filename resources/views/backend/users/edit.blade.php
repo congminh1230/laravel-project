@@ -27,8 +27,7 @@
               <!-- /.card-header -->
               <!-- form start -->
               @include('backend.users.components.user_from',[
-                  'user_route' => route('backend.users.update',['user' => '1']),
-                  'method' => 'put'
+                  'user_route' => route('backend.users.update',['user' =>1])
               ])
             </div>
         </div>

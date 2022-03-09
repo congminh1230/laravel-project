@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Backend;
-
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -15,7 +15,12 @@ class CategoryControler extends Controller
     public function index()
     {
         //
-        return view('backend.categories.index');
+        $categories = DB::table('categories')->orderBy('created_at','desc')
+        ->get();
+        // dd($categories);
+        return view('backend.categories.index')->with([
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -38,6 +43,18 @@ class CategoryControler extends Controller
     public function store(Request $request)
     {
         //
+        $data = $request->only([
+            'name'
+        ]);
+        // dd($data);
+        DB::table('categories')->insert([
+            'name' => $data['name'],
+            'created_at' => now(),
+            'updated_at' => now()
+
+        ]);
+        return redirect()->route('backend.categories.index');
+
     }
 
     /**
@@ -61,8 +78,17 @@ class CategoryControler extends Controller
     public function edit($id)
     {
         //
-        return view('backend.categories.edit');
+        if($id !== null) {
+            $categories = DB::table('categories')->select(['id','name'])->find($id);
+            return view('Backend.categories.edit')->with([
+                'categories'=>$categories
+            ]);
+           
+        }else {
+            return redirect()->back();
 
+        }
+       
     }
 
     /**
@@ -74,14 +100,12 @@ class CategoryControler extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        $data= true;
-        if($data) {
+        $data = $request->all();
+        DB::table('categories')->where('id',$id)->
+            update([
+                'name' => $data['name'],
+            ]);
                 return redirect()->route('backend.categories.index');
-                // return redirect()->action([PostController::class , 'index']);
-        }else {
-            return redirect()->back();
-        }
     }
 
     /**
@@ -93,5 +117,8 @@ class CategoryControler extends Controller
     public function destroy($id)
     {
         //
+        DB::table('categories')->where('id',$id)->delete();
+        return redirect()->route('backend.categories.index');
+ 
     }
 }

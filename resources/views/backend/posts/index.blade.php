@@ -30,6 +30,9 @@
                       <th >
                          Danh Mục
                       </th>
+                      <th >
+                         Nội Dung
+                      </th>
                       <th>
                           Người tạo
                       </th>
@@ -42,48 +45,32 @@
                   </tr>
               </thead>
               <tbody>
-                  <tr>
-                      <td>
-                         1
-                      </td>
-                      <td>
-                        sdsdsdsdsd
-                      </td>
-                      <td>
-                          dsdsdsdsd
-                      </td>
-                      <td class="project_progress">
-                         dsdsdsd
-                      </td>
-                      <td class="project-state">
-                          sdsdsd
-                      </td>
-                      <td class="project-actions text-right">
-                          <a class="btn btn-primary btn-sm" href="#">
-                              <i class="fas fa-folder">
-                              </i>
-                              View
-                          </a>
-                          <a class="btn btn-info btn-sm" href="#">
-                              <i class="fas fa-pencil-alt">
-                              </i>
-                              Edit
-                          </a>
-                          <a class="btn btn-danger btn-sm" href="#">
-                              <i class="fas fa-trash">
-                              </i>
-                              Delete
-                          </a>
-                      </td>
-                  </tr>
-                
-               
-               
-                 
-                 
-                
-                 
-                  
+              @foreach($posts as $post)
+                    <tr>
+                        <td>{{ $post->id }}</td>
+                        <td>{{ $post->title }} <a href="">show</a></td>
+                        <td>{{ $post->category_id }}</td>
+                        <!-- <td>{{ $post->slug }}</td> -->
+                        <!-- <td>{{ $post->image_url }}</td> -->
+                        <td>{{ $post->content }}</td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <a href="{{ route('backend.posts.edit', ['post' => $post->id ]) }}" class="btn bg-primary"><i class="far fa-edit"></i></a>
+                            <form  method="POST" action="{{ route('backend.posts.destroy', ['post' => $post->id ]) }}" >
+                                  @csrf
+                                  @method('DELETE')
+                                  <button class="btn btn-danger">
+                                    <i class="fas fa-trash"></i>
+                                  </button>
+                            </form>
+                        </td>
+
+                        <!-- <td>{{ $post->user_created_id }}</td>
+                        <td>{{ $post->user_updated_id }}</td>
+                        <td>{{ $post->status }}</td> -->
+                    </tr>
+                 @endforeach
               </tbody>
           </table>
 @endsection

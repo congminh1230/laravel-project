@@ -18,7 +18,7 @@
 @endsection
 @section('content')
 <table class="table table-striped projects">
-    <a href="{{route('backend.posts.create')}}" class="btn badge-success" > Tạo danh mục </a>
+    <a href="{{route('backend.categories.create')}}" class="btn badge-success" > Tạo danh mục </a>
               <thead>
                   <tr>
                         <th>ID</th>
@@ -31,51 +31,28 @@
                   </tr>
               </thead>
               <tbody>
-                  <tr>
-                      <td>
-                         1
-                      </td>
-                      <td>
-                         dsd
-                      </td>
-                      <td>
-                        sdsdsdsdsd
-                      </td>
-                      <td>
-                          dsdsdsdsd
-                      </td>
-                      <td class="project_progress">
-                         dsdsdsd
-                      </td>
-                      <td class="project-state">
-                          sdsdsd
-                      </td>
-                      <td class="project-actions text-right">
-                          <a class="btn btn-primary btn-sm" href="#">
-                              <i class="fas fa-folder">
-                              </i>
-                              View
-                          </a>
-                          <a class="" href="#">
-                              <i class="fas fa-pencil-alt">
-                              </i>
-                              Edit
-                          </a>
-                          <a class="btn btn-danger btn-sm" href="#">
-                              <i class="fas fa-trash">
-                              </i>
-                              Delete
-                          </a>
-                      </td>
-                  </tr>
-                
-               
-               
-                 
-                 
-                
-                 
-                  
+                 @foreach($categories as $category)
+                    <tr>
+                        <td>{{ $category->id }}</td>
+                        <td>{{ $category->name }}</td>
+                        <td>{{ $category->created_at }}</td>
+                        <td>{{ $category->updated_at }}</td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <a href="#" class="btn bg-primary"><i class="far fa-edit"></i></a>
+                            <a href="{{ route('backend.categories.edit', ['category' => $category->id ]) }}" class="btn badge-success"><i class="fas fa-upload"></i></a>
+                            <form  method="POST" action="{{ route('backend.categories.destroy', ['category' => $category->id ]) }}" >
+                                  @csrf
+                                  @method('DELETE')
+                                  
+                                  <button class="btn btn-danger">
+                                    <i class="fas fa-trash"></i>
+                                  </button>
+                            </form>
+                        </td>
+                    </tr>
+                 @endforeach
               </tbody>
           </table>
 @endsection

@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Backend;
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -14,8 +15,13 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        // dd(1);
-        // dd($request->fullUrl()());
+        //
+        $posts = DB::table('posts')->orderBy('created_at','desc')
+        ->get();
+        // dd($posts);
+        return view('backend.posts.index')->with([
+            'posts' => $posts
+        ]);
         return view('backend.posts.index');
     }
 
@@ -38,20 +44,37 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $data= true;
-        if($data) {
-                return redirect()->route('backend.posts.index');
-                // return redirect()->action([PostController::class , 'index']);
-        }else {
-            return redirect()->back();
-        }
-       if($request->is('backend/*')) {
-           dd('dung');
-       }else {
-            dd('error');
-       };
-       dd($request->path());
-       dd($request->except('_token'));
+        $data = $request->only([
+            'title','content'
+        ]);
+        // dd($data);
+        DB::table('posts')->insert([
+            'title' => $data['title'],
+            'slug' => Str::slug($data['title']),
+            'content' => $data['content'],
+            'user_created_id' => 1,
+            'user_updated_id' => 1,
+            'category_id' => 1,
+            'created_at' => now(),
+            'updated_at' => now()
+
+        ]);
+
+        return redirect()->route('backend.posts.index');
+    //     $data= true;
+    //     if($data) {
+    //             return redirect()->route('backend.posts.index');
+    //             // return redirect()->action([PostController::class , 'index']);
+    //     }else {
+    //         return redirect()->back();
+    //     }
+    //    if($request->is('backend/*')) {
+    //        dd('dung');
+    //    }else {
+    //         dd('error');
+    //    };
+    //    dd($request->path());
+    //    dd($request->except('_token'));
     }
 
     /**
@@ -82,8 +105,17 @@ class PostController extends Controller
     public function edit($id)
     {
         //
-        dd(1);
-        echo 'minh';
+       
+        if($id !== null) {
+            $posts = DB::table('posts')->select(['id','title','content'])->find($id);
+            return view('Backend.posts.edit')->with([
+                'posts'=>$posts
+            ]);
+           
+        }else {
+            return redirect()->back();
+
+        }
 
     }
 
@@ -97,13 +129,13 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $data= true;
-        if($data) {
+        $data = $request->all();
+        DB::table('posts')->where('id',$id)->
+            update([
+                'title' => $data['title'],
+                'content' => $data['content'],
+            ]);
                 return redirect()->route('backend.posts.index');
-                // return redirect()->action([PostController::class , 'index']);
-        }else {
-            return redirect()->back();
-        }
     }
 
     /**
@@ -115,5 +147,7 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+        DB::table('posts')->where('id',$id)->delete();
+        return redirect()->route('backend.posts.index');
     }
 }

@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\Backend;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class UserController extends Controller
 {
@@ -16,7 +17,12 @@ class UserController extends Controller
     {
         //
         // dd(1);
-        return view('backend.users.index');
+        $users = DB::table('users')
+        ->get();
+        // dd($users);
+        return view('backend.users.index')->with([
+            'users' => $users
+        ]);;
     }
 
     /**
@@ -26,9 +32,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
-        return view('Backend.users.create');
         
+        return view('Backend.users.create');
     }
 
     /**
@@ -39,14 +44,24 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $data= true;
-        if($data) {
-                // return redirect()->route('backend.users.index');
-                return redirect()->action([UserController::class , 'index']);
-        }else {
-            return redirect()->back();
-        }
+        $data = $request->only([
+            'name','email','password','avatar'
+        ]);
+        // dd($data);
+        DB::table('users')->insert([
+            'name' => 'min',
+            'address' => 'sdsd',
+            'avatar' => $data['avatar'],
+            'phone' => '0875743578',
+            'email' => $data['email'],
+            'password' => $data['password'],
+            'created_at' => now(),
+            'updated_at' => now()
+
+        ]);
+        return redirect()->route('backend.users.index');
+
+     
     }
 
     /**
@@ -58,6 +73,17 @@ class UserController extends Controller
     public function show($id)
     {
         //
+        if($id !== null) {
+            $users = DB::table('users')->select(['id','name','email','phone'])->find($id);
+            return view('Backend.users.show')->with([
+                'users'=>$users
+            ]);
+           
+        }else {
+            return redirect()->back();
+
+        }
+
     }
 
     /**
@@ -69,9 +95,16 @@ class UserController extends Controller
     public function edit($id)
     {
         //
-        return view('Backend.users.edit');
-        // dd(1);
-        // echo 'fsds';
+        if($id !== null) {
+            $users = DB::table('users')->select(['id','name'])->find($id);
+            return view('Backend.users.edit')->with([
+                'users'=>$users
+            ]);
+           
+        }else {
+            return redirect()->back();
+
+        }
 
     }
 
@@ -85,13 +118,12 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $data= true;
-        if($data) {
-                // return redirect()->route('backend.users.index');
-                return redirect()->action([UserController::class , 'index']);
-        }else {
-            return redirect()->back();
-        }
+        $data = $request->all();
+        DB::table('users')->where('id',$id)->
+            update([
+                'name' => $data['name'],
+            ]);
+                return redirect()->route('backend.users.index');
     }
 
     /**
@@ -103,5 +135,8 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+        DB::table('users')->where('id',$id)->delete();
+        return redirect()->route('backend.users.index');
+ 
     }
 }

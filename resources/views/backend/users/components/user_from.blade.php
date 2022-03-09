@@ -1,4 +1,4 @@
-<form id="quickForm" method="POST" action="{{ $user_route }}" >
+<form id="quickForm" method="POST" action="{{route('backend.users.store')}}" >
 @csrf
                   @if(isset($method))
 
@@ -19,6 +19,10 @@
 
 
                 <div class="card-body">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">avatar</label>
+                    <input type="avatar" name="avatar" class="form-control" id="exampleInputEmail1" placeholder="Enter avatar">
+                  </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1">Email address</label>
                     <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">

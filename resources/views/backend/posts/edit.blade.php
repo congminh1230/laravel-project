@@ -23,16 +23,19 @@
         <div class="card card-primary col-12">
               <!-- /.card-header -->
               <!-- form start -->
-              <form class="" method="POST" action="{{route('backend.categories.store')}}">
+              <form class="" method="POST" action="{{route('backend.posts.update', [ 'post' => $posts->id ])}}">
                 @csrf
+                @method('PUT')
                 <div class="card-body">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Tiêu đề</label>
-                    <input type="text" name="name" class="form-control" id="exampleInputEmail1" placeholder="Enter...">
+                    <input type="text" name="title" class="form-control" id="exampleInputEmail1" value="{{  $posts->title }}" placeholder="Enter...">
                   </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1">Text area</label>
-                    <textarea  id="summernote"class="col-12" name="content" id="text_area" cols="30" rows="10"></textarea>
+                    <textarea  id="summernote"class="col-12" name="content" id="text_area" cols="30" rows="10">
+                              {{  $posts->content }}
+                    </textarea>
                   </div>
                   <div class= "row">
                     <div class="form-group col-6">
