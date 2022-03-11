@@ -17,6 +17,17 @@
     </div>
 @endsection
 @section('content')
+<div class="col-12">
+          <form>
+              <div class="input-group" style="width: 100%; margin-bottom:10px ">
+                  <input type="text" name="title" class="form-control float-right" placeholder="Title">
+                  <input type="text" name="status" class="form-control float-right" placeholder="Status">
+                  <button type="submit" class="btn btn-default">
+                    Filter
+                  </button>
+              </div>
+          </form>
+        </div>
 <table class="table table-striped projects">
     <a href="{{route('backend.posts.create')}}" class="btn badge-success" > Tạo bài viết </a>
               <thead>

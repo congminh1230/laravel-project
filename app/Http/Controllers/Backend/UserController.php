@@ -17,9 +17,16 @@ class UserController extends Controller
     {
         //
         // dd(1);
-        $users = DB::table('users')
-        ->get();
-        // dd($users);
+        $name = request()->get('name');
+        $email = request()->get('email');
+        $users_query = DB::table('users')->select('*');
+        if(!empty($email)) {
+                $users_query = $users_query->where('email',$email);
+        }
+        if(!empty($name)) {
+            $users_query = $users_query->where('name',$name);
+        }
+        $users = $users_query->orderBy('created_at','desc')->get();
         return view('backend.users.index')->with([
             'users' => $users
         ]);;
@@ -52,7 +59,7 @@ class UserController extends Controller
             'name' => 'min',
             'address' => 'sdsd',
             'avatar' => $data['avatar'],
-            'phone' => '0875743578',
+            'phone' => '0875743378',
             'email' => $data['email'],
             'password' => $data['password'],
             'created_at' => now(),

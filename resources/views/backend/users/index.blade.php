@@ -19,6 +19,18 @@
 @section('content')
     <div class="row">
       <div class="card-body table-responsive p-0">
+        <div class="col-12">
+          <form>
+              <div class="input-group" style="width: 100%; margin-bottom:10px ">
+                  <input type="text" name="name" class="form-control float-right" placeholder="Name">
+                  <input type="text" name="email" class="form-control float-right" placeholder="Email">
+                  <button type="submit" class="btn btn-default">
+                    Filter
+                  </button>
+              </div>
+          </form>
+        </div>
+       
         <a href="{{route('backend.users.create')}}" class="btn badge-success" > Tạo bài viết </a>
                 <table class="table table-hover text-nowrap">
                   <thead>

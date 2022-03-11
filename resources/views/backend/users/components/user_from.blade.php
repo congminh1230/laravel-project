@@ -20,6 +20,10 @@
 
                 <div class="card-body">
                 <div class="form-group">
+                    <label for="exampleInputEmail1">Name</label>
+                    <input type="name" name="name" class="form-control" id="exampleInputEmail1" placeholder="Enter name">
+                  </div>
+                <div class="form-group">
                     <label for="exampleInputEmail1">avatar</label>
                     <input type="avatar" name="avatar" class="form-control" id="exampleInputEmail1" placeholder="Enter avatar">
                   </div>
