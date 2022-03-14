@@ -44,11 +44,11 @@ Route::prefix('backend')->name('backend.')->namespace('Backend')->middleware([])
     // Route::resources([
         
     // ]);
-    // Route::prefix('posts')->name('posts.')->group(function() {
-    //     Route::get('create', function () {
-    //         return view('posts.create');
+    // Route::prefix('users')->name('users.')->group(function() {
+    //     Route::get('delete', function () {
+    //         return view('delete.create');
     //         // return ('dsdsd');
-    //     })->name('create');
+    //     })->name('delete');
     // });
     // Route::get('users', function () {
     //     return view('backend.users.index');

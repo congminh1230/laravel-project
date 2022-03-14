@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Backend;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Category;
+use Illuminate\Support\Str;
 
 class CategoryControler extends Controller
 {
@@ -15,8 +17,8 @@ class CategoryControler extends Controller
     public function index()
     {
         //
-        $categories = DB::table('categories')->orderBy('created_at','desc')
-        ->get();
+        $categories =Category::paginate(3);
+        // $categories = Category::all();
         // dd($categories);
         return view('backend.categories.index')->with([
             'categories' => $categories
@@ -42,19 +44,12 @@ class CategoryControler extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $data = $request->only([
-            'name'
-        ]);
-        // dd($data);
-        DB::table('categories')->insert([
-            'name' => $data['name'],
-            'created_at' => now(),
-            'updated_at' => now()
-
-        ]);
+        $data = $request->all();
+        $category = new Category();
+        $category->name = $data['name'];
+        $category->slug = Str::slug($data['name']);
+        $category->save();
         return redirect()->route('backend.categories.index');
-
     }
 
     /**
@@ -101,11 +96,11 @@ class CategoryControler extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        DB::table('categories')->where('id',$id)->
-            update([
-                'name' => $data['name'],
-            ]);
-                return redirect()->route('backend.categories.index');
+        $category = Category::find($id);
+        $category->name = $data['name'];
+        $category->slug = Str::slug($data['name']);
+        $category->save();
+        return redirect()->route('backend.categories.index');
     }
 
     /**
@@ -117,8 +112,17 @@ class CategoryControler extends Controller
     public function destroy($id)
     {
         //
-        DB::table('categories')->where('id',$id)->delete();
-        return redirect()->route('backend.categories.index');
+        if($id  ===  'true') {
+            $categories = Category::onlyTrashed()->get();
+            // dd($users);
+            return view('backend.categories.delete')->with([
+                'users'=>$categories
+            ]);
+        }else {
+            $user = Category::onlyTrashed()->where('id', $id)->find($id);
+            $user->restore();
+            return redirect()->route('backend.categories.index');
+        }
  
     }
 }

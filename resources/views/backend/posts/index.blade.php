@@ -45,6 +45,9 @@
                          Nội Dung
                       </th>
                       <th>
+                          Trạng Thái
+                      </th>
+                      <th>
                           Người tạo
                       </th>
                       <th >
@@ -59,11 +62,12 @@
               @foreach($posts as $post)
                     <tr>
                         <td>{{ $post->id }}</td>
-                        <td>{{ $post->title }} <a href="">show</a></td>
+                        <td>{{ $post->title}} {{ $post->slug }}  <a href="">show</a></td>
                         <td>{{ $post->category_id }}</td>
                         <!-- <td>{{ $post->slug }}</td> -->
                         <!-- <td>{{ $post->image_url }}</td> -->
                         <td>{{ $post->content }}</td>
+                        <td>{{ $post->status_text }}</td>
                         <td></td>
                         <td></td>
                         <td>
@@ -84,4 +88,5 @@
                  @endforeach
               </tbody>
           </table>
+          {{ $posts->links() }}
 @endsection

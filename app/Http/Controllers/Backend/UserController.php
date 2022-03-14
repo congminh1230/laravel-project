@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
 
 
 class UserController extends Controller
@@ -17,16 +18,22 @@ class UserController extends Controller
     {
         //
         // dd(1);
+        $users = DB::table('users')->count();
+        $price = DB::table('users')->min('id');
+        // dd($price);
         $name = request()->get('name');
         $email = request()->get('email');
-        $users_query = DB::table('users')->select('*');
+        $users_query = User::select('*')->paginate(3);
         if(!empty($email)) {
                 $users_query = $users_query->where('email',$email);
         }
         if(!empty($name)) {
             $users_query = $users_query->where('name',$name);
         }
-        $users = $users_query->orderBy('created_at','desc')->get();
+        $users = $users_query->paginate(3);
+        // dd($users);
+        // $users = User::all();
+
         return view('backend.users.index')->with([
             'users' => $users
         ]);;
@@ -59,7 +66,7 @@ class UserController extends Controller
             'name' => 'min',
             'address' => 'sdsd',
             'avatar' => $data['avatar'],
-            'phone' => '0875743378',
+            'phone' => '0875741378',
             'email' => $data['email'],
             'password' => $data['password'],
             'created_at' => now(),
@@ -139,11 +146,21 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
-        DB::table('users')->where('id',$id)->delete();
-        return redirect()->route('backend.users.index');
+       
+        if($id  ===  'true') {
+            $users = User::onlyTrashed()->get();
+            // dd($users);
+            return view('backend.users.delete')->with([
+                'users'=>$users
+            ]);
+        }else {
+            $user = User::onlyTrashed()->where('id', $id)->find($id);
+            $user->restore();
+            return redirect()->route('backend.users.index');
+        }
  
     }
+   
 }

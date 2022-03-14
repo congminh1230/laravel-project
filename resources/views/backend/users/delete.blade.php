@@ -30,14 +30,8 @@
               </div>
           </form>
         </div>
-        <form  method="POST" action="{{ route('backend.users.destroy', ['user' => 'true' ]) }}" >
-                                  @csrf
-                                  @method('DELETE')
-                                  <button class="btn btn-danger">
-                                     Danh sách delete
-                                  </button>
-                            </form>
-        <a href="{{route('backend.users.create')}}" class="btn badge-success" > Tạo bài viết </a>
+       
+        <a href="{{route('backend.users.index')}}" class="btn badge-success" >Danh sách bài viết </a>
                 <table class="table table-hover text-nowrap">
                   <thead>
                     <tr>
@@ -60,8 +54,14 @@
                         <td>{{ $user->phone }}</td>
                         <td>{{ $user->status }}</td>
                         <td>
-                            <a href="{{ route('backend.users.edit', ['user' => $user->id ]) }}" class="btn bg-primary"><i class="far fa-edit"></i></a>
-                            <form  method="POST" action="{{ route('backend.users.destroy', ['user' => $user->id]) }}" >
+                        <!-- <form form  method="POST" action="{{ route('backend.users.destroy', ['user' => $user->id ]) }}" >
+                                  @csrf
+                                  @method('PUT')
+                                  <button class="btn btn-danger">
+                                   <i class="fas fa-trash"></i>
+                                  </button>
+                            </form> -->
+                            <form  method="POST" action="{{ route('backend.users.destroy', ['user' => $user->id ]) }}" >
                                   @csrf
                                   @method('DELETE')
                                   <button class="btn btn-danger">
@@ -73,8 +73,6 @@
                  @endforeach
                   </tbody>
                 </table>
-                {{ $users->links() }}
               </div>
-
     </div>
 @endsection
