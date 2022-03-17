@@ -30,6 +30,7 @@ class PostController extends Controller
         }
         $posts = $posts_query->paginate(3);
         // dd($posts);
+        // $users = Post::where('status','=',Post::STATUS_DONE)->get();
         return view('backend.posts.index')->with([
             'posts' => $posts
         ]);;
@@ -106,7 +107,11 @@ class PostController extends Controller
     public function show($id)
     {
         //
-        
+        $post = DB::table('posts')->find($id);
+        foreach($post->tags as $tag){
+            echo $tag->name;
+        }
+        dd($post);
         if($id) {
             return view('backend.posts.index');
         }else {

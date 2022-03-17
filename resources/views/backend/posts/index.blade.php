@@ -68,7 +68,9 @@
                         <!-- <td>{{ $post->image_url }}</td> -->
                         <td>{{ $post->content }}</td>
                         <td>{{ $post->status_text }}</td>
-                        <td></td>
+                        <td>
+                        {{ $post->user->name }}
+                        </td>
                         <td></td>
                         <td>
                             <a href="{{ route('backend.posts.edit', ['post' => $post->id ]) }}" class="btn bg-primary"><i class="far fa-edit"></i></a>

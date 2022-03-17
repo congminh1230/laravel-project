@@ -23,7 +23,7 @@ class UserController extends Controller
         // dd($price);
         $name = request()->get('name');
         $email = request()->get('email');
-        $users_query = User::select('*')->paginate(3);
+        $users_query = User::select('*');
         if(!empty($email)) {
                 $users_query = $users_query->where('email',$email);
         }
@@ -31,9 +31,6 @@ class UserController extends Controller
             $users_query = $users_query->where('name',$name);
         }
         $users = $users_query->paginate(3);
-        // dd($users);
-        // $users = User::all();
-
         return view('backend.users.index')->with([
             'users' => $users
         ]);;
@@ -88,7 +85,15 @@ class UserController extends Controller
     {
         //
         if($id !== null) {
-            $users = DB::table('users')->select(['id','name','email','phone'])->find($id);
+            // $users = DB::table('users')->select(['id','name','email','phone'])->find($id);
+            // return view('Backend.users.show')->with([
+            //     'users'=>$users
+            // ]);
+            // $posts = User::find($id)->posts;
+            // dd($posts);
+            $users = User::find($id);
+            $userInfo = $users->userInfo;
+            // dd($userInfo->phone );
             return view('Backend.users.show')->with([
                 'users'=>$users
             ]);

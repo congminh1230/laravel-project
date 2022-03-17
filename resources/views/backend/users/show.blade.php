@@ -39,7 +39,7 @@
                     <b>Email</b> <a class="float-right">{{ $users->email }}</a>
                   </li>
                   <li class="list-group-item">
-                    <b>Phone</b> <a class="float-right">{{ $users->phone }}</a>
+                    <b>Phone</b> <a class="float-right">{{ $users->userInfo->phone }}</a>
                   </li>
                   <li class="list-group-item">
                     <b>Friends</b> <a class="float-right">13,287</a>

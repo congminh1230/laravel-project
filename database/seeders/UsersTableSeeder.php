@@ -14,52 +14,98 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->truncate();
+        DB::table('users')-> truncate();
+        DB::table('user_infos')-> truncate();
         $users = [
-            [
-                'name' => 'lol',
-                'avatar' => 'lol',
-                'address'=> 'hanoi',
-                'email' => 'congminh@gamil.com',
-                'phone' => '0814332325',
-                'password' => bcrypt('lol')
-            ],
-            [
-                'name' => 'nhat',
-                'avatar' => 'nhat',
-                'address'=> 'hanoi',
-                'email' => 'nhat@gamil.com',
-                'phone' => '0847894758',
-                'password' => bcrypt('minh')
-            ],
-            [
-                'name' => 'khanh',
-                'avatar' => 'khanh',
-                'address'=> 'hanoi',
-                'email' => 'khanh@gamil.com',
-                'phone' => '0945894297',
-                'password' => bcrypt('khanh')
-            ],
-            [
-                'name' => 'ngoc',
-                'avatar' => 'ngoc',
-                'address'=> 'hanoi',
-                'email' => 'ngoc@gamil.com',
-                'phone' => '0986787426',
-                'password' => bcrypt('ngoc')
-            ],
-            [
-                'name' => 'hop',
-                'avatar' => 'hop',
-                'address'=> 'hanoi',
-                'email' => 'hop@gamil.com',
-                'phone' => '0984567326',
-                'password' => bcrypt('hop')
-            ]
-            ];
-            foreach($users as $user) {
-                DB::table('users')->insert($user);
-            }
+                    [
+                     'user'=> 
+                         [
+                            'name' => 'Admin',
+                            'avatar' => 'https://i.9mobi.vn/cf/images/2015/03/nkk/hinh-dep-19.jpg',
+                            'email'=> 'Admin@gmail.com',
+                            'password' => bcrypt('123456789')
+                         ],
+                     'info' =>
+                         [
+                            'address'=> 'Ha Noi',
+                            'phone' => '0395515962',
+                         ]
+               
+                    ],
+
+                    [
+                        'user'=> 
+                            [
+                               'name' => 'Admin2',
+                               'avatar' => 'https://i.9mobi.vn/cf/images/2015/03/nkk/hinh-dep-19.jpg',
+                               'email'=> 'Admin2@gmail.com',
+                               'password' => bcrypt('123456789')
+                            ],
+                        'info' =>
+                            [
+                               'address'=> 'Ha Noi',
+                               'phone' => '0395515962',
+                            ]
+                  
+                       ],
+
+                       [
+                        'user'=> 
+                            [
+                               'name' => 'Admin3',
+                               'avatar' => 'https://i.9mobi.vn/cf/images/2015/03/nkk/hinh-dep-19.jpg',
+                               'email'=> 'Admin3@gmail.com',
+                               'password' => bcrypt('123456789')
+                            ],
+                        'info' =>
+                            [
+                               'address'=> 'Thai Binh',
+                               'phone' => '0395515962',
+                            ]
+                  
+                       ],
+
+                       [
+                        'user'=> 
+                            [
+                               'name' => 'Admin4',
+                               'avatar' => 'https://i.9mobi.vn/cf/images/2015/03/nkk/hinh-dep-19.jpg',
+                               'email'=> 'Admin4@gmail.com',
+                               'password' => bcrypt('123456789')
+                            ],
+                        'info' =>
+                            [
+                               'address'=> 'Son la',
+                               'phone' => '0395515962',
+                            ]
+                  
+                       ],
+
+                       [
+                        'user'=> 
+                            [
+                               'name' => 'Admin5',
+                               'avatar' => 'https://i.9mobi.vn/cf/images/2015/03/nkk/hinh-dep-19.jpg',
+                               'email'=> 'Admin5@gmail.com',
+                               'password' => bcrypt('123456789')
+                            ],
+                        'info' =>
+                            [
+                               'address'=> 'Ho Chi Minh',
+                               'phone' => '0395515962',
+                            ]
+                  
+                       ],
+
+           
+        ];
+
+        foreach($users as $user)
+        {
+            $user_id = DB::table('users')-> insertGetId($user['user']);
+            $user['info']['user_id'] = $user_id;
+            DB:: table('user_infos')-> insert($user['info']); 
+        }
 
 
     }
