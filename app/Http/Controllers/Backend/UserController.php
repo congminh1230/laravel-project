@@ -91,9 +91,10 @@ class UserController extends Controller
             // ]);
             // $posts = User::find($id)->posts;
             // dd($posts);
-            $users = User::find($id);
-            $userInfo = $users->userInfo;
-            // dd($userInfo->phone );
+            $users = User::find($id)->posts;
+            dd($users);
+            // $userInfo = $users->userInfo;
+            // // dd($userInfo->phone );
             return view('Backend.users.show')->with([
                 'users'=>$users
             ]);

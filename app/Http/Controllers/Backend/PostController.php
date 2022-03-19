@@ -17,8 +17,8 @@ class PostController extends Controller
     public function index(Request $request)
     {
         //
-        // $posts = Post::all();
-        // dd($posts);
+        $users = Post::all();
+        // dd($users);
         $title = request()->get('title');
         $status = request()->get('status');
         $posts_query = Post::where('status',1)->select('*');
@@ -30,7 +30,8 @@ class PostController extends Controller
         }
         $posts = $posts_query->paginate(3);
         // dd($posts);
-        // $users = Post::where('status','=',Post::STATUS_DONE)->get();
+        // $posts = DB::table('posts')->get();
+        // dd($posts);
         return view('backend.posts.index')->with([
             'posts' => $posts
         ]);;

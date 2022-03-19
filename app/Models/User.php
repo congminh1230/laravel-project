@@ -47,10 +47,10 @@ class User extends Authenticatable
     
     public function userInfo() {
         return $this->hasOne(UserInfo::class);
-    }
-
+    } 
 
     public function posts() {
         return $this->hasMany(Post::class,'user_created_id','id');
     }
+
 }

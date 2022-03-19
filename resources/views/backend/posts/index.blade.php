@@ -71,7 +71,9 @@
                         <td>
                         {{ $post->user->name }}
                         </td>
-                        <td></td>
+                        <td>
+                        {{ $post->created_at }}
+                        </td>
                         <td>
                             <a href="{{ route('backend.posts.edit', ['post' => $post->id ]) }}" class="btn bg-primary"><i class="far fa-edit"></i></a>
                             <form  method="POST" action="{{ route('backend.posts.destroy', ['post' => $post->id ]) }}" >

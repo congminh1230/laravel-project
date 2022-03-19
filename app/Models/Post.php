@@ -29,7 +29,7 @@ class Post extends Model
         $this->attributes['slug'] = Str::slug($title);
     }
     public function user() {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'user_created_id');
     }
     public function userUpdate() {
         return $this->belongsTo(User::class,'user_updated_id');

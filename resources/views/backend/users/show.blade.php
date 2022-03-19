@@ -44,6 +44,9 @@
                   <li class="list-group-item">
                     <b>Friends</b> <a class="float-right">13,287</a>
                   </li>
+                  <li class="list-group-item">
+                    <b>Address</b> <a class="float-right">{{ $users->userInfo->address }}</a>
+                  </li>
                 </ul>
 
                 <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>

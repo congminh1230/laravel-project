@@ -44,6 +44,7 @@
                       <th>ID</th>
                       <th>Name</th>
                       <th>Avatar</th>
+                      <th>Người tạo</th>
                       <th>Email</th>
                       <th>Phone</th>
                       <th>Status</th>
@@ -56,6 +57,7 @@
                         <td>{{ $user->id }}</td>
                         <td>{{ $user->name }} <a href="{{ route('backend.users.show', ['user' => $user->id ]) }}">show</a></td>
                         <td>{{ $user->avatar }}</td>
+                        <td>{{ $user->user_id }}</td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->phone }}</td>
                         <td>{{ $user->status }}</td>
