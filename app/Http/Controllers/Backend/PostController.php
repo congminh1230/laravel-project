@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Tag;
 
 class PostController extends Controller
 {
@@ -108,16 +109,22 @@ class PostController extends Controller
     public function show($id)
     {
         //
-        $post = DB::table('posts')->find($id);
-        foreach($post->tags as $tag){
+        // $post = DB::table('posts')->find($id);
+    //    $tag = Tag::find(1);
+    //    foreach($tag->posts as $post) {
+    //         echo $post->id . $post->title . "</br>";
+    //    };
+        $post = Post::find($id);
+        dd($post->tags);
+        foreach($post->tags as $tag) {
             echo $tag->name;
-        }
-        dd($post);
-        if($id) {
-            return view('backend.posts.index');
-        }else {
-            return 'dungh';
-        }
+        }   ;
+        // dd($post);
+        // if($id) {
+        //     return view('backend.posts.index');
+        // }else {
+        //     return 'dungh';
+        // }
         
 
     }

@@ -62,7 +62,7 @@
               @foreach($posts as $post)
                     <tr>
                         <td>{{ $post->id }}</td>
-                        <td>{{ $post->title}} {{ $post->slug }}  <a href="">show</a></td>
+                        <td>{{ $post->title}} {{ $post->slug }}  <a href="{{ route('backend.posts.show', ['post' => $post->id ]) }}">show</a></td>
                         <td>{{ $post->category_id }}</td>
                         <!-- <td>{{ $post->slug }}</td> -->
                         <!-- <td>{{ $post->image_url }}</td> -->

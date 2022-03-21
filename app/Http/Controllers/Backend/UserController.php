@@ -63,7 +63,7 @@ class UserController extends Controller
             'name' => 'min',
             'address' => 'sdsd',
             'avatar' => $data['avatar'],
-            'phone' => '0875741378',
+            // 'phone' => $data['phone'],
             'email' => $data['email'],
             'password' => $data['password'],
             'created_at' => now(),
