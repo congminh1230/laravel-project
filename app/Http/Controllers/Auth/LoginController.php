@@ -14,8 +14,8 @@ class LoginController extends Controller
     }
     public function authenticate(Request $request) {
         $credentials = $request->validate([
-            'email' => ['required','email'],
-            'password' => ['required']
+            'email' => ['required','email'], 
+            'password' => ['required']                        
         ]);
         if($request->get('remember')) {
             $remember = true;
@@ -25,7 +25,6 @@ class LoginController extends Controller
         }
         if(Auth::attempt($credentials,$remember)) {
             $request->session()->regenerate();
-            // dd(1);
             return redirect()->intended('backend/dashboard');
         }
         return back()->withErrors([

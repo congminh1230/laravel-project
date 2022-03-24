@@ -75,7 +75,10 @@
                         {{ $post->created_at }}
                         </td>
                         <td>
+                            @can('update',$post)
                             <a href="{{ route('backend.posts.edit', ['post' => $post->id ]) }}" class="btn bg-primary"><i class="far fa-edit"></i></a>
+                            @endcan
+                            @can('delete',$post)
                             <form  method="POST" action="{{ route('backend.posts.destroy', ['post' => $post->id ]) }}" >
                                   @csrf
                                   @method('DELETE')
@@ -83,6 +86,7 @@
                                     <i class="fas fa-trash"></i>
                                   </button>
                             </form>
+                            @endcan
                         </td>
 
                         <!-- <td>{{ $post->user_created_id }}</td>

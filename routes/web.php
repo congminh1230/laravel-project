@@ -14,27 +14,37 @@ use Illuminate\Support\Facades\App;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/','HomeController@index');
-
-Route::prefix('backend')->name('backend.')->namespace('Backend')->middleware('auth')->group(function() {
+Route::get('/', function () {
+    return view('frontend.home.index');
+}) ->name('home.index');
+Route::prefix('/')->name('/')->namespace('')->middleware([])->group(function() {
+    Route::get('home', function () {
+        return view('frontend.home.index');
+}) ->name('frontend.home.index');
+});
+// Route::get('/','HomeController@index');
+Route::prefix('backend')->name('backend.')->namespace('Backend')->middleware('auth','role:admin,admod')->group(function() {
     Route::get('dashboard','DashboardController@index');
     // Route::get('home',HomeController::class , 'index' );
     Route::get('home', function () {
         return view('home.index');
     }) ->name('home.index');
-    // Route::get('login', function () {
-    //     return view('backend.login.login');
-    // }) ->name('login.login');
-    // Route::get('register', function () {
-    //     return view('backend.register.register');
-    // }) ->name('register.register');
     Route::resources([
         'posts' => PostController::class,
         'users' => UserController::class,
         'categories' => CategoryControler::class,
     ]);
+    // post
+    // Route::put('post/{post}', 'UserController@update')
+    // ->middleware('can:update,post')
+    // ->name('posts.update');
+    Route::resource('posts',PostController::class)
+    ->except([
+        'update'
+    ]);
+    Route::resource('categories',CategoryControler::class);
 });
-Route::prefix('frontend')->name('auth')->namespace('auth')->middleware([])->group(function() {
+Route::prefix('frontend')->name('frontend.')->namespace('frontend')->middleware([])->group(function() {
     Route::get('home', function () {
         return view('frontend.home.index');
 }) ->name('home.index');
@@ -60,6 +70,8 @@ Route::prefix('/')->name('auth.')->namespace('auth')->group(function() {
 
 
 });
+
+
 
 
 
