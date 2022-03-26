@@ -11,6 +11,7 @@ class Category extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    protected $table= 'categories';
     protected $fillable = [
         'name',
         'slug',
@@ -18,5 +19,14 @@ class Category extends Model
     public function setTitleAttribute($name) {
         $this->attributes['name'] = $name;
         $this->attributes['slug'] = Str::slug($name);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
     }
 }

@@ -18,80 +18,76 @@
 @endsection
 @section('content')
 <div class="col-12">
-          <form>
-              <div class="input-group" style="width: 100%; margin-bottom:10px ">
-                  <input type="text" name="title" class="form-control float-right" placeholder="Title">
-                  <input type="text" name="status" class="form-control float-right" placeholder="Status">
-                  <button type="submit" class="btn btn-default">
-                    Filter
-                  </button>
+          <form style="margin: 20px 0 ; display:flex; justify-content:space-evenly " method="GET" action="{{ route('backend.posts.index')}}" class="form-inline"  >
+            <div class="col-3">
+              <input value="{{ request()->get('title')}}" name="title" type="text" class="form-control" placeholder="Nhập tiêu đề cần tìm..">
+            </div>
+            <div class="col-3">
+              <input value="{{ request()->get('status')}}" name="status" type="text" class="form-control" placeholder="Trạng thái....">
+            </div>
+
+            <div style="margin-right: 30px">
+                <button type="submit" class="btn btn-info">Lọc</button>
               </div>
+            {{-- <div >
+                <a href="{{ route('backend.posts.index')}}" class="btn btn-default"> Quay lại</a>
+            </div> --}}
           </form>
-        </div>
+</div>
 <table class="table table-striped projects">
-    <a href="{{route('backend.posts.create')}}" class="btn badge-success" > Tạo bài viết </a>
+                @can('create', App\Models\Post::class)
+                  <a href="{{ route('backend.posts.create') }}" class="btn btn-success"><i style="margin-right:10px" class="fas fa-plus"></i>Tạo bài viết</a>
+                @endcan
               <thead>
-                  <tr>
-                      <th>
-                         ID
-                      </th>
-                      <th>
-                        Tên Bài Viết
-                      </th>
-                      <th >
-                         Danh Mục
-                      </th>
-                      <th >
-                         Nội Dung
-                      </th>
-                      <th>
-                          Trạng Thái
-                      </th>
-                      <th>
-                          Người tạo
-                      </th>
-                      <th >
-                          Ngày tạo
-                      </th>
-                      <th >
-                            Hành Động
-                      </th>
-                  </tr>
+              <th>STT</th>
+                      <th>Tiêu đề</th>
+                      <th>Ảnh</th>
+                      <th>Danh mục</th>
+                      <th>Tags</th>
+                      <th>Người tạo</th>
+                      <th>Trạng thái</th>
+                      {{-- <th>Lượt xem</th> --}}
+                      <th>Thời gian tạo</th>
+                      <th>Ngày cập nhật</th>
+                      <th class="text-center">Hoạt động</th>
               </thead>
               <tbody>
               @foreach($posts as $post)
                     <tr>
-                        <td>{{ $post->id }}</td>
-                        <td>{{ $post->title}} {{ $post->slug }}  <a href="{{ route('backend.posts.show', ['post' => $post->id ]) }}">show</a></td>
-                        <td>{{ $post->category_id }}</td>
-                        <!-- <td>{{ $post->slug }}</td> -->
-                        <!-- <td>{{ $post->image_url }}</td> -->
-                        <td>{{ $post->content }}</td>
-                        <td>{{ $post->status_text }}</td>
+                       
+                    <td>{{ $post->id }}</td>
+                        <td> <a href=""></a>{{ $post->title }}</td>
                         <td>
-                        {{ $post->user->name }}
+                            {{-- <img src="assets/backend/uploads/" width="100%" height="100px" style="border-radius: 5px; object-fit: cover;"> --}}
                         </td>
+                        <td class="text-center">{{ $post->category_id }}</td>
                         <td>
-                        {{ $post->created_at }}
+                            @foreach ($post->tags as $tag )
+                                <span class="badge badge -info">{{ $tag->name }}</span>
+                            @endforeach
                         </td>
-                        <td>
+                        <td> {{ $post->user->name }} </td>
+                        <td> {{ $post->status_text }} </td>
+                        <td>{!! date('d/m/Y', strtotime($post->created_at)) !!}</td>
+                        <td>{!! date('d/m/Y', strtotime($post->updated_at)) !!}</td>
+                        <td></td>
+                        <td style="display:flex; margin-left: -125px;" >
                             @can('update',$post)
-                            <a href="{{ route('backend.posts.edit', ['post' => $post->id ]) }}" class="btn bg-primary"><i class="far fa-edit"></i></a>
+                            <a style="margin-right:10px;" href="{{ route('backend.posts.edit', $post->id) }}" class="btn btn-success"><i class="fas fa-edit"></i></a>
                             @endcan
-                            @can('delete',$post)
-                            <form  method="POST" action="{{ route('backend.posts.destroy', ['post' => $post->id ]) }}" >
-                                  @csrf
-                                  @method('DELETE')
-                                  <button class="btn btn-danger">
-                                    <i class="fas fa-trash"></i>
-                                  </button>
-                            </form>
-                            @endcan
-                        </td>
 
-                        <!-- <td>{{ $post->user_created_id }}</td>
-                        <td>{{ $post->user_updated_id }}</td>
-                        <td>{{ $post->status }}</td> -->
+                            @can('delete',$post)
+                            <form method="POST" action="{{ route('backend.posts.destroy', $post->id) }}">
+                              @csrf
+                              @method('DELETE')
+                              <button class="btn btn-danger">
+                                <i class="fas fa-trash"></i>
+                              </button>
+                            </form>
+                            
+                            @endcan
+
+                        </td>
                     </tr>
                  @endforeach
               </tbody>

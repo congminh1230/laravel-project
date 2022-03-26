@@ -52,7 +52,7 @@ Route::get('posts', function () {
     return view('frontend.posts.index');
 }) ->name('posts.index');
 });
-Route::prefix('/')->name('auth.')->namespace('auth')->group(function() {
+Route::prefix('/')->name('auth.')->namespace('Auth')->group(function() {
     Route::get('/register', 'RegisteredUserController@create')
     ->middleware('guest')
     ->name('register');
@@ -70,6 +70,13 @@ Route::prefix('/')->name('auth.')->namespace('auth')->group(function() {
 
 
 });
+// Route::prefix('auth')->name('auth.')->namespace('Auth')->group(function(){
+//     Route::get('/register', 'RegisterUserController@create' )->name('register')->middleware('guest');
+//     Route::post('/register', 'RegisterUserController@store' )->middleware('guest');
+//     Route::get('/login', 'LoginController@create' )->name('login')->middleware('guest');
+//     Route::post('/login', 'LoginController@authenticate' )->name('login')->middleware('guest');
+//     Route::post('/logout', 'LoginController@logout' )->name('logout');
+//   });
 
 
 
