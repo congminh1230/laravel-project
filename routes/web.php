@@ -19,7 +19,7 @@ Route::get('/', function () {
 }) ->name('home.index');
 Route::prefix('/')->name('/')->namespace('')->middleware([])->group(function() {
     Route::get('home', function () {
-        return view('frontend.home.index');
+        return view('home');
 }) ->name('frontend.home.index');
 });
 // Route::get('/','HomeController@index');

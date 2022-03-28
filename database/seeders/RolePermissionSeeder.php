@@ -17,10 +17,9 @@ class RolePermissionSeeder extends Seeder
      */
     public function run()
     {
-        //
         DB::table('permissions')->truncate();
         DB::table('roles')->truncate();
-        DB::table('permissions')->truncate();
+        DB::table('permissions_roles')->truncate();
         DB::table('users_permissions')->truncate();
         DB::table('users_roles')->truncate();
 
@@ -83,4 +82,5 @@ class RolePermissionSeeder extends Seeder
         $admod_user->roles()->attach($admod_role);
         $writer_user->roles()->attach($writer_role);
     }
+    
 }
