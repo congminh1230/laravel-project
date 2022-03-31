@@ -58,7 +58,11 @@
                     <td>{{ $post->id }}</td>
                         <td> <a href=""></a>{{ $post->title }}</td>
                         <td>
-                            {{-- <img src="assets/backend/uploads/" width="100%" height="100px" style="border-radius: 5px; object-fit: cover;"> --}}
+                          @if(!empty($post->image))
+                            <img src="{{ Illuminate\Support\Facades\Storage::disk($post->disk)->url($post->image)}}"
+                            width="100px">
+                          @endif
+
                         </td>
                         <td class="text-center">{{ $post->category_id }}</td>
                         <td>
@@ -73,11 +77,11 @@
                         <td></td>
                         <td style="display:flex; margin-left: -125px;" >
                             @can('update',$post)
-                            <a style="margin-right:10px;" href="{{ route('backend.posts.edit', $post->id) }}" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                            <a style="margin-right:10px;" href="{{ route('backend.posts.edit',['post' => $post->id ]) }}" class="btn btn-success"><i class="fas fa-edit"></i></a>
                             @endcan
 
                             @can('delete',$post)
-                            <form method="POST" action="{{ route('backend.posts.destroy', $post->id) }}">
+                            <form method="POST" action="{{ route('backend.posts.destroy',['post' => $post->id ]) }}">
                               @csrf
                               @method('DELETE')
                               <button class="btn btn-danger">

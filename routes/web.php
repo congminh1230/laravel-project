@@ -25,6 +25,7 @@ Route::prefix('/')->name('/')->namespace('')->middleware([])->group(function() {
 // Route::get('/','HomeController@index');
 Route::prefix('backend')->name('backend.')->namespace('Backend')->middleware('auth','role:admin,admod')->group(function() {
     Route::get('dashboard','DashboardController@index');
+    Route::get('Storage','StorageController@index');
     // Route::get('home',HomeController::class , 'index' );
     Route::get('home', function () {
         return view('home.index');
@@ -33,6 +34,7 @@ Route::prefix('backend')->name('backend.')->namespace('Backend')->middleware('au
         'posts' => PostController::class,
         'users' => UserController::class,
         'categories' => CategoryControler::class,
+        // 'storage' => StorageController::class,
     ]);
     // post
     // Route::put('post/{post}', 'UserController@update')

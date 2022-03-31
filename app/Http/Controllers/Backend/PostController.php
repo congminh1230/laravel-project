@@ -11,6 +11,8 @@ use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\StorePostRequest;
 
 class PostController extends Controller
 {
@@ -67,6 +69,7 @@ class PostController extends Controller
 
 
         $posts = $posts_query;
+        // dd($posts);
         return view('backend.posts.index', ['posts' => $posts , 'categories' => $categories ]);
     }
 
@@ -91,26 +94,36 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-        // $data = $request->only([
-        //     'title','content'
-        // ]);
-        // $data = $request->all();
         
-        // // dd($data);
-        // $post = new Post();
-        // $post->title = $data['title'];
-        // $post->slug = Str::slug($data['title']);
-        // $post->user_created_id = 1;
-        // $post->user_updated_id = 1;
-        // $post->category_id = 1;
-        // $post->content = $data['content'];
-        // $post->save();
-        // return redirect()->route('backend.posts.index');
-        if($request->user()->cannot('update',Post::class)){
-            abort(403);
-        }
+        // if($request->user()->cannot('update',Post::class)){
+        //     abort(403);
+        // }
+        // $validated = $request->validate([
+        //     'title' => 'required|unique:posts|min:20|max:255',
+        //     'content' => 'required',
+        //     ]);
+
+        // $validator = Validator::make($request->all(), [
+        //     'title' => 'required|unique:posts|min:20|max:255',
+        //     'content' => 'required',
+        // ],
+        // [
+        //     'required' => 'Thuộc tính :attribute là bắt buộc.',
+        //     'content.require' => 'Nội dung không được để trống'
+        // ]
+
+        // );
+
+            // dd($validator->fails());
+            // if ($validator->fails()) {
+            //     return redirect('backend/posts/create')
+            //     ->withErrors($validator)
+            //     ->withInput();
+            //     }
+
+
 
         $data = $request->only(['title', 'content','status','user_id']);
         $tags = $request->get('tags');
@@ -120,14 +133,37 @@ class PostController extends Controller
         // $post->slug= $data['title'];
         // $post->status=$data['status'];
         $post->user_created_id = 1;
+        $post->user_updated_id=1;
         $post->category_id= 1;
         $post->content=$data['content'];
+        
+        if($request->hasFile('image'))
+        {
+            // dd( $request->file('image'));
+            $disk = 'public';
+            $path = $request->file('image')->store('blogs', $disk);
+            $post->disk = $disk;
+            $post->image = $path;
+        }
         $post->save();
 
         $user = User::find(1);
         $user->posts()->save($post);
 
         $post->tags()->attach($tags);
+
+
+        // DB::table('posts')->insert([
+        //     'title' =>  $data['title'],
+        //    'slug' =>  $data['slug'],
+        //    'content' =>  $data['content'],
+        //    'user_created_id' => 1,
+        //    'category_id' =>  1,
+        //    'status' => 1,
+        //    'created_at' => now(),
+        //    'updated_at' => now()
+
+        // ]);
         
         return redirect()->route('backend.posts.index');
     }
@@ -202,6 +238,14 @@ class PostController extends Controller
         // }
         if($request->user()->cannot('update',$post)){
             abort(403);
+        }
+
+        if($request->hasFile('image'))
+        {
+            $disk = 'public';
+            $path = $request->file('image')->store('blogs', $disk);
+            $post->disk = $disk;
+            $post->image = $path;
         }
 
         $data = request()->only(['title','content']);
