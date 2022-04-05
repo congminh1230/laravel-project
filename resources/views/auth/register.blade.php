@@ -8,7 +8,14 @@
   <div class="card">
     <div class="card-body register-card-body">
       <p class="login-box-msg">Register a new membership</p>
-
+      @if ($errors->any())
+          <div class="alert alert-danger"><ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+            </ul>
+          </div>
+      @endif
       <form action=" {{ route('auth.register') }} " method="POST">
         @csrf
         <div class="input-group mb-3">
@@ -19,6 +26,9 @@
             </div>
           </div>
         </div>
+        @error('name')
+          <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         <div class="input-group mb-3">
           <input type="email" name="email" class="form-control" placeholder="Email">
           <div class="input-group-append">
@@ -27,6 +37,9 @@
             </div>
           </div>
         </div>
+        @error('email')
+          <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         <div class="input-group mb-3">
           <input type="password" name="password" class="form-control" placeholder="Password">
           <div class="input-group-append">
@@ -35,6 +48,9 @@
             </div>
           </div>
         </div>
+        @error('password')
+          <div class="alert alert-danger">{{ $message }}</div>
+          @enderror
         <div class="input-group mb-3">
           <input type="password" name="password_confirmation" class="form-control" placeholder="Retype password">
           <div class="input-group-append">
@@ -42,6 +58,9 @@
               <span class="fas fa-lock"></span>
             </div>
           </div>
+          @error('password')
+          <div class="alert alert-danger">{{ $message }}</div>
+          @enderror
         </div>
         <div class="row">
           <div class="col-8">

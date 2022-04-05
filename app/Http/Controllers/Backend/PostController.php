@@ -31,45 +31,20 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        //
-        // $post = Post::all();
-        // dd($users);
-        // dd($post->tags);
-        // $title = request()->get('title');
-        // $status = request()->get('status');
-        // $posts_query = Post::where('status',1)->select('*');
-        // if(!empty($title)) {
-        //         $posts_query = $posts_query->where('title',$title);
-        // }
-        // if(!empty($status)) {
-        //     $posts_query = $posts_query->where('status',$status);
-        // }
-        // $posts = $posts_query->paginate(3);
-        // return view('backend.posts.index')->with([
-        //     'posts' => $posts
-        // ]);;
-        // return view('backend.posts.index');
         $title = request()->get('title');
         $status = request()->get('status');
         $categories = Category::get();
-        // $posts_query = DB::table('posts')->orderBy('created_at','desc')->select('*')->paginate(5);
         $posts_query = Post::orderBy('created_at','desc')->select('*')->paginate(5);
-        // dd($posts_query);
 
         if(!empty($title)){
             $posts_query = Post::where('title','LIKE',"%$title%")->paginate(1);
         }
-        // dd($title);
-
 
         if(!empty($status)){
             $posts_query = Post::where('status','LIKE',"%$status%")->paginate(1);
         }
-        // dd($status);
-
 
         $posts = $posts_query;
-        // dd($posts);
         return view('backend.posts.index', ['posts' => $posts , 'categories' => $categories ]);
     }
 
@@ -94,34 +69,34 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorePostRequest $request)
+    public function store(Request $request)
     {
         
         // if($request->user()->cannot('update',Post::class)){
         //     abort(403);
         // }
-        // $validated = $request->validate([
-        //     'title' => 'required|unique:posts|min:20|max:255',
-        //     'content' => 'required',
-        //     ]);
+        $validated = $request->validate([
+            'title' => 'required|unique:posts|min:20|max:255',
+            'content' => 'required',
+            ]);
 
-        // $validator = Validator::make($request->all(), [
-        //     'title' => 'required|unique:posts|min:20|max:255',
-        //     'content' => 'required',
-        // ],
-        // [
-        //     'required' => 'Thuộc tính :attribute là bắt buộc.',
-        //     'content.require' => 'Nội dung không được để trống'
-        // ]
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|unique:posts|min:20|max:255',
+            'content' => 'required',
+        ],
+        [
+            'required' => 'Thuộc tính :attribute là bắt buộc.',
+            'content.require' => 'Nội dung không được để trống'
+        ]
 
-        // );
+        );
 
-            // dd($validator->fails());
-            // if ($validator->fails()) {
-            //     return redirect('backend/posts/create')
-            //     ->withErrors($validator)
-            //     ->withInput();
-            //     }
+            dd($validator->fails());
+            if ($validator->fails()) {
+                return redirect('backend/posts/create')
+                ->withErrors($validator)
+                ->withInput();
+                }
 
 
 
@@ -130,8 +105,6 @@ class PostController extends Controller
         // dd($tags);
         $post = new Post();
         $post->title = $data['title'];
-        // $post->slug= $data['title'];
-        // $post->status=$data['status'];
         $post->user_created_id = 1;
         $post->user_updated_id=1;
         $post->category_id= 1;
@@ -139,7 +112,6 @@ class PostController extends Controller
         
         if($request->hasFile('image'))
         {
-            // dd( $request->file('image'));
             $disk = 'public';
             $path = $request->file('image')->store('blogs', $disk);
             $post->disk = $disk;
@@ -151,20 +123,24 @@ class PostController extends Controller
         $user->posts()->save($post);
 
         $post->tags()->attach($tags);
-
-
-        // DB::table('posts')->insert([
-        //     'title' =>  $data['title'],
-        //    'slug' =>  $data['slug'],
-        //    'content' =>  $data['content'],
-        //    'user_created_id' => 1,
-        //    'category_id' =>  1,
-        //    'status' => 1,
-        //    'created_at' => now(),
-        //    'updated_at' => now()
-
-        // ]);
-        
+        $request->session()->flash('success', 'Task was successful!');
+        // if($request->hasFile('image')){
+        //     $disk = 'public';
+        //     $path = $request->file('image')->store('blogs', $disk);
+        //     $post->disk = $disk;
+        //     $post->image = $path;
+        //     }
+            
+        // $post -> title = $data['title'];
+        // // $post -> slug = Str::slug($data['title']);
+        // $post -> content = $data['content'];
+        // $post -> category_id = $data['category_id'];
+        // $post -> status = $data['status'];
+        // $post -> user_created_id = 1;
+        // $post -> user_updated_id = 1;
+        // $post -> save();
+        // $post -> tags()-> attach($tags);
+        // $request->session()->flash('success', 'Task was successful!');
         return redirect()->route('backend.posts.index');
     }
 
@@ -223,38 +199,30 @@ class PostController extends Controller
     public function update(Request $request,Post $post)
     {
        
-        // DB::table('posts')->where('id', $id)->update([
-        //     'title' =>  $data['title'],
-        // //    'slug' =>  $data['slug'],
-        //    'content' =>  $data['content'],
-        // //    'user_create_id' => 1,
-        // //    'category_id' =>  1,
-        //    'status' => $data['status'],
-        //    'updated_at' => now()
-        // ]);
-        // $post = Post::find($id);
-        // if(! Gate::allows('update-post',$post)){
-        //     abort(403);
-        // }
+        // dd($request);
         if($request->user()->cannot('update',$post)){
             abort(403);
         }
-
+        $data = $request->all();
+        $tags = $request -> get('tags');
         if($request->hasFile('image'))
         {
+            // dd( $request->file('image'));
             $disk = 'public';
             $path = $request->file('image')->store('blogs', $disk);
             $post->disk = $disk;
             $post->image = $path;
         }
-
-        $data = request()->only(['title','content']);
-        $tags = $request->get('tags');
-        $post->title = $data['title'];
-        $post->user_created_id = 1;
-        $post->category_id= 1;
-        $post->content=$data['content'];
-        $post->save();
+        $post -> title = $data['title'];
+        $post -> content = $data['content'];
+        $post -> category_id = $data['category_id'];
+        $post -> user_created_id = 1;
+        $post -> user_updated_id = 1;
+        
+        $post -> save();
+        $post -> tags()-> sync($tags);
+        $request->session()->flash('success', 'Update  successful!');
+       
         return redirect()->route('backend.posts.index');
     }
     /**
@@ -263,15 +231,13 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request , $id)
     {
         //
         $post = Post::find($id);
-        if (! Gate::allows('delete-post', $post)) {
-            abort(403);
-        };
-        $post = Post::find($id);
-        $post->delete();
+        $this -> authorize('delete', $post);
+        $post -> delete();
+        $request->session()->flash('success', 'Delete  successful!');
         return redirect()->route('backend.posts.index');
     }
 }

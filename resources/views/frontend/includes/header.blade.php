@@ -51,10 +51,17 @@
                   @if(auth()->check()) 
                   <!-- <div> <img src="https://png.pngtree.com/png-clipart/20190520/original/pngtree-vector-users-icon-png-image_4144740.jpg" > </img> </div> -->
                   @else
-                  <li class="hidden-xs"><a href="checkout.html">Checkout</a></li>
-                  <li><a href="" data-toggle="modal" data-target="#login-modal">Login</a></li>
+                  <li><a href="{{ route('auth.login') }}" >Login</a></li>
                   @endif 
-                 
+                  <li>
+                    <form method="post" action="{{ route('auth.logout')}}">
+                      @csrf
+                      <a href="#" class="nav-link"
+                        onclick="this.closest('form').submit();return false;">
+                      Logout
+                      </a>
+                    </form>
+                  </li>
                 </ul>
               </div>
             </div>

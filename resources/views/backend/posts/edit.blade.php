@@ -23,7 +23,7 @@
         <div class="card card-primary col-12">
               <!-- /.card-header -->
               <!-- form start -->
-              <form class="" method="POST" action="{{route('backend.posts.update', [ 'post' => $post->id ])}}">
+              <form class="" method="POST" action="{{route('backend.posts.update', [ 'post' => $post->id ])}}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="card-body">
@@ -32,37 +32,45 @@
                     <input type="text" name="title" class="form-control" id="exampleInputEmail1" value="{{  $post->title }}" placeholder="Enter...">
                   </div>
                   <div class="form-group">
+                    <label for="exampleInputFile">Tải lên ảnh</label>
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="image">
+                            <label class="custom-file-label" for="exampleInputFile">Chọn file</label>
+                        </div>
+                        <div class="input-group-append">
+                        <span class="input-group-text">Tải lên</span>
+                    </div>
+                </div>
+                  <div class="form-group">
                     <label for="exampleInputEmail1">Text area</label>
                     <textarea  id="summernote"class="col-12" name="content" id="text_area" cols="30" rows="10">
                               {{  $post->content }}
                     </textarea>
                   </div>
-                  <div class= "row">
-                    <div class="form-group col-6">
-                      <label for="exampleInputPassword1">Danh mục</label>
-                      <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                      <option selected="selected" data-select2-id="3">Option1</option>
-                      <option data-select2-id="36">Option2</option>
-                      <option data-select2-id="37">Option3</option>
-                      <option data-select2-id="38">Option4</option>
-                      <option data-select2-id="39">Option5</option>
-                      <option data-select2-id="40">Option6</option>
-                      <option data-select2-id="41">Option7</option>
-                      </select>
-                    </div>
-                    <div class="form-group col-6">
-                      <label for="exampleInputPassword1">Trạng thái</label>
-                      <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                      <option selected="selected" data-select2-id="3">Option1</option>
-                      <option data-select2-id="36">Option2</option>
-                      <option data-select2-id="37">Option3</option>
-                      <option data-select2-id="38">Option4</option>
-                      <option data-select2-id="39">Option5</option>
-                      <option data-select2-id="40">Option6</option>
-                      <option data-select2-id="41">Option7</option>
-                      </select>
-                    </div>
-                  </div>
+                  <div class="form-group">
+                <label for="">Danh mục</label>
+                <select class="form-control" name="category_id">
+                    <option value="0">
+                        Chọn danh mục
+                    </option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Tags</label>
+                <select multiple="" name="tags[]" class="form-control">
+                    <option value="0">
+                        Chọn Tags
+                    </option>
+                    @foreach ($tags as $item)
+                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                    @endforeach
+                </select>
+            </div>
                 </div>
                 <!-- /.card-body -->
 

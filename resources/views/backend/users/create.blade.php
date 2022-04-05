@@ -17,7 +17,50 @@
     </div>
 @endsection
 @section('content')
-  @include('backend.users.components.user_from',[
-      'user_route' => route('backend.users.store')
-  ])
+<form id="quickForm" method="POST" action="{{route('backend.users.store')}}" enctype="multipart/form-data" >
+                @csrf
+                <div class="card-body">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Name</label>
+                    <input type="name" name="name" class="form-control" id="exampleInputEmail1" placeholder="Enter name">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Address</label>
+                    <input type="text" name="address" class="form-control" id="exampleInputEmail1" placeholder="Enter name">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputFile">Tải lên ảnh</label>
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="avatar">
+                            <label class="custom-file-label" for="exampleInputFile">Chọn file</label>
+                        </div>
+                        <div class="input-group-append">
+                        <span class="input-group-text">Tải lên</span>
+                    </div>
+                </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">phone</label>
+                    <input type="phone" name="phone" class="form-control" id="exampleInputEmail1" placeholder="">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                  </div>
+                  <div class="form-group mb-0">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" name="terms" class="custom-control-input" id="exampleCheck1">
+                      <label class="custom-control-label" for="exampleCheck1">I agree to the <a href="#">terms of service</a>.</label>
+                    </div>
+                  </div>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </form>
 @endsection

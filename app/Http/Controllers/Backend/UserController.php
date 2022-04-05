@@ -43,8 +43,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        
-        return view('Backend.users.create');
+        // dd(1);
+        return view('backend.users.create');
     }
 
     /**
@@ -55,21 +55,37 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+
         $data = $request->only([
             'name','email','password','avatar'
         ]);
-        // dd($data);
-        DB::table('users')->insert([
-            'name' => 'min',
-            'address' => 'sdsd',
-            'avatar' => $data['avatar'],
-            // 'phone' => $data['phone'],
-            'email' => $data['email'],
-            'password' => $data['password'],
-            'created_at' => now(),
-            'updated_at' => now()
+        $user = new User();
+        $user->name = $data['name'];
+        $user->email = $data['email'];
+        $user->password = $data['password'];
+        
+        if($request->hasFile('avatar'))
+        {
+            // dd( $request->file('image'));
+            $disk = 'public';
+            $path = $request->file('avatar')->store('users', $disk);
+            $user->disk = $disk;
+            $user->avatar = $path;
+        }
+        $user->save();
 
-        ]);
+        // // dd($data);
+        // DB::table('users')->insert([
+        //     'name' => 'min',
+        //     'address' => 'sdsd',
+        //     'avatar' => $data['avatar'],
+        //     // 'phone' => $data['phone'],
+        //     'email' => $data['email'],
+        //     'password' => $data['password'],
+        //     'created_at' => now(),
+        //     'updated_at' => now()
+
+        // ]);
         return redirect()->route('backend.users.index');
 
      
@@ -85,16 +101,12 @@ class UserController extends Controller
     {
         //
         if($id !== null) {
-            // $users = DB::table('users')->select(['id','name','email','phone'])->find($id);
-            // return view('Backend.users.show')->with([
-            //     'users'=>$users
-            // ]);
-            // $posts = User::find($id)->posts;
+            $users = User::find($id);
             // dd($posts);
-            $users = User::find($id)->posts;
-            dd($users);
-            // $userInfo = $users->userInfo;
-            // // dd($userInfo->phone );
+            // $users = User::find($id)->posts;
+            // // dd($users);
+            // // $userInfo = $users->userInfo;
+            // // // dd($userInfo->phone );
             return view('Backend.users.show')->with([
                 'users'=>$users
             ]);
@@ -116,7 +128,7 @@ class UserController extends Controller
     {
         //
         if($id !== null) {
-            $users = DB::table('users')->select(['id','name'])->find($id);
+            $users = DB::table('users')->select(['id','name','avatar'])->find($id);
             return view('Backend.users.edit')->with([
                 'users'=>$users
             ]);
@@ -135,15 +147,21 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,User $user)
     {
-        //
+        // dd($request->all());
         $data = $request->all();
-        DB::table('users')->where('id',$id)->
-            update([
-                'name' => $data['name'],
-            ]);
-                return redirect()->route('backend.users.index');
+        // dd($request->hasFile('avatar'));
+        if($request->hasFile('avatar'))
+        {
+            $disk = 'public';
+            $path = $request->file('avatar')->store('users', $disk);
+            $user->disk = $disk;
+            $user->image = $path;
+        }
+        $user->name= $data['name'];
+        $user->save();
+        return redirect()->route('backend.users.index');
     }
 
     /**

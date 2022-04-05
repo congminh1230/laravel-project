@@ -18,11 +18,13 @@ class CheckRole
     {
         // dd($roles);
        foreach ($roles as $role) {
+        //    dd($request->user()->role == $role);
             if($request->user()->role == $role) {
                 return $next($request);
             }
        }
         
         return abort(403);
+        // return 'loi';
     }
 }

@@ -18,7 +18,6 @@
 @endsection
 @section('content')
 <div class="container-fluid">
-        <!-- Small boxes (Stat box) -->
         <div class="row">
         <div class="card card-primary col-12">
               <!-- /.card-header -->
@@ -64,7 +63,7 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                <a href= "list" type="button" class="btn btn-outline-secondary">Hủy</a>
+                <a href= "{{route('backend.categories.index')}}" type="button" class="btn btn-outline-secondary">Hủy</a>
                 <button style="float:right;" type="submit" class="btn btn-success">Lưu</button>
                 </div>
               </form>

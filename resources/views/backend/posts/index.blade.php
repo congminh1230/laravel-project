@@ -35,6 +35,17 @@
           </form>
 </div>
 <table class="table table-striped projects">
+        @if (session('error'))
+        <div class="alert alert-danger" role="alert">
+        {{ session('error') }}
+        </div>
+        @endif
+        @if (session('success'))
+        <div class="alert alert-success" role="alert">
+        {{ session('success') }}
+        </div>
+        @endif
+
                 @can('create', App\Models\Post::class)
                   <a href="{{ route('backend.posts.create') }}" class="btn btn-success"><i style="margin-right:10px" class="fas fa-plus"></i>Tạo bài viết</a>
                 @endcan

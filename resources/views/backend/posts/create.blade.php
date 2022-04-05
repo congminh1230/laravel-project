@@ -38,15 +38,15 @@
                     <textarea  id="summernote"class="col-12" name="content" id="text_area" cols="30" rows="10"></textarea>
                   </div>
                   <div class="form-group">
-                <label for="exampleInputFile">Tải lên ảnh</label>
-                <div class="input-group">
-                <div class="custom-file">
-                <input type="file" class="custom-file-input" name="image">
-                <label class="custom-file-label" for="exampleInputFile">Chọn file</label>
-                </div>
-                <div class="input-group-append">
-                <span class="input-group-text">Tải lên</span>
-                </div>
+                    <label for="exampleInputFile">Tải lên ảnh</label>
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="image">
+                            <label class="custom-file-label" for="exampleInputFile">Chọn file</label>
+                        </div>
+                        <div class="input-group-append">
+                        <span class="input-group-text">Tải lên</span>
+                    </div>
                 </div>
               </div>
             <div class="form-group">

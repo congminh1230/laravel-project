@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use Illuminate\Support\Str;
+use App\Http\Requests\StoreCategoryRequest;
+
 
 class CategoryControler extends Controller
 {
@@ -42,13 +44,15 @@ class CategoryControler extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request)
     {
+        dd($request);
         $data = $request->all();
         $category = new Category();
         $category->name = $data['name'];
         $category->slug = Str::slug($data['name']);
         $category->save();
+        $request->session()->flash('success', 'Task was successful!');
         return redirect()->route('backend.categories.index');
     }
 
@@ -100,6 +104,7 @@ class CategoryControler extends Controller
         $category->name = $data['name'];
         $category->slug = Str::slug($data['name']);
         $category->save();
+        $request->session()->flash('success', 'Update  successful!');
         return redirect()->route('backend.categories.index');
     }
 
@@ -109,20 +114,13 @@ class CategoryControler extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         //
-        if($id  ===  'true') {
-            $categories = Category::onlyTrashed()->get();
-            // dd($users);
-            return view('backend.categories.delete')->with([
-                'users'=>$categories
-            ]);
-        }else {
-            $user = Category::onlyTrashed()->where('id', $id)->find($id);
-            $user->restore();
-            return redirect()->route('backend.categories.index');
-        }
+        Category::destroy($id);
+        $request->session()->flash('success', 'Delete  successful!');
+        return redirect()-> route('backend.categories.index');
  
     }
 }
+

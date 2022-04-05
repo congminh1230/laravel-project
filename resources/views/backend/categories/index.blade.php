@@ -18,6 +18,16 @@
 @endsection
 @section('content')
 <table class="table table-striped projects">
+        @if (session('error'))
+        <div class="alert alert-danger" role="alert">
+        {{ session('error') }}
+        </div>
+        @endif
+        @if (session('success'))
+        <div class="alert alert-success" role="alert">
+        {{ session('success') }}
+        </div>
+        @endif
     <a href="{{route('backend.categories.create')}}" class="btn badge-success" > Tạo danh mục </a>
               <thead>
                   <tr>

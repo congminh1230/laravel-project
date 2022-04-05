@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Cookie;
 class LoginController extends Controller
 {
     //
@@ -25,6 +25,7 @@ class LoginController extends Controller
         }
         if(Auth::attempt($credentials,$remember)) {
             $request->session()->regenerate();
+            Cookie::queue('email', $request->get('email'));
             return redirect()->intended('backend/dashboard');
         }
         return back()->withErrors([
@@ -36,6 +37,6 @@ class LoginController extends Controller
         Auth::guard('web')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/');
+        return redirect('/frontend/home');
     }
 }

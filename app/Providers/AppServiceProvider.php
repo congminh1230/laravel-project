@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\Menu;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Cache;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,8 +27,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $menu = ['phone','lol'];
-        View::share('menu',$menu);
+        // $menu = ['phone','lol'];
+        // View::share('menu',$menu);
+        $menus =  Cache::remember('menus', 60*60*60, function () {
+            return Menu::get();
+        });
+        View::share('menus', $menus);
         Paginator::useBootstrap();
     }
 }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Post;
+use Illuminate\Support\Facades\Storage;
 
 class StorageController extends Controller
 {
@@ -16,7 +18,15 @@ class StorageController extends Controller
     {
         //
         // return view('public.avatars');
-        dd(1);
+        // dd(1);\
+        $files = Storage::disk('public')->allFiles();
+        unset($files[0]);
+        // s
+        // dd($files);
+        // $posts = Post::get();
+        return view('backend.storage.index')->with([
+            'files' => $files,
+        ]);
     }
 
     /**
@@ -80,7 +90,12 @@ class StorageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
+    {
+        Storage::disk('public')->delete($request->get('file'));
+        return  redirect()->route('backend.Storage.index');
+    }
+    public function delete($id)
     {
         //
     }

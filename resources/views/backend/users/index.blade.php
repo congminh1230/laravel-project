@@ -56,7 +56,12 @@
                     <tr>
                         <td>{{ $user->id }}</td>
                         <td>{{ $user->name }} <a href="{{ route('backend.users.show', ['user' => $user->id ]) }}">show</a></td>
-                        <td>{{ $user->avatar }}</td>
+                        <td>
+                          @if(!empty($user->avatar))
+                            <img src="{{ Illuminate\Support\Facades\Storage::disk($user->disk)->url($user->avatar)}}"
+                            width="100px">
+                          @endif
+                        </td>
                         <td>{{ $user->user_id }}</td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->phone }}</td>
