@@ -27,6 +27,9 @@ class LoginController extends Controller
             $request->session()->regenerate();
             Cookie::queue('email', $request->get('email'));
             return redirect()->intended('backend/dashboard');
+        }else {
+            $request->session()->flash('error', 'Tài khoản hoặc mật khẩu không tồn tại!');
+            // dd(1);
         }
         return back()->withErrors([
             'email' => 'the provided credentials do not math our records'
