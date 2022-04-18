@@ -14,18 +14,15 @@ use Illuminate\Support\Facades\App;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    return view('frontend.home.index');
-}) ->name('home.index');
-// Route::prefix('/')->name('/')->namespace('')->middleware([])->group(function() {
-//     // return 'minh';
-//     Route::get('frontend', function () {
-//         return view('home');
-//     }) ->name('frontend.home.index');
-// });
-// Route::get('/','HomeController@index');
+
+
+Route::get('/datatables','DatatablesController@index');
+Route::get('/datatables/data','DatatablesController@anyData')->name('datatables.data');
+
+Route::get('/','HomeController@index');
 Route::prefix('backend')->name('backend.')->namespace('Backend')->middleware('auth','role:admin,admod,writer')->group(function() {
-    Route::get('dashboard','DashboardController@index');
+    // Route::get('dashboard','DashboardController@anyData');
+    Route::get('/dashboard/get-list','DashboardController@index');
     Route::get('Storage','StorageController@index')->name('Storage.index');
     Route::post('Storage/destroy','StorageController@destroy')->name('Storage.destroy');
     // Route::get('home',HomeController::class , 'index' );

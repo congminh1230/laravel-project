@@ -1,3 +1,6 @@
+@section('link')
+<link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+@endsection
 @extends('backend.layouts.master')
 @section('content-header')
 <div class="content-header">
@@ -35,16 +38,7 @@
           </form>
 </div>
 <table class="table table-striped projects">
-        @if (session('error'))
-        <div class="alert alert-danger" role="alert">
-        {{ session('error') }}
-        </div>
-        @endif
-        @if (session('success'))
-        <div class="alert alert-success" role="alert">
-        {{ session('success') }}
-        </div>
-        @endif
+      
 
                 @can('create', App\Models\Post::class)
                   <a href="{{ route('backend.posts.create') }}" class="btn btn-success"><i style="margin-right:10px" class="fas fa-plus"></i>Tạo bài viết</a>
@@ -109,3 +103,9 @@
           </table>
           {{ $posts->links() }}
 @endsection
+@section('script')
+<script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+        <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+        {!! Toastr::message() !!}
+@endsection
+

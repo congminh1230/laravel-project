@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\StorePostRequest;
+use Brian2694\Toastr\Facades\Toastr;
 
 class PostController extends Controller
 {
@@ -91,7 +92,7 @@ class PostController extends Controller
 
         );
 
-            dd($validator->fails());
+            // dd($validator->fails());
             if ($validator->fails()) {
                 return redirect('backend/posts/create')
                 ->withErrors($validator)
@@ -123,7 +124,8 @@ class PostController extends Controller
         $user->posts()->save($post);
 
         $post->tags()->attach($tags);
-        $request->session()->flash('success', 'Task was successful!');
+        // $request->session()->flash('success', 'Task was successful!');
+        Toastr::success('Task was successful!', 'success', ["positionClass" => "toast-top-right"]);
         // if($request->hasFile('image')){
         //     $disk = 'public';
         //     $path = $request->file('image')->store('blogs', $disk);

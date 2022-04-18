@@ -1,1 +1,4 @@
-<h1>hi</h1>
+@extends('frontend.layouts.master')
+@section('content')
+
+@endsection
