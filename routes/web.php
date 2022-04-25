@@ -15,16 +15,15 @@ use Illuminate\Support\Facades\App;
 |
 */
 
-
+Route::resource('customers','CustomerController');
 Route::get('/datatables','DatatablesController@index');
 Route::get('/datatables/data','DatatablesController@anyData')->name('datatables.data');
 
-Route::get('/','HomeController@index');
 Route::prefix('backend')->name('backend.')->namespace('Backend')->middleware('auth','role:admin,admod,writer')->group(function() {
     // Route::get('dashboard','DashboardController@anyData');
-    Route::get('/dashboard/get-list','DashboardController@index');
-    Route::get('Storage','StorageController@index')->name('Storage.index');
-    Route::post('Storage/destroy','StorageController@destroy')->name('Storage.destroy');
+    Route::get('/dashboard','DashboardController@index');
+    // Route::get('Storage','StorageController@index')->name('Storage.index');
+    // Route::post('Storage/destroy','StorageController@destroy')->name('Storage.destroy');
     // Route::get('home',HomeController::class , 'index' );
     Route::get('home', function () {
         return view('home.index');
@@ -33,26 +32,14 @@ Route::prefix('backend')->name('backend.')->namespace('Backend')->middleware('au
         'posts' => PostController::class,
         'users' => UserController::class,
         'categories' => CategoryControler::class,
-        // 'storage' => StorageController::class,
     ]);
-    // post
-    // Route::put('post/{post}', 'UserController@update')
-    // ->middleware('can:update,post')
-    // ->name('posts.update');
     Route::resource('posts',PostController::class)
     ->except([
         'update'
     ]);
     Route::resource('categories',CategoryControler::class);
 });
-Route::prefix('frontend')->name('frontend.')->namespace('frontend')->middleware([])->group(function() {
-    Route::get('home', function () {
-        return view('frontend.home.index');
-}) ->name('home.index');
-Route::get('posts', function () {
-    return view('frontend.posts.index');
-}) ->name('posts.index');
-});
+
 Route::prefix('/')->name('auth.')->namespace('Auth')->group(function() {
     Route::get('/register', 'RegisteredUserController@create')
     ->middleware('guest')
@@ -71,14 +58,23 @@ Route::prefix('/')->name('auth.')->namespace('Auth')->group(function() {
 
 
 });
-// Route::prefix('auth')->name('auth.')->namespace('Auth')->group(function(){
-//     Route::get('/register', 'RegisterUserController@create' )->name('register')->middleware('guest');
-//     Route::post('/register', 'RegisterUserController@store' )->middleware('guest');
-//     Route::get('/login', 'LoginController@create' )->name('login')->middleware('guest');
-//     Route::post('/login', 'LoginController@authenticate' )->name('login')->middleware('guest');
-//     Route::post('/logout', 'LoginController@logout' )->name('logout');
-//   });
 
+// frontend
+Route::get('/post/show/{id}', 'PostController@show')->name('post.show');
+Route::post('/comment/store', 'CommentController@store')->name('comment.add');
+Route::post('/reply/store', 'CommentController@replyStore')->name('reply.add');
+
+
+Route::get('/','HomeController@index'); 
+
+Route::name('frontend.')->namespace('Frontend')->middleware([])->group(function() {
+    Route::get('home', function () {
+        return view('frontend.home.index');
+    }) ->name('home.index');
+    Route::get('posts','PostController@index'); 
+    Route::get('/{slug}.html','ProductController@show')->name('product.show'); 
+   
+});
 
 
 

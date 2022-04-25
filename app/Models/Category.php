@@ -16,9 +16,9 @@ class Category extends Model
         'name',
         'slug',
     ];
-    public function setTitleAttribute($name) {
-        $this->attributes['name'] = $name;
-        $this->attributes['slug'] = Str::slug($name);
+    public function setNameAttribute($name){
+        $this -> attributes['name'] = $name;
+        $this -> attributes['slug']= Str::slug($name);
     }
     public function user()
     {

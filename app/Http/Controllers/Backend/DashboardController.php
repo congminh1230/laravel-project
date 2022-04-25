@@ -38,8 +38,8 @@ class DashboardController extends Controller
         // };
         // $cache = Cache::put('key', 'value', 10);
         // dd($cache);
-        // return view('welcome');
-        return DataTables::of(User::query())->make(true);
+        return view('dashboard');
+        // return DataTables::of(User::query())->make(true);
 
     }
     public function anyData()

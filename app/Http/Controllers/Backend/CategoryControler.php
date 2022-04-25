@@ -44,9 +44,9 @@ class CategoryControler extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCategoryRequest $request)
+    public function store(Request $request)
     {
-        dd($request);
+       
         $data = $request->all();
         $category = new Category();
         $category->name = $data['name'];

@@ -24,7 +24,12 @@ class PostController extends Controller
      */
     public function _construct() {
         $this->authorizeResource(Post::class,'post');
-    }    
+    }
+    public function __construct()
+    {
+        return $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -73,9 +78,6 @@ class PostController extends Controller
     public function store(Request $request)
     {
         
-        // if($request->user()->cannot('update',Post::class)){
-        //     abort(403);
-        // }
         $validated = $request->validate([
             'title' => 'required|unique:posts|min:20|max:255',
             'content' => 'required',
@@ -92,13 +94,12 @@ class PostController extends Controller
 
         );
 
-            // dd($validator->fails());
-            if ($validator->fails()) {
-                return redirect('backend/posts/create')
-                ->withErrors($validator)
-                ->withInput();
-                }
-
+        if ($validator->fails()) 
+        {
+            return redirect('backend/posts/create')
+            ->withErrors($validator)
+            ->withInput();
+        }
 
 
         $data = $request->only(['title', 'content','status','user_id']);
@@ -126,23 +127,6 @@ class PostController extends Controller
         $post->tags()->attach($tags);
         // $request->session()->flash('success', 'Task was successful!');
         Toastr::success('Task was successful!', 'success', ["positionClass" => "toast-top-right"]);
-        // if($request->hasFile('image')){
-        //     $disk = 'public';
-        //     $path = $request->file('image')->store('blogs', $disk);
-        //     $post->disk = $disk;
-        //     $post->image = $path;
-        //     }
-            
-        // $post -> title = $data['title'];
-        // // $post -> slug = Str::slug($data['title']);
-        // $post -> content = $data['content'];
-        // $post -> category_id = $data['category_id'];
-        // $post -> status = $data['status'];
-        // $post -> user_created_id = 1;
-        // $post -> user_updated_id = 1;
-        // $post -> save();
-        // $post -> tags()-> attach($tags);
-        // $request->session()->flash('success', 'Task was successful!');
         return redirect()->route('backend.posts.index');
     }
 
@@ -160,11 +144,17 @@ class PostController extends Controller
     //    foreach($tag->posts as $post) {
     //         echo $post->id . $post->title . "</br>";
     //    };
+        // $post = Post::find($id);
+        // dd($post->tags);
+        // foreach($post->tags as $tag) {
+        //     echo $tag->name;
+        // };
         $post = Post::find($id);
-        dd($post->tags);
-        foreach($post->tags as $tag) {
-            echo $tag->name;
-        }   ;
+        // dd($post);
+        // return view('backend.posts.show');
+        return view('backend.posts.show', ['post' => $post ],compact('post'));
+        // return view('show', compact('post'));
+        // return view('backend.posts.show');
     }
 
     /**
@@ -209,7 +199,6 @@ class PostController extends Controller
         $tags = $request -> get('tags');
         if($request->hasFile('image'))
         {
-            // dd( $request->file('image'));
             $disk = 'public';
             $path = $request->file('image')->store('blogs', $disk);
             $post->disk = $disk;

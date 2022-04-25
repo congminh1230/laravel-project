@@ -61,7 +61,8 @@
                     <tr>
                        
                     <td>{{ $post->id }}</td>
-                        <td> <a href=""></a>{{ $post->title }}</td>
+                        <td> <a href="{{ route('backend.posts.show',['post' => $post->id ]) }}">{{ $post->title }}</a>{{ $post->title }}
+                        </td>
                         <td>
                           @if(!empty($post->image))
                             <img src="{{ Illuminate\Support\Facades\Storage::disk($post->disk)->url($post->image)}}"

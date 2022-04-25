@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Laravel 6 Ajax CRUD Example</title>
     <meta name="csrf-token" content="">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
     <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -15,7 +14,6 @@
 <body>
 
 <div class="container">
-    <h1>Laravel 6 Ajax CRUD </h1>
     <a class="btn btn-success" href="javascript:void(0)" id="createNewCustomer"> Create New Customer</a>
     <table class="table table-bordered data-table">
         <thead>
