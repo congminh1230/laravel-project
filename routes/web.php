@@ -20,11 +20,10 @@ Route::get('/datatables','DatatablesController@index');
 Route::get('/datatables/data','DatatablesController@anyData')->name('datatables.data');
 
 Route::prefix('backend')->name('backend.')->namespace('Backend')->middleware('auth','role:admin,admod,writer')->group(function() {
-    // Route::get('dashboard','DashboardController@anyData');
     Route::get('/dashboard','DashboardController@index');
-    // Route::get('Storage','StorageController@index')->name('Storage.index');
-    // Route::post('Storage/destroy','StorageController@destroy')->name('Storage.destroy');
-    // Route::get('home',HomeController::class , 'index' );
+    Route::get('/Shop/add','ProductController@createImage')->name('products.add');
+    Route::post('/Shop/storeImage','ProductController@storeImage')->name('products.storeImage');
+
     Route::get('home', function () {
         return view('home.index');
     }) ->name('home.index');
@@ -32,6 +31,8 @@ Route::prefix('backend')->name('backend.')->namespace('Backend')->middleware('au
         'posts' => PostController::class,
         'users' => UserController::class,
         'categories' => CategoryControler::class,
+        'products' => ProductController::class,
+        'images' => ImageController::class,
     ]);
     Route::resource('posts',PostController::class)
     ->except([
@@ -65,15 +66,21 @@ Route::post('/comment/store', 'CommentController@store')->name('comment.add');
 Route::post('/reply/store', 'CommentController@replyStore')->name('reply.add');
 
 
-Route::get('/','HomeController@index'); 
+Route::get('/','HomeController@index')->name('home'); 
 
-Route::name('frontend.')->namespace('Frontend')->middleware([])->group(function() {
-    Route::get('home', function () {
-        return view('frontend.home.index');
-    }) ->name('home.index');
-    Route::get('posts','PostController@index'); 
-    Route::get('/{slug}.html','ProductController@show')->name('product.show'); 
-   
+Route::prefix('')->namespace('Frontend')
+                ->group(function() {
+    Route::get('shop','ProductController@index')->name('frontend.product.shop');
+    Route::get('/{slug}.html','ProductController@show')->name('frontend.product.show');
+    Route::get('/carts','CartController@index')->name('frontend.carts.index');
+    Route::get('/carts/add/{id}','CartController@add')->name('frontend.carts.add');
+    Route::get('/carts/delete/{id}','CartController@delete')->name('frontend.carts.delete');
+    Route::post('/carts/update','CartController@update')->name('frontend.carts.update');
+    Route::get('checkout','CheckOutController@index')->name('frontend.checkout.index');
+    Route::get('/destroy','CartController@destroy')->name('frontend.carts.destroy');
+    Route::get('/blog','ProductController@blog')->name('frontend.posts.index');
+    Route::get('blog/detail/{id}','ProductController@detail')->name('frontend.blogs.index');
+
 });
 
 

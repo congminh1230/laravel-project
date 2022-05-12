@@ -35,16 +35,18 @@
                   </div>
                   <div class= "row">
                     <div class="form-group col-6">
-                      <label for="exampleInputPassword1">Danh mục</label>
-                      <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                      <option selected="selected" data-select2-id="3">Option1</option>
-                      <option data-select2-id="36">Option2</option>
-                      <option data-select2-id="37">Option3</option>
-                      <option data-select2-id="38">Option4</option>
-                      <option data-select2-id="39">Option5</option>
-                      <option data-select2-id="40">Option6</option>
-                      <option data-select2-id="41">Option7</option>
-                      </select>
+                    <div class="form-group">
+                <label for="">Danh mục</label>
+                <select class="form-control" name="category_parent">
+                    <option value="0">
+                        Chọn danh mục
+                    </option>
+                    @foreach ($categories as $category)
+                        <option >{{ $category->name }}</option>
+                    @endforeach
+
+                </select>
+            </div>
                     </div>
                     <div class="form-group col-6">
                       <label for="exampleInputPassword1">Trạng thái</label>

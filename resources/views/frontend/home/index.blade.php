@@ -1,7 +1,7 @@
 @extends('frontend.layouts.master')
 @section('content')
 <!--top tags area start-->
-<div class="top_tags_area">
+<!-- <div class="top_tags_area">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -21,7 +21,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!--top tags area end-->
 
     <!--slider area start-->
@@ -202,17 +202,17 @@
                             <ul class="nav" role="tablist" id="nav-tab">
                                 <li>
                                     <a class="active" data-bs-toggle="tab" href="#Sellers" role="tab" aria-controls="Sellers" aria-selected="true"> 
-                                        Best Sellers
+                                        Xe Mercedes
                                     </a>
                                 </li>
                                 <li>
                                     <a data-bs-toggle="tab" href="#Featured" role="tab" aria-controls="Featured" aria-selected="false">
-                                        Featured Products
+                                        Phụ Tùng Xe
                                     </a>
                                 </li>
                                 <li>
                                     <a data-bs-toggle="tab" href="#Arrivals" role="tab" aria-controls="Arrivals" aria-selected="false">
-                                       New Arrivals
+                                       Độ Xe
                                     </a>
                                 </li>
                             </ul>
@@ -223,15 +223,13 @@
                     <div class="tab-pane fade show active" id="Sellers" role="tabpanel">
                         <div class="row">
                             <div class="product_carousel product_column5 owl-carousel">
-                               
+
                                         @foreach($product_best_sellers as $product) 
                                             @include('frontend.home.compoments.list_products',[
                                                 'product' => $product    
                                             ])
                                         @endforeach
-                                       
-                                   
-                               
+                                        
                             </div> 
                         </div> 
                     </div>
@@ -304,17 +302,21 @@
                         <div class="col-lg-6 col-md-12">
                           <div class="product_style_left">
                                 <article class="single_product">
-                                    <figure>
+                                    @foreach($san_pham_gioi_han as $product) 
+                                        <figure>
                                         <div class="product_thumb">
-                                            <a class="primary_img" href="product-details.html"><img src="assets/img/product/product7.jpg" alt=""></a>
-                                            <a class="secondary_img" href="product-details.html"><img src="assets/img/product/product8.jpg" alt=""></a>
+                                            <a class="primary_img" href="product-details.html"> <img src="@if(!empty($product->image))
+                                      {{$product->image->path}}
+                                      @endif" alt=""></a>
+                                            <a class="secondary_img" href="product-details.html"> <img src="@if(!empty($product->image))
+                                      {{$product->image->path}}
+                                      @endif" alt=""></a>
                                             <div class="label_product">
-                                                <span class="label_sale">-52%</span>
+                                                <span class="label_sale">{{ $product->price_sale }}%</span>
                                             </div>
                                         </div>
                                         <div class="product_content">
-                                            <p class="manufacture_product"><a href="#">Parts</a></p>
-                                            <h4 class="product_name"><a href="product-details.html">Nunc Neque Eros</a></h4>
+                                            <p class="manufacture_product"><a href="#">{{ $product->name }}</a></p>
                                             <div class="product_rating">
                                                <ul>
                                                    <li><a href="#"><i class="ion-android-star-outline"></i></a></li>
@@ -325,8 +327,7 @@
                                                </ul>
                                             </div>
                                             <div class="price_box"> 
-                                                <span class="old_price">$320.00</span> 
-                                                <span class="current_price">$120.00</span>
+                                                <span class="old_price">{{$product->price_origin}}$</span> 
                                             </div>
                                             <div class="product_desc">
                                                 <p>Nunc facilisis sagittis ullamcorper. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc.</p>
@@ -341,6 +342,9 @@
                                             </div> 
                                         </div>
                                     </figure>
+                                    
+                                    @endforeach
+                                   
                                 </article>
                             </div>
                         </div>
@@ -350,7 +354,7 @@
                                     <div class="product_carousel product_column3 owl-carousel">
                                         
                                                 @foreach($product_on_sale as $product) 
-                                                    @include('frontend.home.compoments.product_style_left',[
+                                                    @include('frontend.home.compoments.list_products',[
                                                         'product' => $product    
                                                     ])
                                                 @endforeach

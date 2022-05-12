@@ -41,22 +41,22 @@
                     <label for="exampleInputFile">Tải lên ảnh</label>
                     <div class="input-group">
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" name="image">
+                            <input type="file" class="custom-file-input" name="image"  multiple >
                             <label class="custom-file-label" for="exampleInputFile">Chọn file</label>
                         </div>
                         <div class="input-group-append">
-                        <span class="input-group-text">Tải lên</span>
+                          <span class="input-group-text">Tải lên</span>
+                        </div>
                     </div>
-                </div>
-              </div>
+                  </div>
             <div class="form-group">
                 <label for="">Danh mục</label>
-                <select class="form-control" name="category_id">
+                <select class="form-control" name="category_name">
                     <option value="0">
                         Chọn danh mục
                     </option>
                     @foreach ($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        <option value="{{ $category->name }}">{{ $category->name }}</option>
                     @endforeach
 
                 </select>

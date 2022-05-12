@@ -47,7 +47,9 @@
                         <td>{{ $category->name }} {{ $category->slug }}</td>
                         <td>{{ $category->created_at }}</td>
                         <td>{{ $category->updated_at }}</td>
-                        <td></td>
+                        <td>
+                            {{ $category->category_parent }}
+                        </td>
                         <td></td>
                         <td>
                             <a href="#" class="btn bg-primary"><i class="far fa-edit"></i></a>

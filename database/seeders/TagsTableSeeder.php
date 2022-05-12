@@ -16,7 +16,7 @@ class TagsTableSeeder extends Seeder
     {
         //
         $tags = [
-            'Iphone', 'Samsung', 'IOS', 'Android'
+            'Toyota', 'Chevrolet', 'Ford', 'Honda','Hyundai','Kia','Lexus','Mazda','Peugeot','Porsche','Mercedes Benz','BMW','Mini Cooper','Audi',' Lamborghini','Volvo','Jaguar','Maserati','Bentley','Vinfast'
         ];
         DB::table('tags')->truncate();
         foreach($tags as $tag){

@@ -31,6 +31,9 @@ class UserController extends Controller
             $users_query = $users_query->where('name',$name);
         }
         $users = $users_query->paginate(3);
+        foreach($users as $user) {
+            dd($user->posts->name);
+        }
         return view('backend.users.index')->with([
             'users' => $users
         ]);;

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddDeletedColumnUsersTable extends Migration
+class AddCategoryNameColumnPostsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class AddDeletedColumnUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->softDeletes();
+        Schema::table('posts', function (Blueprint $table) {
+            //
+            $table-> string('category_name');
         });
     }
 
@@ -25,9 +26,9 @@ class AddDeletedColumnUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('posts', function (Blueprint $table) {
             //
-            $table->dropSoftDeletes();
+            $table->dropColumn('category_name');
         });
     }
 }

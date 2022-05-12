@@ -41,7 +41,7 @@ class PostController extends Controller
         $status = request()->get('status');
         $categories = Category::get();
         $posts_query = Post::orderBy('created_at','desc')->select('*')->paginate(5);
-
+        
         if(!empty($title)){
             $posts_query = Post::where('title','LIKE',"%$title%")->paginate(1);
         }
@@ -51,6 +51,9 @@ class PostController extends Controller
         }
 
         $posts = $posts_query;
+        // foreach($posts as $post) {
+        //     dd($post->user);
+        // }
         return view('backend.posts.index', ['posts' => $posts , 'categories' => $categories ]);
     }
 
@@ -77,14 +80,14 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        
+        // dd($request);
         $validated = $request->validate([
-            'title' => 'required|unique:posts|min:20|max:255',
+            'title' => 'required|unique:posts|min:2|max:255',
             'content' => 'required',
             ]);
 
         $validator = Validator::make($request->all(), [
-            'title' => 'required|unique:posts|min:20|max:255',
+            'title' => 'required|unique:posts|min:3|max:255',
             'content' => 'required',
         ],
         [
@@ -102,26 +105,27 @@ class PostController extends Controller
         }
 
 
-        $data = $request->only(['title', 'content','status','user_id']);
+        $data = $request->all();
         $tags = $request->get('tags');
         // dd($tags);
         $post = new Post();
         $post->title = $data['title'];
         $post->user_created_id = 1;
         $post->user_updated_id=1;
-        $post->category_id= 1;
+        $post->category_name= $data['category_name'];
         $post->content=$data['content'];
         
         if($request->hasFile('image'))
         {
             $disk = 'public';
             $path = $request->file('image')->store('blogs', $disk);
+            // dd($path);
             $post->disk = $disk;
             $post->image = $path;
         }
         $post->save();
 
-        $user = User::find(1);
+        $user = User::find(4);
         $user->posts()->save($post);
 
         $post->tags()->attach($tags);

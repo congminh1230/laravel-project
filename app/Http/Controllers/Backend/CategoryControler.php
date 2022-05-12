@@ -20,8 +20,6 @@ class CategoryControler extends Controller
     {
         //
         $categories =Category::paginate(3);
-        // $categories = Category::all();
-        // dd($categories);
         return view('backend.categories.index')->with([
             'categories' => $categories
         ]);
@@ -35,7 +33,10 @@ class CategoryControler extends Controller
     public function create()
     {
         //
-        return view('backend.categories.create');
+        $categories =Category::get();
+        return view('backend.categories.create')->with([
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -46,11 +47,14 @@ class CategoryControler extends Controller
      */
     public function store(Request $request)
     {
-       
+        // dd($request);
         $data = $request->all();
+        // dd($data['category_parent']);
         $category = new Category();
         $category->name = $data['name'];
         $category->slug = Str::slug($data['name']);
+        $category->category_parent = $data['category_parent'];
+
         $category->save();
         $request->session()->flash('success', 'Task was successful!');
         return redirect()->route('backend.categories.index');

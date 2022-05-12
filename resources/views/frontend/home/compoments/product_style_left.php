@@ -13,7 +13,7 @@
                                                         </div>
                                                         <div class="product_content">
                                                             <div class="product_content_inner">
-                                                                <p class="manufacture_product"><a href="#">Parts</a></p>
+                                                                <p class="manufacture_product"><a href="#">{{ $product->name }}</a></p>
                                                                 <h4 class="product_name"><a href="product-details.html">Cas Meque Metus</a></h4>
                                                                 <div class="product_rating">
                                                                    <ul>
@@ -31,7 +31,7 @@
                                                             </div> 
                                                             <div class="action_links">
                                                                  <ul>
-                                                                    <li class="add_to_cart"><a href="cart.html" title="Add to cart">Add to cart</a></li>
+                                                                    <li class="add_to_cart"><a href="{{ route('frontend.carts.add',[ 'id' => $product->id ]) }}" title="Add to cart">Add to cart</a></li>
                                                                     <li class="wishlist"><a href="wishlist.html"  title="Add to Wishlist"><i class="icon-heart"></i></a></li>
                                                                     <li class="compare"><a href="compare.html" title="Add to Compare"><i class="icon-rotate-cw"></i></a></li>  
                                                                 </ul>

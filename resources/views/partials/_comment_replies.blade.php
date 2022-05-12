@@ -13,7 +13,9 @@
                 <input type="hidden" name="comment_id" value="{{ $comment->id }}" />
             </div>
             <div class="form-group">
+                @if(auth()->check())
                 <input type="submit" class="btn btn-warning" value="Reply" />
+                @endif
             </div>
         </form>
         @include('partials._comment_replies', ['comments' => $comment->replies])

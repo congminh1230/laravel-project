@@ -37,6 +37,31 @@
             </a>
             </li>
           <li class="nav-header">Quản lý chung</li>
+          <li class="nav-item  @if (request()->routeIs('backend.products.*')) menu-open @endif ">
+            <a href="#2" class="nav-link @if (request()->routeIs('backend.products.*')) active @endif ">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Quản lý Sản Phẩm
+                <i class="fas fa-angle-left right"></i>
+
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('backend.products.create') }}" class="nav-link @if (request()->routeIs('backend.products.create')) active @endif ">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Tạo mới Sản Phẩm</p>
+                </a>
+              </li>
+             
+              <li class="nav-item">
+                <a href="{{ route('backend.products.index') }}" class="nav-link @if (request()->routeIs('backend.products.index')) active @endif">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Danh sách Sản Phẩm</p>
+                </a>
+              </li>
+            </ul>
+          </li>
           <li class="nav-item  @if (request()->routeIs('backend.posts.*')) menu-open @endif ">
             <a href="#2" class="nav-link @if (request()->routeIs('backend.posts.*')) active @endif ">
               <i class="nav-icon fas fa-tachometer-alt"></i>

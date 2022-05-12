@@ -11,15 +11,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="https://i.pinimg.com/originals/78/af/87/78af87a5255e5d0b0901ec691eb8f395.jpg ">
-    
+    @yield('css')
     <!-- CSS 
     ========================= -->
 
     <!-- Plugins CSS -->
-    <link rel="stylesheet" href="frontend/assets/css/plugins.css">
+    <link rel="stylesheet" href="/frontend/assets/css/plugins.css">
     
     <!-- Main Style CSS -->
-    <link rel="stylesheet" href="frontend/assets/css/style.css">
+    <link rel="stylesheet" href="/frontend/assets/css/style.css">
 
 </head>
 

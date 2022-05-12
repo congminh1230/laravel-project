@@ -7,12 +7,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Tạo mới users</h1>
+            <h1 class="m-0">Sản phẩm</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Danh sách bài viết</li>
+              <li class="breadcrumb-item"><a href="#">Sản phẩm</a></li>
+              <li class="breadcrumb-item active">Danh sách </li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -21,7 +21,7 @@
 @endsection
 @section('content')
         <div class="col-12">
-          <form style="margin: 20px 0 ; display:flex; justify-content:space-evenly " method="GET" action="{{ route('backend.posts.index')}}" class="form-inline"  >
+          <form style="margin: 20px 0 ; display:flex; justify-content:space-evenly " method="GET" action="" class="form-inline"  >
             <div class="col-3">
               <input value="{{ request()->get('title')}}" name="title" type="text" class="form-control" placeholder="Nhập tiêu đề cần tìm..">
             </div>
@@ -33,14 +33,12 @@
                 <button type="submit" class="btn btn-info">Lọc</button>
               </div>
             {{-- <div >
-                <a href="{{ route('backend.posts.index')}}" class="btn btn-default"> Quay lại</a>
+                <a href="" class="btn btn-default"> Quay lại</a>
             </div> --}}
           </form>
         </div>
         <table class="table table-striped projects">
-                @can('create', App\Models\Post::class)
-                  <a href="{{ route('backend.posts.create') }}" class="btn btn-success"><i style="margin-right:10px" class="fas fa-plus"></i>Tạo bài viết</a>
-                @endcan
+                <a href="{{ route('backend.products.create') }}" class="btn btn-success" style="margin-bottom:10px" ><i style="margin-right:10px" class="fas fa-plus"></i>Tạo bài viết</a>
               <thead>
                       <tr>
                         <th>STT</th>
@@ -48,7 +46,6 @@
                         <th>Ảnh</th>
                         <th>Danh mục</th>
                         <th>Tags</th>
-                        <th>Người tạo</th>
                         <th>Trạng thái</th>
                         {{-- <th>Lượt xem</th> --}}
                         <th>Thời gian tạo</th>
@@ -57,54 +54,43 @@
                       </tr>
               </thead>
               <tbody>
-                @foreach($posts as $post)
+                @foreach($products as $product)
                     <tr>
                        
-                        <td>{{ $post->id }}</td>
+                        <td>{{ $product->id }}</td>
                         <td  style="width: 20%" > 
-                            <a href="{{ route('backend.posts.show',['post' => $post->id ]) }}">{{ $post->title }}</a>
-                            {{ $post->title }}
+                            {{ $product->name }}
+                            <a href="">{{ $product->slug }}</a>
+                           
                         </td>
                         <td>
-                          @if(!empty($post->image))
-                            <img src="{{ Illuminate\Support\Facades\Storage::disk($post->disk)->url($post->image)}}"
-                            width="100px">
-                          @endif
+                                <img src="@if(!empty($product->image))
+                                      {{$product->image->path}}
+                                      @endif" style="width:100px" >
                         </td>
                         <td class="text-center">
-                            <span class="badge badge -info">{{ $post->category_name }}</span>
+                            <span class="badge badge -info">{{ $product->category->name }}</span>
                         </td>
+                       
+                        <td>  </td>
+                        <td>  {{ $product->status }} </td>
+                        <td>  {!! date('d/m/Y', strtotime($product->created_at)) !!}</td>
+                        <td>  {!! date('d/m/Y', strtotime($product->updated_at)) !!}</td>
                         <td>
-                            @foreach ($post->tags as $tag )
-                                <span class="badge badge -info">{{ $tag->name }}</span>
-                            @endforeach
-                        </td>
-                        <td>  {{ $post->user->name }} </td>
-                        <td>  {{ $post->status_text }} </td>
-                        <td>  {!! date('d/m/Y', strtotime($post->created_at)) !!}</td>
-                        <td>  {!! date('d/m/Y', strtotime($post->updated_at)) !!}</td>
-                        <td>
-                            @can('update',$post)
-                            <a style="margin-right:10px;" href="{{ route('backend.posts.edit',['post' => $post->id ]) }}" class="btn btn-success"><i class="fas fa-edit"></i></a>
-                            @endcan
-
-                            @can('delete',$post)
-                            <form method="POST" action="{{ route('backend.posts.destroy',['post' => $post->id ]) }}">
+                            <a style="margin-right:10px;" href="{{ route('backend.products.edit',['product' => $product->id ]) }}" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                            <form method="POST" action="{{ route('backend.products.destroy',['product' => $product->id ]) }}">
                               @csrf
                               @method('DELETE')
                               <button class="btn btn-danger">
                                 <i class="fas fa-trash"></i>
                               </button>
                             </form>
-                            
-                            @endcan
-
                         </td>
                     </tr>
                  @endforeach
               </tbody>
         </table>
-          {{ $posts->links() }}
+        {{ $products->links() }}
 @endsection
 @section('script')
 <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>

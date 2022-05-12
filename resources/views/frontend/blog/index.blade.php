@@ -1,7 +1,4 @@
 @extends('frontend.layouts.master')
-@section('css')
-
-@endsection
 @section('content')
 <!--breadcrumbs area start-->
 <div class="breadcrumbs_area">
@@ -31,11 +28,11 @@
                             <article class="single_blog">
                                 <figure>
                                    <div class="post_header">
-                                       <h3 class="post_title">Aypi non habent claritatem insitam</h3>
+                                       <h3 class="post_title">{{ $post->title }}</h3>
                                         <div class="blog_meta">                                        
-                                            <span class="author">Posted by : <a href="#">admin</a> / </span>
-                                            <span class="meta_date">On : <a href="#">July 05, 2022</a> /</span>
-                                            <span class="post_category">In : <a href="#">Company, Image, Travel</a></span>
+                                        <span class="author">Posted by : <a href="#"> {{ $post->user->name }}</a> / </span>
+                                                <span class="meta_date">Posted on :  <a href="#"> {{ $post->created_at }}</a></span>
+                                                <span class="meta_date">Update :  <a href="#"> {{ $post->updated_at }}</a></span>
                                         </div>
                                     </div>
                                     <div class="blog_thumb">
@@ -43,12 +40,7 @@
                                    </div>
                                    <figcaption class="blog_content">
                                         <div class="post_content">
-                                            <p>Aenean et tempor eros, vitae sollicitudin velit. Etiam varius enim nec quam tempor, sed efficitur ex ultrices. Phasellus pretium est vel dui vestibulum condimentum. Aenean nec suscipit nibh. Phasellus nec lacus id arcu facilisis elementum. Curabitur lobortis, elit ut elementum congue, erat ex bibendum odio, nec iaculis lacus sem non lorem. Duis suscipit metus ante, sed convallis quam posuere quis. Ut tincidunt eleifend odio, ac fringilla mi vehicula nec. Nunc vitae lacus eget lectus imperdiet tempus sed in dui. Nam molestie magna at risus consectetur, placerat suscipit justo dignissim. Sed vitae fringilla enim, nec ullamcorper arcu.</p>
-                                            <blockquote>
-                                                <p>Quisque semper nunc vitae erat pellentesque, ac placerat arcu consectetur. In venenatis elit ac ultrices convallis. Duis est nisi, tincidunt ac urna sed, cursus blandit lectus. In ullamcorper sit amet ligula ut eleifend. Proin dictum tempor ligula, ac feugiat metus. Sed finibus tortor eu scelerisque scelerisque.</p>
-                                            </blockquote>
-                                            <p>Aenean et tempor eros, vitae sollicitudin velit. Etiam varius enim nec quam tempor, sed efficitur ex ultrices. Phasellus pretium est vel dui vestibulum condimentum. Aenean nec suscipit nibh. Phasellus nec lacus id arcu facilisis elementum. Curabitur lobortis, elit ut elementum congue, erat ex bibendum odio, nec iaculis lacus sem non lorem. Duis suscipit metus ante, sed convallis quam posuere quis. Ut tincidunt eleifend odio, ac fringilla mi vehicula nec. Nunc vitae lacus eget lectus imperdiet tempus sed in dui. Nam molestie magna at risus consectetur, placerat suscipit justo dignissim. Sed vitae fringilla enim, nec ullamcorper arcu.</p>
-                                            <p>Suspendisse turpis ipsum, tempus in nulla eu, posuere pharetra nibh. In dignissim vitae lorem non mollis. Praesent pretium tellus in tortor viverra condimentum. Nullam dignissim facilisis nisl, accumsan placerat justo ultricies vel. Vivamus finibus mi a neque pretium, ut convallis dui lacinia. Morbi a rutrum velit. Curabitur sagittis quam quis consectetur mattis. Aenean sit amet quam vel turpis interdum sagittis et eget neque. Nunc ante quam, luctus et neque a, interdum iaculis metus. Aliquam vel ante mattis, placerat orci id, vehicula quam. Suspendisse quis eros cursus, viverra urna sed, commodo mauris. Cras diam arcu, fringilla a sem condimentum, viverra facilisis nunc. Curabitur vitae orci id nulla maximus maximus. Nunc pulvinar sollicitudin molestie.</p>
+                                            <p>{{ $post->content }}</p>
                                         </div>
                                         <div class="entry_content">
                                             <div class="post_meta">
@@ -125,9 +117,43 @@
                                     </div>
                                 </div>
                            </div> 
+                           
                             <div class="comments_box">
                                 <h3>3 Comments	</h3>
-                                <div class="comment_list">
+                                <!-- <div class="comment_list">
+                                    <div class="comment_thumb">
+                                        <img src="assets/img/blog/comment3.png.jpg" alt="">
+                                    </div>
+                                    <div class="comment_content">
+                                        <div class="comment_meta">
+                                            <h5><a href="#">Admin</a></h5>
+                                            <span>July 05, 2022 at 1:38 am</span> 
+                                        </div>
+                                        <p>But I must explain to you how all this mistaken idea of denouncing pleasure</p>
+                                        <div class="comment_reply">
+                                            <a href="#">Reply</a>
+                                        </div>
+                                    </div> -->
+                                    <div class="card">
+                                    <div class="card-body">
+                                        @include('partials._comment_replies', ['comments' => $post->comments, 'post_id' => $post->id])
+                                        <hr />
+                                        <h4>Add comment</h4>
+                                        <form method="post" action="{{ route('comment.add') }}">
+                                            @csrf
+                                            <div class="form-group">
+                                                <input type="text" name="comment_body" class="form-control" />
+                                                <input type="hidden" name="post_id" value="{{ $post->id }}" />
+                                            </div>
+                                            <div class="form-group">
+                                                @if(auth()->check())
+                                                <input type="submit" class="btn btn-warning" value="Add Comment" />
+                                                @endif 
+                                            </div>
+                                        </form>
+                                        </div>
+                                    </div>
+                                <!-- <div class="comment_list">
                                     <div class="comment_thumb">
                                         <img src="assets/img/blog/comment3.png.jpg" alt="">
                                     </div>
@@ -172,9 +198,9 @@
                                             <a href="#">Reply</a>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
-                            <div class="comments_form">
+                            <!-- <div class="comments_form">
                                 <h3>Leave a Reply </h3>
                                 <p>Your email address will not be published. Required fields are marked *</p>
                                 <form action="#">
@@ -199,7 +225,7 @@
                                     </div>
                                     <button class="button" type="submit">Post Comment</button>
                                  </form>    
-                            </div>
+                            </div> -->
 
                         </div>
                         <!--blog grid area start-->

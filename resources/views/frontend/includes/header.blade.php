@@ -5,24 +5,7 @@
                <div class="container">
                     <div class="row align-items-center">
                         <div class="col-lg-4 col-md-5">
-                            <div class="header_account">
-                                <ul>
-                                    <li class="language"><a href="#"><img src="assets/img/logo/language.png" alt=""> english <i class="ion-chevron-down"></i></a>
-                                        <ul class="dropdown_language">
-                                            <li><a href="#">English</a></li>
-                                            <li><a href="#">Germany</a></li>
-                                            <li><a href="#">Japanese</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="currency"><a href="#">USD <i class="ion-chevron-down"></i></a>
-                                        <ul class="dropdown_currency">
-                                            <li><a href="#">EUR – Euro</a></li>
-                                            <li><a href="#">GBP – British Pound</a></li>
-                                            <li><a href="#">INR – India Rupee</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
+                           
                         </div>
                         <div class="col-lg-8 col-md-7">
                             <div class="header_top_links text-right">
@@ -40,8 +23,8 @@
                                       </a>
                                     </form>
                                   </li>
-                                    <li><a href="cart.html">Shopping Cart</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
+                                    <li><a href="{{ route('frontend.carts.index') }}">Shopping Cart</a></li>
+                                    <li><a href="{{ route('frontend.checkout.index') }}">Checkout</a></li>
                                 </ul>
                             </div>   
                         </div>
@@ -90,16 +73,10 @@
                                     </form>
                                 </div>
                                 <div class="header_configure_area">
-                                    <div class="header_wishlist">
-                                        <a href="wishlist.html"><i class="icon-heart"></i>
-                                            <span class="wishlist_count">3</span>
-                                        </a>
-                                    </div>
                                     <div class="mini_cart_wrapper">
-                                        <a href="javascript:void(0)">
+                                        <a href="{{ route('frontend.carts.index') }}">
                                             <i class="icon-shopping-bag2"></i>
-                                            <span class="cart_price">$152.00 <i class="ion-ios-arrow-down"></i></span>
-                                            <span class="cart_count">2</span>
+                                            <span class="cart_count">{{ \Gloudemans\Shoppingcart\Facades\Cart::content()->count() }}</span>
                                         </a>
                                         <!--mini cart-->
                                         <div class="mini_cart">
@@ -109,7 +86,7 @@
                                                         <h3>cart</h3>
                                                     </div>
                                                     <div class="mini_cart_close">
-                                                        <a href="javascript:void(0)"><i class="icon-x"></i></a>
+                                                        <a href=""><i class="icon-x"></i></a>
                                                     </div>
                                                 </div>
                                                 <div class="cart_item">
@@ -300,15 +277,9 @@
                             <div class="main_menu menu_position text-left"> 
                                 <nav>  
                                     <ul>
-                                        <li><a class="active"  href="index.html">home<i class="fa fa-angle-down"></i></a>
-                                            <ul class="sub_menu">
-                                                <li><a href="index.html">Home shop 1</a></li>
-                                                <li><a href="index-2.html">Home shop 2</a></li>
-                                                <li><a href="index-3.html">Home shop 3</a></li>
-                                                <li><a href="index-4.html">Home shop 4</a></li>
-                                            </ul>
+                                        <li><a class="active"  href="{{ route('home') }}">home</a>
                                         </li>
-                                        <li class="mega_items"><a href="shop.html">shop<i class="fa fa-angle-down"></i></a> 
+                                        <li class="mega_items"><a href="{{ route('frontend.product.shop') }}">shop<i class="fa fa-angle-down"></i></a> 
                                             <div class="mega_menu">
                                                 <ul class="mega_menu_inner">
                                                     <li><a href="#">Shop Layouts</a>
@@ -350,20 +321,6 @@
                                                 <li><a href="blog-no-sidebar.html">blog no sidebar</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="#">pages <i class="fa fa-angle-down"></i></a>
-                                            <ul class="sub_menu pages">
-                                                <li><a href="about.html">About Us</a></li>
-                                                <li><a href="faq.html">Frequently Questions</a></li>
-                                                <li><a href="contact.html">contact</a></li>
-                                                <li><a href="login.html">login</a></li>
-                                                <li><a href="404.html">Error 404</a></li>
-                                                <li><a href="compare.html">compare</a></li>
-                                                <li><a href="privacy-policy.html">privacy policy</a></li>
-                                                <li><a href="coming-soon.html">coming soon</a></li>
-                                            </ul>
-                                        </li>
-
-                                        <li><a href="about.html">About Us</a></li>
                                         <li><a href="contact.html"> Contact Us</a></li>
                                     </ul>  
                                 </nav> 
@@ -371,7 +328,7 @@
                         </div>
                         <div class="col-lg-3">
                             <div class="call_support text-right">
-                                <p><i class="icon-phone-call" aria-hidden="true"></i> <span>Call us:  <a href="tel:0123456789">0123456789</a></span></p>
+                                <p><i class="icon-phone-call" aria-hidden="true"></i> <span>Call us:  <a href="tel:0123456789">0814332325</a></span></p>
                             </div>
                         </div>
                     </div>

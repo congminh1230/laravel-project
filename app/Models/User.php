@@ -52,5 +52,8 @@ class User extends Authenticatable
     public function posts() {
         return $this->hasMany(Post::class,'user_created_id','id');
     }
+    public function products() {
+        return $this->hasMany(Post::class,'id');
+    }
 
 }

@@ -1,14 +1,13 @@
 @extends('frontend.layouts.master')
 @section('content')
-  <!--breadcrumbs area start-->
-  <div class="breadcrumbs_area">
+<div class="breadcrumbs_area">
         <div class="container">   
             <div class="row">
                 <div class="col-12">
                     <div class="breadcrumb_content">
                         <ul>
                             <li><a href="index.html">home</a></li>
-                            <li>blog fullwidth</li>
+                            <li>blog</li>
                         </ul>
                     </div>
                 </div>
@@ -17,147 +16,48 @@
     </div>
     <!--breadcrumbs area end-->
     
-    <!--blog area start-->
     <div class="blog_bg_area">
-        <div class="container">
-            <div class="blog_page_section ">
+       <div class="container">
+            <!--blog area start-->
+            <div class="blog_page_section">
                 <div class="row">
                     <div class="col-lg-9 col-md-12">
-                        <div class="blog_wrapper blog_fullwidth mb-30">
+                        <div class="blog_wrapper mb-30">
                             <div class="blog_header">
                                 <h1>Blog</h1>
                             </div>
                             <div class="blog_wrapper_inner">
+                                @foreach($posts as $post)
                                 <article class="single_blog">
                                     <figure>
                                         <div class="blog_thumb">
-                                            <a href="blog-details.html"><img src="assets/img/blog/blog-big1.jpg" alt=""></a>
+                                            
+                                            <a href="blog-details.html">
+                                            @if(!empty($post->image))
+                                                <img src="{{ Illuminate\Support\Facades\Storage::disk($post->disk)->url($post->image)}}"
+                                                width="100px">
+                                            @endif
+                                            </a>
                                         </div>
                                         <figcaption class="blog_content">
-                                           <h4 class="post_title"><a href="blog-details.html">Blog image post (sticky)</a></h4>
+                                           <h4 class="post_title"><a href="blog-details.html"></a>{{$post->title}}</h4>
                                            <div class="blog_meta">                                        
-                                                <span class="author">Posted by : <a href="#">admin</a> / </span>
-                                                <span class="meta_date">Posted on :  <a href="#">July 05, 2022</a></span>
+                                                <span class="author">Posted by : <a href="#"> {{ $post->user->name }}</a> / </span>
+                                                <span class="meta_date">Posted on :  <a href="#"> {{ $post->created_at }}</a></span>
+                                                <span class="meta_date">Update :  <a href="#"> {{ $post->updated_at }}</a></span>
                                             </div>
-                                            <p class="post_desc">Donec vitae hendrerit arcu, sit amet faucibus nisl. Cras pretium arcu ex. Aenean posuere libero eu augue condimentum rhoncus. Praesent ornare tortor ac ante egestas hendrerit. Aliquam et metus pharetra, bibendum massa nec, fermentum odio. Nunc id leo ultrices, mollis ligula in, finibus tortor. Mauris</p>
+                                            <div class="blog_desc">
+                                                <p>{{$post->content}}</p>
+                                            </div>
                                             <footer class="btn_more">
-                                                <a href="blog-details.html"> Read more</a>
+                                                <a href="{{ route('frontend.blogs.index',['id' => $post->id ]) }}"> Read more</a>
                                             </footer>
                                         </figcaption>
                                     </figure>
                                 </article>
-                                <article class="single_blog single_blog_gallery">
-                                    <figure>
-                                        <div class="blog_thumb blog_thumb_active owl-carousel">
-                                            <div class="single_blog_thumb">
-                                                <a href="#"><img src="assets/img/blog/blog-big2.jpg" alt=""></a>
-                                            </div>
-                                            <div class="single_blog_thumb">
-                                                <a href="#"><img src="assets/img/blog/blog-big1.jpg" alt=""></a>
-                                            </div>
-                                            <div class="single_blog_thumb">
-                                                <a href="#"><img src="assets/img/blog/blog-big3.jpg" alt=""></a>
-                                            </div>
-                                            <div class="single_blog_thumb">
-                                                <a href="#"><img src="assets/img/blog/blog-big4.jpg" alt=""></a>
-                                            </div>
-                                            <div class="single_blog_thumb">
-                                                <a href="#"><img src="assets/img/blog/blog-big5.jpg" alt=""></a>
-                                            </div>
-                                        </div>
-                                        <figcaption class="blog_content">
-                                           <h4 class="post_title"><a href="blog-details.html">Post with Gallery</a></h4>
-                                           <div class="blog_meta">                                        
-                                                <span class="author">Posted by : <a href="#">admin</a> / </span>
-                                                <span class="meta_date">Posted on :  <a href="#">July 05, 2022</a></span>
-                                            </div>
-                                            <p class="post_desc">Donec vitae hendrerit arcu, sit amet faucibus nisl. Cras pretium arcu ex. Aenean posuere libero eu augue condimentum rhoncus. Praesent ornare tortor ac ante egestas hendrerit. Aliquam et metus pharetra, bibendum massa nec, fermentum odio. Nunc id leo ultrices, mollis ligula in, finibus tortor. Mauris</p>
-                                            <footer class="btn_more">
-                                                <a href="blog-details.html"> Read more</a>
-                                            </footer>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                                <article class="single_blog">
-                                    <figure>
-                                        <div class="blog_thumb">
-                                            <a href="blog-details.html"><img src="assets/img/blog/blog-big3.jpg" alt=""></a>
-                                        </div>
-                                        <figcaption class="blog_content">
-                                           <h4 class="post_title"><a href="blog-details.html">Post with Audio</a></h4>
-                                           <div class="blog_meta">                                        
-                                                <span class="author">Posted by : <a href="#">admin</a> / </span>
-                                                <span class="meta_date">Posted on :  <a href="#">July 05, 2022</a></span>
-                                            </div>
-                                            <div class="blog_aduio_icone">
-                                                <audio controls>
-                                                  <source src="https://www.jplayer.org/audio/mp3/TSP-01-Cro_magnon_man.mp3?1" type="audio/mp3">
-                                                </audio>
-                                            </div>
-                                            <p class="post_desc">Donec vitae hendrerit arcu, sit amet faucibus nisl. Cras pretium arcu ex. Aenean posuere libero eu augue condimentum rhoncus. Praesent ornare tortor ac ante egestas hendrerit. Aliquam et is </p>
-                                            <footer class="btn_more">
-                                                <a href="blog-details.html"> Read more</a>
-                                            </footer>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                                <article class="single_blog blog_bidio">
-                                    <figure>
-                                        <div class="blog_thumb">
-                                            <iframe src="https://www.youtube.com/embed/2Zt8va_6HRk"  allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                                        </div>
-                                        <figcaption class="blog_content">
-                                           <h4 class="post_title"><a href="blog-details.html">Post with Video</a></h4>
-                                           <div class="blog_meta">                                        
-                                                <span class="author">Posted by : <a href="#">admin</a> / </span>
-                                                <span class="meta_date">Posted on :  <a href="#">July 05, 2022</a></span>
-                                            </div>
-                                            <p class="post_desc">Donec vitae hendrerit arcu, sit amet faucibus nisl. Cras pretium arcu ex. Aenean posuere libero eu augue condimentum rhoncus. Praesent ornare tortor ac ante egestas hendrerit. Aliquam et metus pharetra, bibendum massa nec, fermentum odio. Nunc id leo ultrices, mollis ligula in, finibus tortor. Mauris</p>
-                                            <footer class="btn_more">
-                                                <a href="blog-details.html"> Read more</a>
-                                            </footer>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                                <article class="single_blog">
-                                    <figure>
-                                        <div class="blog_thumb">
-                                            <a href="blog-details.html"><img src="assets/img/blog/blog-big4.jpg" alt=""></a>
-                                        </div>
-                                        <figcaption class="blog_content">
-                                           <h4 class="post_title"><a href="blog-details.html">Maecenas ultricies</a></h4>
-                                           <div class="blog_meta">                                        
-                                                <span class="author">Posted by : <a href="#">admin</a> / </span>
-                                                <span class="meta_date">Posted on :  <a href="#">July 05, 2022</a></span>
-                                            </div>
-                                            <p class="post_desc">Donec vitae hendrerit arcu, sit amet faucibus nisl. Cras pretium arcu ex. Aenean posuere libero eu augue condimentum rhoncus. Praesent ornare tortor ac ante egestas hendrerit. Aliquam et metus pharetra, bibendum massa nec, fermentum odio. Nunc id leo ultrices, mollis ligula in, finibus tortor. Mauris</p>
-                                            <footer class="btn_more">
-                                                <a href="blog-details.html"> Read more</a>
-                                            </footer>
-                                        </figcaption>
-                                    </figure>
-                                </article>
-                                <article class="single_blog">
-                                    <figure>
-                                        <div class="blog_thumb">
-                                            <a href="blog-details.html"><img src="assets/img/blog/blog-big5.jpg" alt=""></a>
-                                        </div>
-                                        <figcaption class="blog_content">
-                                           <h4 class="post_title"><a href="blog-details.html">Praesent imperdiet</a></h4>
-                                           <div class="blog_meta">                                        
-                                                <span class="author">Posted by : <a href="#">admin</a> / </span>
-                                                <span class="meta_date">Posted on :  <a href="#">July 05, 2022</a></span>
-                                            </div>
-                                            <p class="post_desc">Donec vitae hendrerit arcu, sit amet faucibus nisl. Cras pretium arcu ex. Aenean posuere libero eu augue condimentum rhoncus. Praesent ornare tortor ac ante egestas hendrerit. Aliquam et metus pharetra, bibendum massa nec, fermentum odio. Nunc id leo ultrices, mollis ligula in, finibus tortor. Mauris</p>
-                                            <footer class="btn_more">
-                                                <a href="blog-details.html"> Read more</a>
-                                            </footer>
-                                        </figcaption>
-                                    </figure>
-                                </article>
+                                @endforeach
                             </div>
                         </div>
-                        
                          <!--blog pagination area start-->
                         <div class="blog_pagination">
                             <div class="pagination">
@@ -294,11 +194,12 @@
                     </div>
                 </div>
             </div>
+            <!--blog area end-->
+
+           
         </div>
     </div>
     
-    <!--blog area end-->
-
      <!--brand area start-->
     <div class="brand_area brand_padding">
         <div class="container">
@@ -421,5 +322,6 @@
             </div>
         </div>
     </div>
-    <!--newsletter area end-->
-    @endsection
+    <!--newsletter area end-->  
+@endsection
+<script src="../../Jquery/prettify.js"></script>
