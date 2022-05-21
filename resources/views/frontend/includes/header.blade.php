@@ -12,19 +12,33 @@
                                 <ul>
                                   @if(auth()->check()) 
                                   @else
-                                  <li><a href="{{ route('auth.login') }}" >Login</a></li>
+                                  <li><a href="{{ route('auth.login') }}" >Đăng Nhập</a></li>
                                   @endif 
+                                 
                                   <li>
                                     <form method="post" action="{{ route('auth.logout')}}">
                                       @csrf
                                       <a href="#" class="nav-link"
                                         onclick="this.closest('form').submit();return false;">
-                                      Logout
+                                      Đăng Xuất
                                       </a>
                                     </form>
                                   </li>
-                                    <li><a href="{{ route('frontend.carts.index') }}">Shopping Cart</a></li>
-                                    <li><a href="{{ route('frontend.checkout.index') }}">Checkout</a></li>
+                                    <li><a href="{{ route('frontend.carts.index') }}">Giỏ Hàng</a></li>
+                                    <li><a href="@if(auth()->check())
+                                                            {{ route('frontend.checkout.index') }}
+
+                                                            @else
+                                                                    {{ route('auth.login') }}
+                                                            @endif
+                                    ">Thanh Toán</a></li>
+                                    <li><a href=" @if(auth()->check())
+                                                        {{ route('frontend.order.index') }}
+                                                            @else
+                                                                    {{ route('auth.login') }}
+                                                            @endif
+                                    
+                                    ">Danh Sách Thanh Toán</a></li>
                                 </ul>
                             </div>   
                         </div>
@@ -45,30 +59,15 @@
                         <div class="col-lg-10 col-md-6 col-sm-6 col-6">
                             <div class="header_right_box">
                                 <div class="search_container">
-                                    <form action="#">
+                                    <form method="GET" action="{{ route('frontend.product.search')}}">
                                        <div class="hover_category">
-                                            <select class="select_option" name="select" id="categori2">
-                                                <option selected value="1">All Categories</option>
-                                                <option value="2">Accessories</option>
-                                                <option value="3">Accessories & More</option>
-                                                <option value="4">Butters & Eggs</option>
-                                                <option value="5">Camera & Video </option>
-                                                <option value="6">Mornitors</option>
-                                                <option value="7">Tablets</option>
-                                                <option value="8">Laptops</option>
-                                                <option value="9">Handbags</option>
-                                                <option value="10">Headphone & Speaker</option>
-                                                <option value="11">Herbs & botanicals</option>
-                                                <option value="12">Vegetables</option>
-                                                <option value="13">Shop</option>
-                                                <option value="14">Laptops & Desktops</option>
-                                                <option value="15">Watchs</option>
-                                                <option value="16">Electronic</option>
+                                            <select class="select_option" name="categories" id="categori2">
+                                                <option selected >Tên Sản Phẩm</option>
                                             </select>                        
                                        </div>
                                         <div class="search_box">
-                                            <input placeholder="Search product..." type="text">
-                                            <button type="submit">Search</button> 
+                                            <input name="name" value="{{ request()->get('title')}}" placeholder="Search..." type="text">
+                                            <button type="submit">Tìm Kiếm</button> 
                                         </div>
                                     </form>
                                 </div>
@@ -79,7 +78,7 @@
                                             <span class="cart_count">{{ \Gloudemans\Shoppingcart\Facades\Cart::content()->count() }}</span>
                                         </a>
                                         <!--mini cart-->
-                                        <div class="mini_cart">
+                                        <!-- <div class="mini_cart">
                                             <div class="mini_cart_inner">
                                                 <div class="cart_close">
                                                     <div class="cart_text">
@@ -134,7 +133,7 @@
                                                 </div>
 
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <!--mini cart end-->
                                     </div>
                                 </div>
@@ -152,123 +151,12 @@
                         <div class=" col-lg-3">
                             <div class="categories_menu">
                                 <div class="categories_title">
-                                    <h2 class="categori_toggle">ALL CATEGORIES</h2>
+                                    <h2 class="categori_toggle">Danh Mục</h2>
                                 </div>
                                 <div class="categories_menu_toggle">
                                     <ul>
-                                        <li class="menu_item_children"><a href="#">Brake Parts <i class="fa fa-angle-right"></i></a>
-                                            <ul class="categories_mega_menu">
-                                                <li class="menu_item_children"><a href="#">Dresses</a>
-                                                    <ul class="categorie_sub_menu">
-                                                        <li><a href="#">Sweater</a></li>
-                                                        <li><a href="#">Evening</a></li>
-                                                        <li><a href="#">Day</a></li>
-                                                        <li><a href="#">Sports</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li class="menu_item_children"><a href="#">Handbags</a>
-                                                    <ul class="categorie_sub_menu">
-                                                        <li><a href="#">Shoulder</a></li>
-                                                        <li><a href="#">Satchels</a></li>
-                                                        <li><a href="#">kids</a></li>
-                                                        <li><a href="#">coats</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li class="menu_item_children"><a href="#">shoes</a>
-                                                    <ul class="categorie_sub_menu">
-                                                        <li><a href="#">Ankle Boots</a></li>
-                                                        <li><a href="#">Clog sandals </a></li>
-                                                        <li><a href="#">run</a></li>
-                                                        <li><a href="#">Books</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li class="menu_item_children"><a href="#">Clothing</a>
-                                                    <ul class="categorie_sub_menu">
-                                                        <li><a href="#">Coats  Jackets </a></li>
-                                                        <li><a href="#">Raincoats</a></li>
-                                                        <li><a href="#">Jackets</a></li>
-                                                        <li><a href="#">T-shirts</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="menu_item_children"><a href="#"> Wheels & Tires  <i class="fa fa-angle-right"></i></a>
-                                            <ul class="categories_mega_menu column_3">
-                                                <li class="menu_item_children"><a href="#">Chair</a>
-                                                    <ul class="categorie_sub_menu">
-                                                        <li><a href="#">Dining room</a></li>
-                                                        <li><a href="#">bedroom</a></li>
-                                                        <li><a href="#"> Home & Office</a></li>
-                                                        <li><a href="#">living room</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li class="menu_item_children"><a href="#">Lighting</a>
-                                                    <ul class="categorie_sub_menu">
-                                                        <li><a href="#">Ceiling Lighting</a></li>
-                                                        <li><a href="#">Wall Lighting</a></li>
-                                                        <li><a href="#">Outdoor Lighting</a></li>
-                                                        <li><a href="#">Smart Lighting</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li class="menu_item_children"><a href="#">Sofa</a>
-                                                    <ul class="categorie_sub_menu">
-                                                        <li><a href="#">Fabric Sofas</a></li>
-                                                        <li><a href="#">Leather Sofas</a></li>
-                                                        <li><a href="#">Corner Sofas</a></li>
-                                                        <li><a href="#">Sofa Beds</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="menu_item_children"><a href="#"> Furnitured & Decor <i class="fa fa-angle-right"></i></a>
-                                            <ul class="categories_mega_menu column_2">
-                                                <li class="menu_item_children"><a href="#">Brake Tools</a>
-                                                    <ul class="categorie_sub_menu">
-                                                        <li><a href="#">Driveshafts</a></li>
-                                                        <li><a href="#">Spools</a></li>
-                                                        <li><a href="#">Diesel </a></li>
-                                                        <li><a href="#">Gasoline</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li class="menu_item_children"><a href="#">Emergency Brake</a>
-                                                    <ul class="categorie_sub_menu">
-                                                        <li><a href="#">Dolls for Girls</a></li>
-                                                        <li><a href="#">Girls' Learning Toys</a></li>
-                                                        <li><a href="#">Arts and Crafts for Girls</a></li>
-                                                        <li><a href="#">Video Games for Girls</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="menu_item_children"><a href="#"> Turbo System <i class="fa fa-angle-right"></i></a>
-                                            <ul class="categories_mega_menu column_2">
-                                                <li class="menu_item_children"><a href="#">Check Trousers</a>
-                                                    <ul class="categorie_sub_menu">
-                                                        <li><a href="#">Building</a></li>
-                                                        <li><a href="#">Electronics</a></li>
-                                                        <li><a href="#">action figures </a></li>
-                                                        <li><a href="#">specialty & boutique toy</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li class="menu_item_children"><a href="#">Calculators</a>
-                                                    <ul class="categorie_sub_menu">
-                                                        <li><a href="#">Dolls for Girls</a></li>
-                                                        <li><a href="#">Girls' Learning Toys</a></li>
-                                                        <li><a href="#">Arts and Crafts for Girls</a></li>
-                                                        <li><a href="#">Video Games for Girls</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#"> Lighting</a></li>
-                                        <li><a href="#"> Accessories</a></li>
-                                        <li><a href="#">Body Parts</a></li>
-                                        <li><a href="#">Networking</a></li>
-                                        <li><a href="#">Perfomance Filters</a></li>
-                                        <li><a href="#"> Engine Parts</a></li>
-                                        <li class="hidden"><a href="shop-left-sidebar.html">New Sofas</a></li>
-                                        <li class="hidden"><a href="shop-left-sidebar.html">Sleight Sofas</a></li>
-                                        <li><a href="#" id="more-btn"><i class="fa fa-plus" aria-hidden="true"></i> More Categories</a></li>
+                                        
+
                                     </ul>
                                 </div>
                             </div>
@@ -277,9 +165,9 @@
                             <div class="main_menu menu_position text-left"> 
                                 <nav>  
                                     <ul>
-                                        <li><a class="active"  href="{{ route('home') }}">home</a>
+                                        <li><a class="active"  href="{{ route('home') }}">Trang Chủ</a>
                                         </li>
-                                        <li class="mega_items"><a href="{{ route('frontend.product.shop') }}">shop<i class="fa fa-angle-down"></i></a> 
+                                        <li class="mega_items"><a href="{{ route('frontend.product.shop') }}">Cửa Hàng<i class="fa fa-angle-down"></i></a> 
                                             <div class="mega_menu">
                                                 <ul class="mega_menu_inner">
                                                     <li><a href="#">Shop Layouts</a>
@@ -313,7 +201,7 @@
                                                 </ul>
                                             </div>
                                         </li>
-                                        <li><a href="blog.html">blog<i class="fa fa-angle-down"></i></a>
+                                        <li><a href="{{ route('frontend.posts.index')}}">Bài Viết<i class="fa fa-angle-down"></i></a>
                                             <ul class="sub_menu pages">
                                                 <li><a href="blog-details.html">blog details</a></li>
                                                 <li><a href="blog-fullwidth.html">blog fullwidth</a></li>
@@ -321,7 +209,7 @@
                                                 <li><a href="blog-no-sidebar.html">blog no sidebar</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="contact.html"> Contact Us</a></li>
+                                        <li><a href="{{route('frontend.info.index')}}">Liên Hệ</a></li>
                                     </ul>  
                                 </nav> 
                             </div>

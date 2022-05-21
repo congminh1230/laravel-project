@@ -21,37 +21,12 @@ class RegisteredUserController extends Controller
     }
     public function store(Request $request)
     {
-        # code...
-        // dd($request);
-        // $request->validate([
-        //     'name' => ['required', 'string', 'max:255'],
-        //     'email' => ['required', 'string','email', 'max:255', 'unique:users'],
-        //     'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        // ]);
-        // dd($request);
-        // $validator = Validator::make($request->all(), [
-        //     'name' => 'require',
-        //     'email' => 'required|unique:users',
-        //     'password' => 'required|confirmed',
-        //  ],
-        //  [
-        //      'required' => 'Thuộc tính :attribute Không được để trống',
-        //      'email.unique' => 'Thuộc tính :attribute đã được đăng ký'
-        //  ]
-     
-        //  );
-       $validated = $request->validate([
-            'name' => 'required|unique:users|min:3|max:255',
-            'email' =>  'required|unique:users',
-            'password' => 'required|confirmed',
-
-            ]);
-             // dd($validator->fails());
-            //  if ($validator->fails()) {
-            //      return redirect('register')
-            //      ->withErrors($validator)
-            //      ->withInput();
-            //      }
+        $request -> validate([
+            'name'=> ['required','string','max: 255'],
+            'email'=> ['required','string','email','max: 255','unique:users'],
+            'password'=> ['required','confirmed',Rules\Password::defaults()],
+        ]);
+            
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -59,7 +34,7 @@ class RegisteredUserController extends Controller
         ]);
         // Auth::login($user);
         // dd($user);
-        return redirect('backend/dashboard');
+        return redirect('/login');
 
     }
 }

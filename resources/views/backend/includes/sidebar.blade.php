@@ -37,6 +37,30 @@
             </a>
             </li>
           <li class="nav-header">Quản lý chung</li>
+          <li class="nav-item  @if (request()->routeIs('backend.categories.*')) menu-open @endif ">
+            <a href="" class="nav-link  @if (request()->routeIs('backend.categories.*')) active @endif ">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Quản lý Categories
+                <i class="fas fa-angle-left right"></i>
+
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('backend.categories.create') }}" class="nav-link  @if (request()->routeIs('backend.categories.create')) active @endif ">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Tạo mới Categories</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('backend.categories.index') }}" class="nav-link  @if (request()->routeIs('backend.categories.index')) active @endif ">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Danh sách Categories</p>
+                </a>
+              </li>
+            </ul>
+          </li>
           <li class="nav-item  @if (request()->routeIs('backend.products.*')) menu-open @endif ">
             <a href="#2" class="nav-link @if (request()->routeIs('backend.products.*')) active @endif ">
               <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -62,6 +86,42 @@
               </li>
             </ul>
           </li>
+          <li class="nav-item  @if (request()->routeIs('backend.images.*')) menu-open @endif ">
+            <a href="#2" class="nav-link @if (request()->routeIs('backend.images.*')) active @endif ">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Quản lý Ảnh Sản Phẩm
+                <i class="fas fa-angle-left right"></i>
+
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('backend.images.index') }}" class="nav-link @if (request()->routeIs('backend.images.index')) active @endif">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Danh Sách Ảnh Sản Phẩm</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item  @if (request()->routeIs('backend.order.*')) menu-open @endif ">
+            <a href="" class="nav-link  @if (request()->routeIs('backend.order.*')) active @endif ">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Quản lý Order
+                <i class="fas fa-angle-left right"></i>
+
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('backend.orders.index') }}" class="nav-link  @if (request()->routeIs('backend.orders.index')) active @endif ">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Danh Sách Order</p>
+                </a>
+              </li>
+            </ul>
+          </li>
           <li class="nav-item  @if (request()->routeIs('backend.posts.*')) menu-open @endif ">
             <a href="#2" class="nav-link @if (request()->routeIs('backend.posts.*')) active @endif ">
               <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -82,6 +142,30 @@
                 <a href="{{ route('backend.posts.index') }}" class="nav-link @if (request()->routeIs('backend.posts.index')) active @endif">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Danh sách Blog</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item  @if (request()->routeIs('backend.logo.*')) menu-open @endif ">
+            <a href="" class="nav-link  @if (request()->routeIs('backend.logo.*')) active @endif ">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Quản lý Thương Hiệu
+                <i class="fas fa-angle-left right"></i>
+
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('backend.logo.create') }}" class="nav-link  @if (request()->routeIs('backend.logo.create')) active @endif ">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Tạo Mới Thương Hiệu</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('backend.logo.index') }}" class="nav-link  @if (request()->routeIs('backend.logo.index')) active @endif ">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Danh Sách Thương Hiệu</p>
                 </a>
               </li>
             </ul>
@@ -117,36 +201,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item  @if (request()->routeIs('backend.categories.*')) menu-open @endif ">
-            <a href="" class="nav-link  @if (request()->routeIs('backend.categories.*')) active @endif ">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Quản lý Categories
-                <i class="fas fa-angle-left right"></i>
-
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ route('backend.categories.create') }}" class="nav-link  @if (request()->routeIs('backend.categories.create')) active @endif ">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Tạo mới Categories</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('backend.categories.edit', ['category' => '1']) }}" class="nav-link  @if (request()->routeIs('backend.categories.edit')) active @endif ">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Chỉnh sửa Categories</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('backend.categories.index') }}" class="nav-link  @if (request()->routeIs('backend.categories.index')) active @endif ">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Danh sách Categories</p>
-                </a>
-              </li>
-            </ul>
-          </li>
+         
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

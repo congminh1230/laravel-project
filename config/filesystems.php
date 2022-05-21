@@ -53,6 +53,12 @@ return [
             'url' => env('APP_URL').'/avatars',
             'visibility' => 'public',
         ],
+        'logos' => [
+            'driver' => 'local',
+            'root' => storage_path('app/logos'),
+            'url' => env('APP_URL').'/logos',
+            'visibility' => 'public',
+        ],
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
@@ -81,6 +87,7 @@ return [
         public_path('storage') => storage_path('app/public'),
         public_path('avatars') => storage_path('app/avatars'),
         public_path('products') => storage_path('app/products'),
+        public_path('logos') => storage_path('app/logos'),
 
     ],
 

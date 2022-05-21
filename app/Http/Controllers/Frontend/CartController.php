@@ -11,10 +11,10 @@ class CartController extends Controller
 {
     //
     public function add($id) {
-        $product = Product::find($id);
-        Cart::add($product->id, $product->name,$product->quantity , $product->price_origin);
-      
-        return redirect()->route('frontend.carts.index');
+            $product = Product::find($id);
+            Cart::add($product->id, $product->name,$product->quantity , $product->price_origin);
+            return redirect()->route('frontend.carts.index');
+       
     }
     public function index() {
         $products = Cart::content();
@@ -42,8 +42,5 @@ class CartController extends Controller
         return redirect()->route('frontend.carts.index');
 
     }
-    public function store(Request $request) {
-
-
-    }
+    
 }

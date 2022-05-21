@@ -2,8 +2,8 @@
 <article class="single_product">
                                                     <figure>
                                                         <div class="product_thumb">
-                                                            <a class="primary_img" href="product-details.html"><img src="assets/img/product/product9.jpg" alt=""></a>
-                                                            <a class="secondary_img" href="product-details.html"><img src="assets/img/product/product10.jpg" alt=""></a>
+                                                            <a class="primary_img" href="{{ route('frontend.product.show',[ 'product' => $product->id  ,'slug' => $product->id]) }}"><img src="assets/img/product/product9.jpg" alt=""></a>
+                                                            <a class="secondary_img" href="{{ route('frontend.product.show',[ 'product' => $product->id  ,'slug' => $product->id]) }}"><img src="assets/img/product/product10.jpg" alt=""></a>
                                                             <div class="label_product">
                                                                 <span class="label_sale">-44%</span>
                                                             </div>
@@ -25,13 +25,17 @@
                                                                    </ul>
                                                                 </div>
                                                                 <div class="price_box"> 
-                                                                    <span class="old_price">$420.00</span> 
-                                                                    <span class="current_price">$180.00</span>
+                                                                    <!-- <span class="old_price">$420.00</span>  -->
+                                                                    <span class="current_price">{{$product->price_origin}}$</span>
                                                                 </div>
                                                             </div> 
                                                             <div class="action_links">
                                                                  <ul>
-                                                                    <li class="add_to_cart"><a href="{{ route('frontend.carts.add',[ 'id' => $product->id ]) }}" title="Add to cart">Add to cart</a></li>
+                                                                    <li class="add_to_cart"><a href=" @if(auth()->check())
+                                                                    {{ route('frontend.carts.add',[ 'id' => $product->id ]) }}
+                                                            @else
+                                                                    {{ route('auth.login') }}
+                                                            @endif" title="Add to cart">Add to cart</a></li>
                                                                     <li class="wishlist"><a href="wishlist.html"  title="Add to Wishlist"><i class="icon-heart"></i></a></li>
                                                                     <li class="compare"><a href="compare.html" title="Add to Compare"><i class="icon-rotate-cw"></i></a></li>  
                                                                 </ul>

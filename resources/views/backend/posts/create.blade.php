@@ -35,7 +35,7 @@
             </div> -->
             <div class="form-group">
                     <label for="exampleInputEmail1">Text area</label>
-                    <textarea  id="summernote"class="col-12" name="content" id="text_area" cols="30" rows="10"></textarea>
+                    <textarea class="col-12" name="content" id="text_area" cols="30" rows="10"></textarea>
                   </div>
                   <div class="form-group">
                     <label for="exampleInputFile">Tải lên ảnh</label>

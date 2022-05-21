@@ -73,7 +73,7 @@
                         <div id="menu" class="text-left ">
                             <ul class="offcanvas_main_menu">
                                 <li class="menu-item-has-children active">
-                                    <a href="#">Home</a>
+                                    <a href="#">Trang Chủ</a>
                                     <ul class="sub-menu">
                                         <li><a href="index.html">Home 1</a></li>
                                         <li><a href="index-2.html">Home 2</a></li>
@@ -82,7 +82,7 @@
                                     </ul>
                                 </li>
                                 <li class="menu-item-has-children">
-                                    <a href="#">Shop</a>
+                                    <a href="#">Cửa Hàng</a>
                                     <ul class="sub-menu">
                                         <li class="menu-item-has-children">
                                             <a href="#">Shop Layouts</a>
@@ -118,7 +118,7 @@
                                     </ul>
                                 </li>
                                 <li class="menu-item-has-children">
-                                    <a href="#">blog</a>
+                                    <a href="#">Bài Viết</a>
                                     <ul class="sub-menu">
                                         <li><a href="blog.html">blog</a></li>
                                         <li><a href="blog-details.html">blog details</a></li>

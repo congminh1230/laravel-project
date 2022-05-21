@@ -6,16 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Models\Image;
 use App\Models\Post;
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
     //
     public function index() {
-        $products = Product::get();
-        // dd($products);  
+        $products = Product::orderBy('created_at','desc')->select('*')->paginate(6);
+        $categories = Category::get();
         return view('frontend.product.shop')->with([
             'products' => $products,
+            'categories' => $categories,
         ]);
     }
     public function blog() {
@@ -42,6 +44,36 @@ class ProductController extends Controller
             'images' => $images,
             'products' => $products
 
+        ]);
+    }
+    public function searchProduct(Request $request) {
+        $name = request()->get('name');
+        if(!empty($name)){
+            $products_query = Product::where('name','LIKE',"%$name%")->paginate(3);
+        }
+        $posts = Post::get();
+        $categories = Category::get();
+        $products = $products_query;
+        // dd(1);
+        return view('frontend.product.search')->with([
+            'products'=>$products,
+            'posts'=>$posts,
+            'categories' => $categories,
+        ]);
+    }
+    public function searchCategory($id) {
+        // dd($id);
+        if(!empty($id)){
+            $products_query = Product::where('category_id','LIKE',"%$id%")->paginate(3);
+        }
+        $posts = Post::get();
+        $categories = Category::get();
+        $products = $products_query;
+        // dd(1);
+        return view('frontend.product.search')->with([
+            'products'=>$products,
+            'posts'=>$posts,
+            'categories' => $categories,
         ]);
     }
 }

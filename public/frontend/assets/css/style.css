@@ -228,6 +228,9 @@ figure {
 .bluewood-bg-overlay {
   position: relative;
 }
+/* .fa {
+  padding-top: 8px;
+} */
 .bluewood-bg-overlay::before {
   background: rgba(70, 90, 112, 0.9);
   content: "";

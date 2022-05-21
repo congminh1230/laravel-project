@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use Brian2694\Toastr\Facades\Toastr;
 
 
 class UserController extends Controller
@@ -14,26 +15,26 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
         // dd(1);
-        $users = DB::table('users')->count();
-        $price = DB::table('users')->min('id');
+        // $users = DB::table('users')->count();
+        // $price = DB::table('users')->min('id');
         // dd($price);
         $name = request()->get('name');
         $email = request()->get('email');
-        $users_query = User::select('*');
+        $users_query = User::orderBy('created_at','desc')->select('*')->paginate(5);
         if(!empty($email)) {
                 $users_query = $users_query->where('email',$email);
         }
         if(!empty($name)) {
             $users_query = $users_query->where('name',$name);
         }
-        $users = $users_query->paginate(3);
-        foreach($users as $user) {
-            dd($user->posts->name);
-        }
+        $users = $users_query;
+        // foreach($users as $user) {
+        //     dd($user->posts->name);
+        // }
         return view('backend.users.index')->with([
             'users' => $users
         ]);;
@@ -89,6 +90,8 @@ class UserController extends Controller
         //     'updated_at' => now()
 
         // ]);
+        Toastr::success('Tạo Người Dùng Thành Công', 'Thành Công', ["positionClass" => "toast-top-right"]);
+
         return redirect()->route('backend.users.index');
 
      
@@ -154,16 +157,21 @@ class UserController extends Controller
     {
         // dd($request->all());
         $data = $request->all();
+        $user = new User();
         // dd($request->hasFile('avatar'));
         if($request->hasFile('avatar'))
         {
+            // dd('có');
             $disk = 'public';
             $path = $request->file('avatar')->store('users', $disk);
             $user->disk = $disk;
-            $user->image = $path;
+            $user->avatar = $path;
         }
         $user->name= $data['name'];
+        $user->email= $data['email'];
+        $user->password= $data['password'];
         $user->save();
+        Toastr::success('Update Thành Công', 'Updata', ["positionClass" => "toast-top-right"]);
         return redirect()->route('backend.users.index');
     }
 
@@ -185,9 +193,31 @@ class UserController extends Controller
         }else {
             $user = User::onlyTrashed()->where('id', $id)->find($id);
             $user->restore();
+        Toastr::success('Xóa Thành Công', 'Xóa', ["positionClass" => "toast-top-right"]);
             return redirect()->route('backend.users.index');
         }
  
+    }
+    public function updateAvatar(Request $request, $id) {
+        // dd(1);
+        $data = $request->all();
+        $user = User::find($id);
+        // dd($user->name);
+        // dd($request->hasFile('avatar'));
+        if($request->hasFile('avatar'))
+        {
+            // dd('có');
+            $disk = 'public';
+            $path = $request->file('avatar')->store('users', $disk);
+            $user->disk = $disk;
+            $user->avatar = $path;
+        }
+        $user->name = $user->name;
+        $user->email = $user->email;
+        $user->password = $user->password;
+        $user->save();
+        return redirect()->route('backend.users.index');
+
     }
    
 }

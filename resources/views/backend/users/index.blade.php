@@ -1,3 +1,6 @@
+@section('link')
+<link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+@endsection
 @extends('backend.layouts.master')
 @section('content-header')
 <div class="content-header">
@@ -19,24 +22,19 @@
 @section('content')
     <div class="row">
       <div class="card-body table-responsive p-0">
-        <div class="col-12">
-          <form>
-              <div class="input-group" style="width: 100%; margin-bottom:10px ">
-                  <input type="text" name="name" class="form-control float-right" placeholder="Name">
-                  <input type="text" name="email" class="form-control float-right" placeholder="Email">
-                  <button type="submit" class="btn btn-default">
-                    Filter
-                  </button>
+      <div class="col-12">
+          <form style="margin: 20px 0 ; display:flex; justify-content:space-evenly " method="GET" action="{{ route('backend.users.index')}}" class="form-inline"  >
+            <div class="col-3">
+              <input value="{{ request()->get('name')}}" name="name" type="text" class="form-control" placeholder="Nhập tên cần tìm..">
+            </div>
+            <div style="margin-right: 30px">
+                <button type="submit" class="btn btn-info">Lọc</button>
               </div>
+            {{-- <div >
+                <a href="{{ route('backend.posts.index')}}" class="btn btn-default"> Quay lại</a>
+            </div> --}}
           </form>
         </div>
-        <form  method="POST" action="{{ route('backend.users.destroy', ['user' => 'true' ]) }}" >
-                                  @csrf
-                                  @method('DELETE')
-                                  <button class="btn btn-danger">
-                                     Danh sách delete
-                                  </button>
-                            </form>
         <a href="{{route('backend.users.create')}}" class="btn badge-success" > Tạo bài viết </a>
                 <table class="table table-hover text-nowrap">
                   <thead>
@@ -44,9 +42,7 @@
                       <th>ID</th>
                       <th>Name</th>
                       <th>Avatar</th>
-                      <th>Người tạo</th>
                       <th>Email</th>
-                      <th>Phone</th>
                       <th>Status</th>
                       <th>Action </th>
                     </tr>
@@ -62,11 +58,9 @@
                             width="100px">
                           @endif
                         </td>
-                        <td>{{ $user->user_id }}</td>
                         <td>{{ $user->email }}</td>
-                        <td>{{ $user->phone }}</td>
                         <td>{{ $user->status }}</td>
-                        <td>
+                        <td style="display: flex;gap: 10px;" >
                             <a href="{{ route('backend.users.edit', ['user' => $user->id ]) }}" class="btn bg-primary"><i class="far fa-edit"></i></a>
                             <form  method="POST" action="{{ route('backend.users.destroy', ['user' => $user->id]) }}" >
                                   @csrf
@@ -84,4 +78,9 @@
               </div>
 
     </div>
+@endsection
+@section('script')
+<script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+        <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+        {!! Toastr::message() !!}
 @endsection

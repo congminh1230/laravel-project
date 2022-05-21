@@ -169,6 +169,8 @@
 
 <!-- Main JS -->
 <script src="frontend/assets/js/main.js"></script>
+@yield('js')
+
 
 
 

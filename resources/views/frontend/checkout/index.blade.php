@@ -24,15 +24,8 @@
                 <div class="row">
                    <div class="col-12">
                         <div class="user-actions">
-                            <h3> 
-                                <i class="fa fa-file-o" aria-hidden="true"></i>
-                                Returning customer?
-                                <a class="Returning" href="#" data-bs-toggle="collapse" data-bs-target="#checkout_login" aria-expanded="true">Click here to login</a>     
-
-                            </h3>
                              <div id="checkout_login" class="collapse" data-parent="#accordion">
                                 <div class="checkout_info">
-                                    <p>If you have shopped with us before, please enter your details in the boxes below. If you are a new customer please proceed to the Billing & Shipping section.</p>  
                                     <form action="#">  
                                         <div class="form_group">
                                             <label>Username or email <span>*</span></label>
@@ -54,164 +47,62 @@
                                 </div>
                             </div>    
                         </div>
-                        <div class="user-actions">
-                            <h3> 
-                                <i class="fa fa-file-o" aria-hidden="true"></i>
-                                Returning customer?
-                                <a class="Returning" href="#" data-bs-toggle="collapse" data-bs-target="#checkout_coupon" aria-expanded="true">Click here to enter your code</a>     
-
-                            </h3>
-                             <div id="checkout_coupon" class="collapse" data-parent="#accordion">
-                                <div class="checkout_info">
-                                    <form action="#">
-                                        <input placeholder="Coupon code" type="text">
-                                        <button type="submit">Apply coupon</button>
-                                    </form>
-                                </div>
-                            </div>    
-                        </div>    
                    </div>
                 </div>
                 <div class="checkout_form">
                     <div class="row">
                         <div class="col-lg-6 col-md-6">
                             <div class="checkout_form_left">
-                                <form action="{{ route('frontend.carts.update') }}" method="POST" enctype="multipart/form-data">
-                                    <h3>Billing Details</h3>
+                                <form action="{{ route('frontend.order.add') }}" method="post" novalidate="novalidate">
+                                        @csrf
+                                    <h3>Thông Tin Người Đặt Hàng</h3>
                                     <div class="row">
-
-                                        <div class="col-lg-6 mb-20">
-                                            <label>First Name <span>*</span></label>
-                                            <input type="text">    
+ 
+                                        <div class="col-lg-6 mb-20" style="width: 100%" >
+                                            <label>Họ Và Tên<span>*</span></label>
+                                            <input name="name" value="{{ auth()->user()->name }}"type="text">    
                                         </div>
-                                        <div class="col-lg-6 mb-20">
-                                            <label>Last Name  <span>*</span></label>
-                                            <input type="text"> 
-                                        </div>
+                                      
                                         <div class="col-12 mb-20">
-                                            <label>Company Name</label>
-                                            <input type="text">     
-                                        </div>
-                                        <div class="col-12 mb-20">
-                                            <label for="country">country <span>*</span></label>
-                                            <select class="niceselect_option" name="cuntry" id="country"> 
-                                                <option value="2">bangladesh</option>      
-                                                <option value="3">Algeria</option> 
-                                                <option value="4">Afghanistan</option>    
-                                                <option value="5">Ghana</option>    
-                                                <option value="6">Albania</option>    
-                                                <option value="7">Bahrain</option>    
-                                                <option value="8">Colombia</option>    
-                                                <option value="9">Dominican Republic</option>   
-
+                                            <label for="country">Thành Phố<span>*</span></label>
+                                            <select class="niceselect_option" name="city" id="country"> 
+                                                @foreach($Cites as $City) 
+                                                    <option>{{$City->name_city}}</option>      
+                                                @endforeach
                                             </select>
                                         </div>
-
                                         <div class="col-12 mb-20">
-                                            <label>Street address  <span>*</span></label>
-                                            <input placeholder="House number and street name" type="text">     
+                                            <label for="country">Quận-Phường<span>*</span></label>
+                                            <select class="niceselect_option" name="province" id="country"> 
+                                                @foreach($Provinces as $Province) 
+                                                    <option>{{$Province->name_quan_huyen}}</option>      
+                                                @endforeach
+                                            </select>
                                         </div>
                                         <div class="col-12 mb-20">
-                                            <input placeholder="Apartment, suite, unit etc. (optional)" type="text">     
+                                            <label for="country">Phường-Xã<span>*</span></label>
+                                            <select class="niceselect_option" name="ward" id="country"> 
+                                                @foreach($Wards as $Ward) 
+                                                    <option>{{$Ward->name_xa_huyen}}</option>      
+                                                @endforeach
+                                            </select>
                                         </div>
                                         <div class="col-12 mb-20">
-                                            <label>Town / City <span>*</span></label>
-                                            <input  type="text">    
-                                        </div> 
-                                         <div class="col-12 mb-20">
-                                            <label>State / County <span>*</span></label>
-                                            <input type="text">    
-                                        </div> 
+                                            <label>Địa Chỉ Nhà<span>*</span></label>
+                                            <input placeholder="Số Nhà" name="address" type="text">     
+                                        </div>
                                         <div class="col-lg-6 mb-20">
-                                            <label>Phone<span>*</span></label>
-                                            <input type="text"> 
+                                            <label>Số Điện Thoại<span>*</span></label>
+                                            <input type="phone"  name="phone" > 
 
                                         </div> 
                                          <div class="col-lg-6 mb-20">
-                                            <label> Email Address   <span>*</span></label>
-                                              <input type="text"> 
-
+                                            <label>Địa chỉ Email <span>*</span></label>
+                                              <input type="text" name="email" value="Nhập email"> 
                                         </div> 
-                                        <div class="col-12 mb-20">
-                                            <input id="account" type="checkbox" data-bs-target="createp_account" />
-                                            <label for="account" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-controls="collapseOne">Create an account?</label>
-
-                                            <div id="collapseOne" class="collapse one" data-parent="#accordion">
-                                                <div class="card-body1">
-                                                   <label> Account password   <span>*</span></label>
-                                                    <input placeholder="password" type="password">  
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 mb-20">
-                                            <input id="address" type="checkbox" data-bs-target="createp_account" />
-                                            <label class="righ_0" for="address" data-bs-toggle="collapse" data-bs-target="#collapsetwo" aria-controls="collapseOne">Ship to a different address?</label>
-
-                                            <div id="collapsetwo" class="collapse one" data-parent="#accordion">
-                                               <div class="row">
-                                                    <div class="col-lg-6 mb-20">
-                                                        <label>First Name <span>*</span></label>
-                                                        <input type="text">    
-                                                    </div>
-                                                    <div class="col-lg-6 mb-20">
-                                                        <label>Last Name  <span>*</span></label>
-                                                        <input type="text"> 
-                                                    </div>
-                                                    <div class="col-12 mb-20">
-                                                        <label>Company Name</label>
-                                                        <input type="text">     
-                                                    </div>
-                                                    <div class="col-12 mb-20">
-                                                        <div class="select_form_select">
-                                                            <label for="countru_name">country <span>*</span></label>
-                                                            <select class="niceselect_option" name="cuntry" id="countru_name"> 
-                                                                <option value="2">bangladesh</option>      
-                                                                <option value="3">Algeria</option> 
-                                                                <option value="4">Afghanistan</option>    
-                                                                <option value="5">Ghana</option>    
-                                                                <option value="6">Albania</option>    
-                                                                <option value="7">Bahrain</option>    
-                                                                <option value="8">Colombia</option>    
-                                                                <option value="9">Dominican Republic</option>   
-
-                                                            </select>
-                                                        </div> 
-                                                    </div>
-
-                                                    <div class="col-12 mb-20">
-                                                        <label>Street address  <span>*</span></label>
-                                                        <input placeholder="House number and street name" type="text">     
-                                                    </div>
-                                                    <div class="col-12 mb-20">
-                                                        <input placeholder="Apartment, suite, unit etc. (optional)" type="text">     
-                                                    </div>
-                                                    <div class="col-12 mb-20">
-                                                        <label>Town / City <span>*</span></label>
-                                                        <input  type="text">    
-                                                    </div> 
-                                                     <div class="col-12 mb-20">
-                                                        <label>State / County <span>*</span></label>
-                                                        <input type="text">    
-                                                    </div> 
-                                                    <div class="col-lg-6 mb-20">
-                                                        <label>Phone<span>*</span></label>
-                                                        <input type="text"> 
-
-                                                    </div> 
-                                                     <div class="col-lg-6">
-                                                        <label> Email Address   <span>*</span></label>
-                                                          <input type="text"> 
-
-                                                    </div> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="order-notes">
-                                                 <label for="order_note">Order Notes</label>
-                                                <textarea id="order_note" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
-                                            </div>    
-                                        </div>     	    	    	    	    	    	    
+                                        <div class="order_button">
+                                            <button type="submit">Lưu Thông Tin</button>    	    	    	    	    	    	    
+                                        </div>  
                                     </div>
                                 </form> 
                             </div>
@@ -225,23 +116,29 @@
                                             <thead>
                                                 <tr>
                                                     <th>Product</th>
+                                                    <th>Quantity</th>
                                                     <th>Total</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach($products as $product)
-                                                    <tr>
-                                                        <td>{{ $product->name}} <strong>{{ $product->qty }}</strong></td>
-                                                        <td>${{ number_format($product->qty * $product->price , 0, '.', ',')}}
+                                               @foreach($products as $product)
+                                               <tr>
+                                                    <td>{{ $product->name}}</td>
+                                                    <td> <span>{{ $product->qty }}</span></td>
+                                                    <td>${{ number_format($product->qty * $product->price , 0, '.', ',')}}</td>
+                                               </tr>
                                                 @endforeach
+
                                             </tbody>
                                             <tfoot>
                                                 <tr class="order_total">
                                                     <th>thuế</th>
+                                                    <td></td>
                                                     <td><strong>{{ \Gloudemans\Shoppingcart\Facades\Cart::tax() }}</strong></td>
                                                 </tr>
                                                 <tr class="order_total">
                                                     <th>Order Total</th>
+                                                    <td></td>
                                                     <td><strong>{{ \Gloudemans\Shoppingcart\Facades\Cart::total() }}</strong></td>
                                                 </tr>
                                             </tfoot>

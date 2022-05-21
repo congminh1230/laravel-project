@@ -14,8 +14,8 @@ class Image extends Model
         'disk',
         'path'
     ];
-    public function product(){
-        return $this->belongsTo(Product::class,'id');
+    public function products(){
+        return $this->belongsTo(Product::class);
     }
     
 }

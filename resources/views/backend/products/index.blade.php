@@ -21,14 +21,10 @@
 @endsection
 @section('content')
         <div class="col-12">
-          <form style="margin: 20px 0 ; display:flex; justify-content:space-evenly " method="GET" action="" class="form-inline"  >
+          <form style="margin: 20px 0 ; display:flex; justify-content:space-evenly " method="GET" action="{{ route('backend.products.index') }}" class="form-inline"  >
             <div class="col-3">
-              <input value="{{ request()->get('title')}}" name="title" type="text" class="form-control" placeholder="Nhập tiêu đề cần tìm..">
+              <input value="{{ request()->get('name')}}" name="name" type="text" class="form-control" placeholder="Nhập tiêu đề cần tìm..">
             </div>
-            <div class="col-3">
-              <input value="{{ request()->get('status')}}" name="status" type="text" class="form-control" placeholder="Trạng thái....">
-            </div>
-
             <div style="margin-right: 30px">
                 <button type="submit" class="btn btn-info">Lọc</button>
               </div>
@@ -45,7 +41,6 @@
                         <th>Tiêu đề</th>
                         <th>Ảnh</th>
                         <th>Danh mục</th>
-                        <th>Tags</th>
                         <th>Trạng thái</th>
                         {{-- <th>Lượt xem</th> --}}
                         <th>Thời gian tạo</th>
@@ -59,9 +54,7 @@
                        
                         <td>{{ $product->id }}</td>
                         <td  style="width: 20%" > 
-                            {{ $product->name }}
-                            <a href="">{{ $product->slug }}</a>
-                           
+                          <a href="{{ route('frontend.product.show',[ 'slug' => $product->id ]) }}"> {{ $product->name }}</a>
                         </td>
                         <td>
                                 <img src="@if(!empty($product->image))
@@ -69,13 +62,12 @@
                                       @endif" style="width:100px" >
                         </td>
                         <td class="text-center">
-                            <span class="badge badge -info">{{ $product->category->name }}</span>
+                            <span class="badge badge -info">{{ $product->category_id }}</span>
                         </td>
                        
-                        <td>  </td>
-                        <td>  {{ $product->status }} </td>
-                        <td>  {!! date('d/m/Y', strtotime($product->created_at)) !!}</td>
-                        <td>  {!! date('d/m/Y', strtotime($product->updated_at)) !!}</td>
+                        <td>  {{ $product->status_text }} </td>
+                        <td>{{ $product->created_at }}</td>
+                        <td>{{ $product->updated_at }}</td>
                         <td>
                             <a style="margin-right:10px;" href="{{ route('backend.products.edit',['product' => $product->id ]) }}" class="btn btn-success"><i class="fas fa-edit"></i></a>
                             <form method="POST" action="{{ route('backend.products.destroy',['product' => $product->id ]) }}">

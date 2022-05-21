@@ -8,8 +8,8 @@
                             <img src="assets/img/about/shipping1.png" alt="">
                         </div>
                         <div class="shipping_content">
-                            <h4>Free Delivery</h4>
-                            <p>For all oders over $120</p>
+                            <h4>Giao Hàng Miễn Phí</h4>
+                            <p>Đối Với Đơn Hàng Trên 1 triệu</p>
                         </div>
                     </div>
                     <div class="single_shipping">
@@ -17,8 +17,8 @@
                             <img src="assets/img/about/shipping2.png" alt="">
                         </div>
                         <div class="shipping_content">
-                            <h4>Free Delivery</h4>
-                            <p>For all oders over $120</p>
+                            <h4>Phương Thức Thanh Toán</h4>
+                            <p>Tiền Mặt Hoặc Thẻ Ngân Hàng</p>
                         </div>
                     </div>
                     <div class="single_shipping">
@@ -26,8 +26,8 @@
                             <img src="assets/img/about/shipping3.png" alt="">
                         </div>
                         <div class="shipping_content">
-                            <h4>Free Delivery</h4>
-                            <p>For all oders over $120</p>
+                            <h4>Phương Thức Trả Góp</h4>
+                            <p>10%</p>
                         </div>
                     </div>
                     <div class="single_shipping">
@@ -35,8 +35,8 @@
                             <img src="assets/img/about/shipping4.png" alt="">
                         </div>
                         <div class="shipping_content">
-                            <h4>Free Delivery</h4>
-                            <p>For all oders over $120</p>
+                            <h4>Đội Ngũ Chăm Sóc Khánh Hàng</h4>
+                            <p>24/24</p>
                         </div>
                     </div>
                     <div class="single_shipping">
@@ -44,8 +44,8 @@
                             <img src="assets/img/about/shipping5.png" alt="">
                         </div>
                         <div class="shipping_content">
-                            <h4>Free Delivery</h4>
-                            <p>For all oders over $120</p>
+                            <h4>Đội Ngũ Nhân Viên</h4>
+                            <p>Chất Lượng</p>
                         </div>
                     </div>
                 </div>
@@ -57,24 +57,23 @@
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="widgets_container">
-                            <h3>CONTACT INFO</h3>
+                            <h3>Thông Tin Liên Lạc</h3>
                             <div class="footer_contact">
                                <div class="footer_contact_inner">
                                     <div class="contact_icone">
                                         <img src="assets/img/icon/icon-phone.png" alt="">
                                     </div>
                                     <div class="contact_text">
-                                        <p>Hotline Free 24/24: <br> <strong><a href="tel:0123456789">0123456789</a> </strong></p>
+                                        <p>Hotline  24/24: <br> <strong><a href="tel:0814332325">0814332325</a> </strong></p>
                                     </div>
                                 </div>
-                                <p>We are a team of designers and developers that create high quality HTML Template, Woocommerce, Shopify Theme.</p>
-                                <p>Your address goes here.. <br> demo@example.com</p>
+                                <p>Shop chúng tôi sẽ mang lại trải nghiệm mới mẻ và tiện lợi bậc nhất cho người mua hàng </p>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-9">
                        <div class="footer_col_container">
-                            <div class="widgets_container widget_menu">
+                            <!-- <div class="widgets_container widget_menu">
                                 <h3>Information</h3>
                                 <div class="footer_menu">
                                     <ul>
@@ -138,7 +137,7 @@
                                         <li><a href="#">Estimated Delivery Time</a></li>
                                     </ul>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

@@ -116,20 +116,22 @@
                   <!-- /.tab-pane -->
 
                 <div class="tab-pane" id="settings">
-                  <form id="quickForm" method="POST" action="{{route('backend.users.update',['user' => $users->id ])}}" enctype="multipart/form-data" >
-                      @csrf
-                      @method('PUT')
+                  <form id="quickForm"  action="{{route('backend.users.updateAvatar',['id' => $users->id ])}}" method="POST" enctype="multipart/form-data" >
+                    @csrf
+                    @method('PUT')
                     <div class="card-body">
                       <div class="form-group">
                         <label for="exampleInputFile">Tải lên ảnh</label>
+                        <div class="input-group">
                         <div class="input-group">
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" name="avatar">
                             <label class="custom-file-label" for="exampleInputFile">Chọn file</label>
                         </div>
                         <div class="input-group-append">
-                        <span class="input-group-text">Tải lên</span>
                     </div>
+                          </div>
+                        
                 </div>
                   
                  

@@ -40,10 +40,6 @@
                     </div>
                 </div>
                   <div class="form-group">
-                    <label for="exampleInputEmail1">phone</label>
-                    <input type="phone" name="phone" class="form-control" id="exampleInputEmail1" placeholder="">
-                  </div>
-                  <div class="form-group">
                     <label for="exampleInputEmail1">Email address</label>
                     <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
                   </div>

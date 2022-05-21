@@ -44,9 +44,7 @@
                 </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1">Text area</label>
-                    <textarea  id="summernote"class="col-12" name="content" id="text_area" cols="30" rows="10">
-                              {{  $post->content }}
-                    </textarea>
+                    <textarea class="col-12" name="content" id="text_area" cols="30" rows="10">{{  $post->content }}</textarea>
                   </div>
                   <div class="form-group">
                 <label for="">Danh mục</label>

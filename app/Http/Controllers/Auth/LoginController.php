@@ -15,7 +15,7 @@ class LoginController extends Controller
     public function authenticate(Request $request) {
         $credentials = $request->validate([
             'email' => ['required','email'], 
-            'password' => ['required']                        
+            'password' => ['required'],
         ]);
         if($request->get('remember')) {
             $remember = true;
@@ -26,7 +26,7 @@ class LoginController extends Controller
         if(Auth::attempt($credentials,$remember)) {
             $request->session()->regenerate();
             Cookie::queue('email', $request->get('email'));
-            return redirect()->intended('backend/dashboard');
+            return redirect()->intended('/');
         }else {
             $request->session()->flash('error', 'Tài khoản hoặc mật khẩu không tồn tại!');
             // dd(1);
@@ -38,8 +38,8 @@ class LoginController extends Controller
     public function logout(Request $request) {
         // dd(1);
         Auth::guard('web')->logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        $request->session()->invalidate();//vô hiệu hóa session cũ tránh việc sử dụng lại session
+        $request->session()->regenerateToken();//regen lại Token khác cho session
         return redirect('/');
     }
 }

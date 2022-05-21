@@ -12,7 +12,7 @@
                                                         
                                                     </a>
                                                     <div class="label_product">
-                                                        <span class="label_sale">{{ $product->price_sale }}%</span>
+                                                    <!-- <span class="current_price">{{$product->price_origin}}$</span> -->
                                                     </div>
                                                     <div class="quick_button">
                                                         <a href="#" data-bs-toggle="modal" data-bs-target="#modal_box"  title="quick view"><i class="icon-eye"></i></a>
@@ -37,7 +37,14 @@
                                                     </div> 
                                                     <div class="action_links">
                                                          <ul>
-                                                            <li class="add_to_cart"><a href="{{ route('frontend.carts.add',[ 'id' => $product->id ]) }}" title="Add to cart">Add to cart</a></li>
+                                                            <li class="add_to_cart"><a href="
+                                                            @if(auth()->check())
+                                                                    {{ route('frontend.carts.add',[ 'id' => $product->id ]) }}
+                                                            @else
+                                                                    {{ route('auth.login') }}
+                                                            @endif
+
+                                                            " title="Add to cart">Add to cart</a></li>
                                                             <li class="wishlist"><a href="wishlist.html"  title="Add to Wishlist"><i class="icon-heart"></i></a></li>
                                                             <li class="compare"><a href="compare.html" title="Add to Compare"><i class="icon-rotate-cw"></i></a></li>  
                                                         </ul>

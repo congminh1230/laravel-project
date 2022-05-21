@@ -4,12 +4,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Tạo mới bài viết</h1>
+            <h1 class="m-0">Tạo Mới Danh Mục</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Tạo mới bài viết</li>
+              <li class="breadcrumb-item active">Tạo Mới Danh Mục</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -27,11 +27,10 @@
                 <div class="card-body">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Tiêu đề</label>
-                    <input type="text" name="name" class="form-control" id="exampleInputEmail1" placeholder="Enter...">
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Text area</label>
-                    <textarea  id="summernote"class="col-12" name="content" id="text_area" cols="30" rows="10"></textarea>
+                    <input type="text" name="name" class="form-control" class="@error('name') is-invalid @enderror" id="exampleInputEmail1" placeholder="Enter...">
+                    @error('name')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                   </div>
                   <div class= "row">
                     <div class="form-group col-6">
@@ -48,18 +47,7 @@
                 </select>
             </div>
                     </div>
-                    <div class="form-group col-6">
-                      <label for="exampleInputPassword1">Trạng thái</label>
-                      <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                      <option selected="selected" data-select2-id="3">Option1</option>
-                      <option data-select2-id="36">Option2</option>
-                      <option data-select2-id="37">Option3</option>
-                      <option data-select2-id="38">Option4</option>
-                      <option data-select2-id="39">Option5</option>
-                      <option data-select2-id="40">Option6</option>
-                      <option data-select2-id="41">Option7</option>
-                      </select>
-                    </div>
+                    
                   </div>
                 </div>
                 <!-- /.card-body -->

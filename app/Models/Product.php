@@ -39,7 +39,7 @@ class Product extends Model
     }
     public function category()
     {
-        return $this->belongsTo( Category::class ,'category_id');
+        return $this->belongsTo(Category::class ,'category_id','id');
     }
     public function images(){
         return $this->belongsTo(Image::class,'product_id'); 
@@ -51,6 +51,9 @@ class Product extends Model
     public function user()
     {
         return $this->belongsTo( User::class,'user_created_id','id');
+    }
+    public function orders(){
+        return $this->belongsToMany(Order::class)->withPivot('quantity', 'price')->withTimestamps();
     }
     
 }

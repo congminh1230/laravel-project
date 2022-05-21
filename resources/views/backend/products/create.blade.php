@@ -22,8 +22,8 @@
             @csrf
             <div class="form-group">
                 <label for="">Tên Sản Phẩm</label>
-                <input type="text" class="form-control" id="" value="{{ old('title') }}"
-                class="@error('title') is-invalid @enderror" placeholder="" name="name">
+                <input type="text" class="form-control" 
+                name="name">
                 @error('name')
                 <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
@@ -31,7 +31,10 @@
             </div>
             <div class="form-group">
                     <label for="exampleInputEmail1">Miêu Tả Sản Phẩm</label>
-                    <input type="text" class="form-control" name="description">
+                    <input type="text"  class="form-control" class="@error('description') is-invalid @enderror" value="{{ old('description') }}" name="description">
+                    @error('description')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
             </div>
             <div class="form-group">
                     <label for="exampleInputFile">Thêm ảnh 1</label>
@@ -48,11 +51,17 @@
               </div>
             <div class="form-group">
                     <label for="exampleInputEmail1">Số Lượng Sản Phẩm</label>
-                    <input type="text" class="form-control" name="quantity">
+                    <input type="text" class="@error('quantity') is-invalid @enderror" value="{{ old('quantity') }}" class="form-control" name="quantity">
+                    @error('quantity')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
             </div>
             <div class="form-group">
                     <label for="exampleInputEmail1">Giá(VND)</label>
-                    <input type="text" class="form-control" name="price_origin">
+                    <input type="text" class="@error('price_origin') is-invalid @enderror" value="{{ old('price_origin') }}" class="form-control" name="price_origin">
+                    @error('price_origin')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
             </div>
             <div class="form-group">
                     <label for="exampleInputEmail1">Giá Sale(VND)</label>

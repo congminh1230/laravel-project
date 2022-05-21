@@ -1,3 +1,6 @@
+@section('link')
+<link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+@endsection
 @extends('backend.layouts.master')
 @section('content-header')
 <div class="content-header">
@@ -36,7 +39,7 @@
                       <th>ID</th>
                       <th>Name</th>
                       <th>Avatar</th>
-                      <th>Người tạo</th>
+                      <th>Chức Năng</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -47,11 +50,19 @@
                            {{$image->product_id}}
                         </td>
                         <td>
-                        <img src="{{ Illuminate\Support\Facades\Storage::disk($image->disk)->url($image->path)}}"
+                        <img src="{{$image->path }}"
                             width="100px">
                         </td>
-                        <td></td>
-                        <td></td>
+                        <td style="display: flex" >
+                            <a style="margin-right:10px;" href="{{ route('backend.images.edit',['image' => $image->id ]) }}" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                            <form method="POST" action="{{ route('backend.images.destroy',['image' => $image->id ]) }}">
+                              @csrf
+                              @method('DELETE')
+                              <button class="btn btn-danger">
+                                <i class="fas fa-trash"></i>
+                              </button>
+                            </form>
+                        </td>
                     </tr>
                  @endforeach
                   </tbody>
@@ -59,4 +70,9 @@
               </div>
 
     </div>
+@endsection
+@section('script')
+<script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+        <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+        {!! Toastr::message() !!}
 @endsection

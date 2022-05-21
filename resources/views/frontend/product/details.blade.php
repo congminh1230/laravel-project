@@ -24,18 +24,16 @@
                 <div class="row">
                     <div class="col-lg-5 col-md-6">
                         <div class="product-details-tab">
-                            <div id="img-1" class="zoomWrapper single-zoom">
-                                <a href="#">
-                                    <img src="@if(!empty($product->image))
+                            <div id="img-1">
+                                    <img id="lol"  src="@if(!empty($product->image))
                                       {{$product->image->path}}
                                       @endif">
-                                </a>
                             </div>
                             <div class="single-zoom-thumb">
                                 <ul class="s-tab-zoom owl-carousel single-product-active" id="gallery_01">
                                     @foreach($images as $image)
                                         <li>
-                                            <a href="#" class="elevatezoom-gallery active" data-update="" data-image="{{ $image->path }}" data-zoom-image="{{ $image->path }}">
+                                            <a class="dataImage">
                                                 <img src="{{ $image->path }}" alt="zo-th-1"/>
                                             </a>
 
@@ -65,26 +63,16 @@
                                        <li><a href="#"><i class="ion-android-star-outline"></i></a></li>
                                        <li><a href="#"><i class="ion-android-star-outline"></i></a></li>
                                        <li><a href="#"><i class="ion-android-star-outline"></i></a></li>
-                                       <li class="review"><a href="#">(1 customer review )</a></li>
+                                       <li class="review"><a href="#"></a></li>
                                    </ul>
                                 </div>
                                 <div class="price_box">
-                                    <span class="old_price">$80.00</span>
-                                    <span class="current_price">$70.00</span>
+                                    <span class="current_price">{{ $product->price_origin }}$</span>
                                 </div>
-                                <div class="product_desc">
+                                <!-- <div class="product_desc">
                                     <p>eget velit. Donec ac tempus ante. Fusce ultricies massa massa. Fusce aliquam, purus eget sagittis vulputate, sapien libero hendrerit est, sed commodo augue nisi non neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor, lorem et placerat vestibulum, metus nisi posuere nisl, in </p>
-                                </div>
-                                <div class="product_variant color">
-                                    <h3>Available Options</h3>
-                                    <label>color</label>
-                                    <ul>
-                                        <li class="color1"><a href="#"></a></li>
-                                        <li class="color2"><a href="#"></a></li>
-                                        <li class="color3"><a href="#"></a></li>
-                                        <li class="color4"><a href="#"></a></li>
-                                    </ul>
-                                </div>
+                                </div> -->
+                                
                                 <div class="product_variant quantity">
                                     <label>quantity</label>
                                     <input min="1" max="100" value="1" type="number">
@@ -126,107 +114,23 @@
                                 <div class="product_info_button">    
                                     <ul class="nav" role="tablist" id="nav-tab">
                                         <li >
-                                            <a class="active" data-bs-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="false">Description</a>
+                                            <a class="active" data-bs-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="false">Giới Thiệu</a>
                                         </li>
                                         <li>
-                                             <a data-bs-toggle="tab" href="#sheet" role="tab" aria-controls="sheet" aria-selected="false">Specification</a>
-                                        </li>
-                                        <li>
-                                           <a data-bs-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Reviews (1)</a>
+                                           <a data-bs-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Đánh Giá</a>
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="tab-content">
                                     <div class="tab-pane fade show active" id="info" role="tabpanel" >
                                         <div class="product_info_content">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Donec non est at libero vulputate rutrum. Morbi ornare lectus quis justo gravida semper. Nulla tellus mi, vulputate adipiscing cursus eu, suscipit id nulla.</p>
-                                            <p>Pellentesque aliquet, sem eget laoreet ultrices, ipsum metus feugiat sem, quis fermentum turpis eros eget velit. Donec ac tempus ante. Fusce ultricies massa massa. Fusce aliquam, purus eget sagittis vulputate, sapien libero hendrerit est, sed commodo augue nisi non neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor, lorem et placerat vestibulum, metus nisi posuere nisl, in accumsan elit odio quis mi. Cras neque metus, consequat et blandit et, luctus a nunc. Etiam gravida vehicula tellus, in imperdiet ligula euismod eget.</p>
+                                            <p>{{ $product->description }}</p>
                                         </div>    
                                     </div>
-                                    <div class="tab-pane fade" id="sheet" role="tabpanel" >
-                                        <div class="product_d_table">
-                                           <form action="#">
-                                                <table>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td class="first_child">Compositions</td>
-                                                            <td>Polyester</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="first_child">Styles</td>
-                                                            <td>Girly</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="first_child">Properties</td>
-                                                            <td>Short Dress</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </form>
-                                        </div>
-                                        <div class="product_info_content">
-                                            <p>Fashion has been creating well-designed collections since 2010. The brand offers feminine designs delivering stylish separates and statement dresses which have since evolved into a full ready-to-wear collection in which every item is a vital part of a woman's wardrobe. The result? Cool, easy, chic looks with youthful elegance and unmistakable signature style. All the beautiful pieces are made in Italy and manufactured with the greatest attention. Now Fashion extends to a range of accessories including shoes, hats, belts and more!</p>
-                                        </div>    
-                                    </div>
-
                                     <div class="tab-pane fade" id="reviews" role="tabpanel" >
                                         <div class="reviews_wrapper">
-                                            <h2>1 review for Donec eu furniture</h2>
-                                            <div class="reviews_comment_box">
-                                                <div class="comment_thmb">
-                                                    <img src="assets/img/blog/comment2.jpg" alt="">
-                                                </div>
-                                                <div class="comment_text">
-                                                    <div class="reviews_meta">
-                                                        <div class="product_rating">
-                                                           <ul>
-                                                               <li><a href="#"><i class="ion-android-star-outline"></i></a></li>
-                                                               <li><a href="#"><i class="ion-android-star-outline"></i></a></li>
-                                                               <li><a href="#"><i class="ion-android-star-outline"></i></a></li>
-                                                               <li><a href="#"><i class="ion-android-star-outline"></i></a></li>
-                                                               <li><a href="#"><i class="ion-android-star-outline"></i></a></li>
-                                                           </ul>
-                                                        </div>
-                                                        <p><strong>admin </strong>- September 12, 2018</p>
-                                                        <span>roadthemes</span>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div class="comment_title">
-                                                <h2>Add a review </h2>
-                                                <p>Your email address will not be published.  Required fields are marked </p>
-                                            </div>
-                                            <div class="product_rating mb-10">
-                                               <h3>Your rating</h3>
-                                                <ul>
-                                                   <li><a href="#"><i class="ion-android-star-outline"></i></a></li>
-                                                   <li><a href="#"><i class="ion-android-star-outline"></i></a></li>
-                                                   <li><a href="#"><i class="ion-android-star-outline"></i></a></li>
-                                                   <li><a href="#"><i class="ion-android-star-outline"></i></a></li>
-                                                   <li><a href="#"><i class="ion-android-star-outline"></i></a></li>
-                                               </ul>
-                                            </div>
-                                            <div class="product_review_form">
-                                                <form action="#">
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                            <label for="review_comment">Your review </label>
-                                                            <textarea name="comment" id="review_comment" ></textarea>
-                                                        </div> 
-                                                        <div class="col-lg-6 col-md-6">
-                                                            <label for="author">Name</label>
-                                                            <input id="author"  type="text">
-
-                                                        </div> 
-                                                        <div class="col-lg-6 col-md-6">
-                                                            <label for="email">Email </label>
-                                                            <input id="email"  type="text">
-                                                        </div>  
-                                                    </div>
-                                                    <button type="submit">Submit</button>
-                                                 </form>   
-                                            </div> 
+                                            
+                                            
                                         </div>     
                                     </div>
                                 </div>
@@ -316,70 +220,7 @@
     </div>
     
      <!--brand area start-->
-    <div class="brand_area brand_padding">
-        <div class="container">
-            <div class="col-12">
-                <div class="brand_container owl-carousel ">
-                    <div class="brand_list">
-                        <div class="single_brand">
-                            <a href="#"><img src="assets/img/brand/brand1.jpg" alt=""></a>
-                        </div>
-                        <div class="single_brand">
-                            <a href="#"><img src="assets/img/brand/brand2.jpg" alt=""></a>
-                        </div>
-                    </div>
-                    <div class="brand_list">
-                        <div class="single_brand">
-                            <a href="#"><img src="assets/img/brand/brand3.jpg" alt=""></a>
-                        </div>
-                        <div class="single_brand">
-                            <a href="#"><img src="assets/img/brand/brand4.jpg" alt=""></a>
-                        </div>
-                    </div>
-                    <div class="brand_list">
-                        <div class="single_brand">
-                            <a href="#"><img src="assets/img/brand/brand5.jpg" alt=""></a>
-                        </div>
-                        <div class="single_brand">
-                            <a href="#"><img src="assets/img/brand/brand6.jpg" alt=""></a>
-                        </div>
-                    </div>
-                    <div class="brand_list">
-                        <div class="single_brand">
-                            <a href="#"><img src="assets/img/brand/brand7.jpg" alt=""></a>
-                        </div>
-                        <div class="single_brand">
-                            <a href="#"><img src="assets/img/brand/brand8.jpg" alt=""></a>
-                        </div>
-                    </div>
-                     <div class="brand_list">
-                        <div class="single_brand">
-                            <a href="#"><img src="assets/img/brand/brand1.jpg" alt=""></a>
-                        </div>
-                        <div class="single_brand">
-                            <a href="#"><img src="assets/img/brand/brand2.jpg" alt=""></a>
-                        </div>
-                    </div>
-                    <div class="brand_list">
-                        <div class="single_brand">
-                            <a href="#"><img src="assets/img/brand/brand3.jpg" alt=""></a>
-                        </div>
-                        <div class="single_brand">
-                            <a href="#"><img src="assets/img/brand/brand4.jpg" alt=""></a>
-                        </div>
-                    </div>
-                    <div class="brand_list">
-                        <div class="single_brand">
-                            <a href="#"><img src="assets/img/brand/brand5.jpg" alt=""></a>
-                        </div>
-                        <div class="single_brand">
-                            <a href="#"><img src="assets/img/brand/brand6.jpg" alt=""></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+   
     <!--brand area end-->
     
     <!--newsletter area start-->
@@ -438,4 +279,17 @@
         </div>
     </div>
     <!--newsletter area end-->
+@endsection
+@section('js')
+<script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script>
+    // console.log('dsdsd');
+    $('.dataImage >img').on('click', function() {
+        // alert('jjk');
+        var img = $(this).attr('src')
+        // console.log(img);
+        $('#lol').attr('src', img)
+    })
+</script>
+
 @endsection

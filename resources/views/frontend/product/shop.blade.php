@@ -27,18 +27,9 @@
                         <div class="widget_list widget_categories">
                             <h3>Categories</h3>
                             <ul>
-                                <li><a href="#">Cameras & Camcoders</a></li>
-                                <li class="widget_sub_categories"><a href="javascript:void(0)">Computer & Networking</a>
-                                    <ul class="widget_dropdown_categories">
-                                        <li><a href="#">Computer</a></li>
-                                        <li><a href="#">Networking</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">Games & Consoles</a></li>
-                                <li><a href="#">Headphone & Speaker</a></li>
-                                <li><a href="#">Movies & Video Games</a></li>
-                                <li><a href="#">Smartphone</a> </li>
-                                <li><a href="#">Uncategorized</a></li>
+                                @foreach($categories as $category)
+                                  <li><a>{{$category->name}}</a></li>
+                                @endforeach
                             </ul>
                         </div>
                         <div class="widget_list widget_filter">
@@ -47,68 +38,7 @@
                                 <div id="slider-range"></div>   
                                 <button type="submit">Filter</button>
                                 <input type="text" name="text" id="amount" />   
-
                             </form> 
-                        </div>
-                        <div class="widget_list widget_categories">
-                            <h3>Manufacturer</h3>
-                            <ul>
-                               <li>
-                                    <input id="check1" type="checkbox">
-                                    <label for="check1">Calvin Klein (8)</label>
-                                    <span class="checkmark"></span>
-                                </li>
-                                <li>
-                                    <input id="check2" type="checkbox">
-                                    <label for="check2">Diesel (8)</label>
-                                    <span class="checkmark"></span>
-                                </li>
-                                <li>
-                                    <input id="check3" type="checkbox">
-                                    <label for="check3">Tommy Hilfiger (8)</label>
-                                    <span class="checkmark"></span>
-                                </li>
-                                <li>
-                                    <input id="check4" type="checkbox">
-                                    <label for="check4">Versace (8)</label>
-                                    <span class="checkmark"></span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="widget_list widget_categories">
-                            <h3>Category</h3>
-                            <ul>
-                               <li>
-                                    <input id="check5" type="checkbox">
-                                    <label for="check5">Accessories (8)</label>
-                                    <span class="checkmark"></span>
-                                </li>
-                                <li>
-                                    <input id="check6" type="checkbox">
-                                    <label for="check6">Dresses (8)</label>
-                                    <span class="checkmark"></span>
-                                </li>
-                                <li>
-                                    <input id="check7" type="checkbox">
-                                    <label for="check7">Handbags (8)</label>
-                                    <span class="checkmark"></span>
-                                </li>
-                                <li>
-                                    <input id="check8" type="checkbox">
-                                    <label for="check8">Tops (8)</label>
-                                    <span class="checkmark"></span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="widget_list tags_widget">
-                            <h3>Product tags</h3>
-                            <div class="tag_cloud">
-                                <a href="#">blouse</a>
-                                <a href="#">clothes</a>
-                                <a href="#">fashion</a>
-                                <a href="#">handbag</a>
-                                <a href="#">laptop</a>
-                            </div>
                         </div>
                     </aside>
                     <!--sidebar widget end-->
@@ -211,8 +141,7 @@
                                                </ul>
                                             </div>
                                             <div class="price_box"> 
-                                                <span class="old_price">$320.00</span> 
-                                                <span class="current_price">$120.00</span>
+                                                <span class="current_price">{{number_format($product->price_origin,0,'.',',')}}</span>
                                             </div>
                                             <div class="product_desc">
                                                <p>{{ $product->description }}</p>
@@ -224,7 +153,6 @@
                                                 <ul> 
                                                     <li class="add_to_cart"><a href="{{ route('frontend.carts.add',[ 'id' => $product->id ]) }}" title="Add to cart">Add to cart</a></li>
                                                     <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><i class="icon-heart"></i>  Add to Wishlist</a></li>
-                                                    <li class="compare"><a href="#" title="compare"><i class="icon-rotate-cw"></i>Add to Compare</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -239,13 +167,7 @@
 
                     <div class="shop_toolbar t_bottom">
                         <div class="pagination">
-                            <ul>
-                                <li class="current">1</li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li class="next"><a href="#">next</a></li>
-                                <li><a href="#">>></a></li>
-                            </ul>
+                        {{ $products->links() }}
                         </div>
                     </div>
                     <!--shop toolbar end-->

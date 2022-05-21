@@ -129,8 +129,7 @@ class PostController extends Controller
         $user->posts()->save($post);
 
         $post->tags()->attach($tags);
-        // $request->session()->flash('success', 'Task was successful!');
-        Toastr::success('Task was successful!', 'success', ["positionClass" => "toast-top-right"]);
+        Toastr::success('Tạo Bài Viết Thành Công', 'Thành Công', ["positionClass" => "toast-top-right"]);
         return redirect()->route('backend.posts.index');
     }
 
@@ -216,8 +215,8 @@ class PostController extends Controller
         
         $post -> save();
         $post -> tags()-> sync($tags);
-        $request->session()->flash('success', 'Update  successful!');
-       
+        // $request->session()->flash('success', 'Update  successful!');
+        Toastr::success('Update Thành Công', 'Updata', ["positionClass" => "toast-top-right"]);
         return redirect()->route('backend.posts.index');
     }
     /**
@@ -232,7 +231,7 @@ class PostController extends Controller
         $post = Post::find($id);
         $this -> authorize('delete', $post);
         $post -> delete();
-        $request->session()->flash('success', 'Delete  successful!');
+        Toastr::success('Xóa Thành Công', 'Xóa', ["positionClass" => "toast-top-right"]);
         return redirect()->route('backend.posts.index');
     }
 }

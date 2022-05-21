@@ -7,8 +7,8 @@
                 <div class="col-12">
                     <div class="breadcrumb_content">
                         <ul>
-                            <li><a href="index.html">home</a></li>
-                            <li>blog details</li>
+                            <li><a href="index.html">Trang chủ</a></li>
+                            <li>Chi Tiết Bài Viết</li>
                         </ul>
                     </div>
                 </div>
@@ -30,26 +30,19 @@
                                    <div class="post_header">
                                        <h3 class="post_title">{{ $post->title }}</h3>
                                         <div class="blog_meta">                                        
-                                        <span class="author">Posted by : <a href="#"> {{ $post->user->name }}</a> / </span>
+                                        <span class="author">Tác Giả : <a href="#"> {{ $post->user->name }}</a> / </span>
                                                 <span class="meta_date">Posted on :  <a href="#"> {{ $post->created_at }}</a></span>
                                                 <span class="meta_date">Update :  <a href="#"> {{ $post->updated_at }}</a></span>
                                         </div>
                                     </div>
                                     <div class="blog_thumb">
-                                       <img src="assets/img/blog/blog-big1.jpg" alt="">
+                                       <img  style="width: 100%;" src="{{ Illuminate\Support\Facades\Storage::disk($post->disk)->url($post->image)}}" alt="">
                                    </div>
                                    <figcaption class="blog_content">
                                         <div class="post_content">
                                             <p>{{ $post->content }}</p>
                                         </div>
                                         <div class="entry_content">
-                                            <div class="post_meta">
-                                                <span>Tags: </span>
-                                                <span><a href="#">, fashion</a></span>
-                                                <span><a href="#">, t-shirt</a></span>
-                                                <span><a href="#">, white</a></span>
-                                            </div>
-
                                             <div class="social_sharing">
                                                 <p>share this post:</p>
                                                 <ul>
@@ -64,81 +57,15 @@
                                    </figcaption>
                                 </figure>
                             </article>
-                           <div class="related_posts">
-                               <h3>Related posts</h3>
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-6">
-                                        <article class="single_related">
-                                            <figure>
-                                                <div class="related_thumb">
-                                                    <img src="assets/img/blog/blog7.jpg" alt="">
-                                                </div>
-                                                <figcaption class="related_content">
-                                                   <h4><a href="#">Post with Gallery</a></h4>
-                                                   <div class="blog_meta">                                        
-                                                        <span class="author">By : <a href="#">admin</a> / </span>
-                                                        <span class="meta_date"> July 05, 2022	</span>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </article>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6">
-                                        <article class="single_related">
-                                            <figure>
-                                                <div class="related_thumb">
-                                                    <img src="assets/img/blog/blog8.jpg" alt="">
-                                                </div>
-                                                <figcaption class="related_content">
-                                                   <h4><a href="#">Post with Audio</a></h4>
-                                                   <div class="blog_meta">                                        
-                                                        <span class="author">By : <a href="#">admin</a> / </span>
-                                                        <span class="meta_date"> July 05, 2022	</span>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </article>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6">
-                                        <article class="single_related">
-                                            <figure>
-                                                <div class="related_thumb">
-                                                    <img src="assets/img/blog/blog9.jpg" alt="">
-                                                </div>
-                                                <figcaption class="related_content">
-                                                   <h4><a href="#">Maecenas ultricies</a></h4>
-                                                   <div class="blog_meta">                                        
-                                                        <span class="author">By : <a href="#">admin</a> / </span>
-                                                        <span class="meta_date"> July 05, 2022	</span>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </article>
-                                    </div>
-                                </div>
-                           </div> 
+                          
                            
                             <div class="comments_box">
-                                <h3>3 Comments	</h3>
-                                <!-- <div class="comment_list">
-                                    <div class="comment_thumb">
-                                        <img src="assets/img/blog/comment3.png.jpg" alt="">
-                                    </div>
-                                    <div class="comment_content">
-                                        <div class="comment_meta">
-                                            <h5><a href="#">Admin</a></h5>
-                                            <span>July 05, 2022 at 1:38 am</span> 
-                                        </div>
-                                        <p>But I must explain to you how all this mistaken idea of denouncing pleasure</p>
-                                        <div class="comment_reply">
-                                            <a href="#">Reply</a>
-                                        </div>
-                                    </div> -->
+                                <h3>Bình Luận</h3>
                                     <div class="card">
                                     <div class="card-body">
                                         @include('partials._comment_replies', ['comments' => $post->comments, 'post_id' => $post->id])
                                         <hr />
-                                        <h4>Add comment</h4>
+                                        <h4>Thêm Bình Luận</h4>
                                         <form method="post" action="{{ route('comment.add') }}">
                                             @csrf
                                             <div class="form-group">
@@ -147,86 +74,13 @@
                                             </div>
                                             <div class="form-group">
                                                 @if(auth()->check())
-                                                <input type="submit" class="btn btn-warning" value="Add Comment" />
+                                                <input style="background-color: black;color: white;margin-top: 10px;" type="submit" class="btn btn-warning" value="Thêm" />
                                                 @endif 
                                             </div>
                                         </form>
                                         </div>
                                     </div>
-                                <!-- <div class="comment_list">
-                                    <div class="comment_thumb">
-                                        <img src="assets/img/blog/comment3.png.jpg" alt="">
-                                    </div>
-                                    <div class="comment_content">
-                                        <div class="comment_meta">
-                                            <h5><a href="#">Admin</a></h5>
-                                            <span>July 05, 2022 at 1:38 am</span> 
-                                        </div>
-                                        <p>But I must explain to you how all this mistaken idea of denouncing pleasure</p>
-                                        <div class="comment_reply">
-                                            <a href="#">Reply</a>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="comment_list list_two">
-                                    <div class="comment_thumb">
-                                        <img src="assets/img/blog/comment3.png.jpg" alt="">
-                                    </div>
-                                    <div class="comment_content">
-                                        <div class="comment_meta">
-                                            <h5><a href="#">Demo</a></h5>
-                                            <span>July 05, 2022 at 1:38 am</span> 
-                                        </div>
-                                        <p>Quisque semper nunc vitae erat pellentesque, ac placerat arcu consectetur</p>
-                                        <div class="comment_reply">
-                                            <a href="#">Reply</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="comment_list">
-                                    <div class="comment_thumb">
-                                        <img src="assets/img/blog/comment3.png.jpg" alt="">
-                                    </div>
-                                    <div class="comment_content">
-                                        <div class="comment_meta">
-                                            <h5><a href="#">Admin</a></h5>
-                                            <span>July 05, 2022 at 1:38 am</span> 
-                                        </div>
-                                        <p>Quisque orci nibh, porta vitae sagittis sit amet, vehicula vel mauris. Aenean at</p>
-                                        <div class="comment_reply">
-                                            <a href="#">Reply</a>
-                                        </div>
-                                    </div>
-                                </div> -->
                             </div>
-                            <!-- <div class="comments_form">
-                                <h3>Leave a Reply </h3>
-                                <p>Your email address will not be published. Required fields are marked *</p>
-                                <form action="#">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <label for="review_comment">Comment </label>
-                                            <textarea name="comment" id="review_comment" ></textarea>
-                                        </div> 
-                                        <div class="col-lg-4 col-md-4">
-                                            <label for="author">Name</label>
-                                            <input id="author"  type="text">
-
-                                        </div> 
-                                        <div class="col-lg-4 col-md-4">
-                                            <label for="email">Email </label>
-                                            <input id="email"  type="text">
-                                        </div>
-                                        <div class="col-lg-4 col-md-4">
-                                            <label for="website">Website </label>
-                                            <input id="website"  type="text">
-                                        </div>   
-                                    </div>
-                                    <button class="button" type="submit">Post Comment</button>
-                                 </form>    
-                            </div> -->
-
                         </div>
                         <!--blog grid area start-->
                     </div>
@@ -241,113 +95,31 @@
                                     <button type="submit">search</button>
                                 </form>
                             </div>
-                            <div class="widget_list comments">
-                               <div class="widget_title">
-                                    <h3>Recent Comments</h3>
-                                </div>
-                                <div class="post_wrapper">
-                                    <div class="post_thumb">
-                                        <a href="blog-details.html"><img src="assets/img/blog/comment2.png.jpg" alt=""></a>
-                                    </div>
-                                    <div class="post_info">
-                                        <span> <a href="#">demo</a> says:</span>
-                                        <a href="blog-details.html">Quisque semper nunc</a>
-                                    </div>
-                                </div>
-                                 <div class="post_wrapper">
-                                    <div class="post_thumb">
-                                        <a href="blog-details.html"><img src="assets/img/blog/comment2.png.jpg" alt=""></a>
-                                    </div>
-                                    <div class="post_info">
-                                        <span><a href="#">admin</a> says:</span>
-                                        <a href="blog-details.html">Quisque orci porta...</a>
-                                    </div>
-                                </div>
-                                <div class="post_wrapper">
-                                    <div class="post_thumb">
-                                        <a href="blog-details.html"><img src="assets/img/blog/comment2.png.jpg" alt=""></a>
-                                    </div>
-                                    <div class="post_info">
-                                        <span><a href="#">demo</a> says:</span>
-                                        <a href="blog-details.html">Quisque semper nunc</a>
-                                    </div>
-                                </div>
-                                <div class="post_wrapper">
-                                    <div class="post_thumb">
-                                        <a href="blog-details.html"><img src="assets/img/blog/comment2.png.jpg" alt=""></a>
-                                    </div>
-                                    <div class="post_info">
-                                        <span><a href="#">admin</a> says:</span>
-                                        <a href="blog-details.html">Quisque semper nunc</a>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="widget_list widget_post">
                                 <div class="widget_title">
-                                    <h3>Recent Posts</h3>
+                                    <h3>Bài Viết Nổi Bật</h3>
                                 </div>
+                                @foreach($posts as $post)
                                 <div class="post_wrapper">
                                     <div class="post_thumb">
-                                        <a href="blog-details.html"><img src="assets/img/blog/blog6.jpg" alt=""></a>
+                                        <a href="{{ route('frontend.blogs.detail',['id' => $post->id])}}"><img src="{{ Illuminate\Support\Facades\Storage::disk($post->disk)->url($post->image)}}" alt=""></a>
                                     </div>
                                     <div class="post_info">
-                                        <h4><a href="blog-details.html">Blog image post</a></h4>
-                                        <span>July 05, 2022 </span>
+                                        <h4><a href="{{ route('frontend.blogs.detail',['id' => $post->id])}}">{{$post->name}}</a></h4>
+                                        <span>{{$post->created_at}}</span>
                                     </div>
                                 </div>
-                                 <div class="post_wrapper">
-                                    <div class="post_thumb">
-                                        <a href="blog-details.html"><img src="assets/img/blog/blog7.jpg" alt=""></a>
-                                    </div>
-                                    <div class="post_info">
-                                        <h4><a href="blog-details.html">Post with Gallery</a></h4>
-                                        <span>July 05, 2022 </span>
-                                    </div>
-                                </div>
-                                 <div class="post_wrapper">
-                                    <div class="post_thumb">
-                                        <a href="blog-details.html"><img src="assets/img/blog/blog8.jpg" alt=""></a>
-                                    </div>
-                                    <div class="post_info">
-                                        <h4><a href="blog-details.html">Post with Audio</a></h4>
-                                        <span>July 05, 2022 </span>
-                                    </div>
-                                </div>
-                                 <div class="post_wrapper">
-                                    <div class="post_thumb">
-                                        <a href="blog-details.html"><img src="assets/img/blog/blog9.jpg" alt=""></a>
-                                    </div>
-                                    <div class="post_info">
-                                        <h4><a href="blog-details.html">Post with Video</a></h4>
-                                        <span>July 05, 2022 </span>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                             <div class="widget_list widget_categories">
                                 <div class="widget_title">
-                                    <h3>Categories</h3>
+                                    <h3>Danh Mục</h3>
                                 </div>
                                 <ul>
-                                    <li><a href="#">Audio</a></li>
-                                    <li><a href="#">Company</a></li>
-                                    <li><a href="#">Gallery</a></li>
-                                    <li><a href="#">Image</a></li>
-                                    <li><a href="#">Other</a></li>
-                                    <li><a href="#">Travel</a></li>
+                                    @foreach($categories as $category)
+                                    <li><a href="#">{{$category->name}}</a></li>
+                                    @endforeach
                                 </ul>
-                            </div>
-
-                            <div class="widget_list widget_tag">
-                                <div class="widget_title">
-                                    <h3>Tag products</h3>
-                                </div>
-                                <div class="tag_widget">
-                                    <ul>
-                                        <li><a href="#">asian</a></li>
-                                        <li><a href="#">brown</a></li>
-                                        <li><a href="#">euro</a></li>
-                                    </ul>
-                                </div>
                             </div>
                         </div>
                     </div>

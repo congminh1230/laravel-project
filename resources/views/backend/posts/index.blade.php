@@ -25,10 +25,6 @@
             <div class="col-3">
               <input value="{{ request()->get('title')}}" name="title" type="text" class="form-control" placeholder="Nhập tiêu đề cần tìm..">
             </div>
-            <div class="col-3">
-              <input value="{{ request()->get('status')}}" name="status" type="text" class="form-control" placeholder="Trạng thái....">
-            </div>
-
             <div style="margin-right: 30px">
                 <button type="submit" class="btn btn-info">Lọc</button>
               </div>
@@ -39,7 +35,7 @@
         </div>
         <table class="table table-striped projects">
                 @can('create', App\Models\Post::class)
-                  <a href="{{ route('backend.posts.create') }}" class="btn btn-success"><i style="margin-right:10px" class="fas fa-plus"></i>Tạo bài viết</a>
+                  <a href="{{ route('backend.posts.create') }}" style="margin-bottom:10px" class="btn btn-success"><i style="margin-right:10px" class="fas fa-plus"></i>Tạo bài viết</a>
                 @endcan
               <thead>
                       <tr>
@@ -63,7 +59,6 @@
                         <td>{{ $post->id }}</td>
                         <td  style="width: 20%" > 
                             <a href="{{ route('backend.posts.show',['post' => $post->id ]) }}">{{ $post->title }}</a>
-                            {{ $post->title }}
                         </td>
                         <td>
                           @if(!empty($post->image))
