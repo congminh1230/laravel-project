@@ -238,7 +238,7 @@
                                       {{$product->image->path}}
                                       @endif" alt=""></a>
                                             <div class="label_product">
-                                                <span class="label_sale">{{ $product->price_sale }}%</span>
+                                                <span class="label_sale">{{number_format($product->price_sale,0,'.',',')}}%</span>
                                             </div>
                                         </div>
                                         <div class="product_content">
@@ -253,7 +253,7 @@
                                                </ul>
                                             </div>
                                             <div class="price_box"> 
-                                            <span class="current_price">{{$product->price_origin}}$</span>
+                                            <span class="current_price">{{number_format($product->price_origin,0,'.',',')}}</span>
                                             </div>
                                             <div class="product_desc">
                                                 <p>{{ $product->content}}</p>
@@ -320,16 +320,15 @@
                             <article class="single_blog">
                                 <figure>
                                     <div class="blog_thumb">
-                                        <a href="blog-details.html"><img src="{{ Illuminate\Support\Facades\Storage::disk($post->disk)->url($post->image)}}" alt=""></a>
+                                        <a href="{{ route('frontend.blogs.detail',['id' => $post->id]) }}"><img src="{{ Illuminate\Support\Facades\Storage::disk($post->disk)->url($post->image)}}" alt=""></a>
                                     </div>
                                     <figcaption class="blog_content">
-                                        <h4><a href="">{{ $post->title}}</a></h4> 
+                                        <h4><a href="{{ route('frontend.blogs.detail',['id' => $post->id]) }}">{{ $post->title}}</a></h4> 
                                         <div class="post_meta">
                                             <p>Tác Giả: {{$post->user->name}}</p>
                                             <p> {{ $post->created_at }}</p>
                                         </div>
                                         <div class="post_desc">
-                                            <p>Condimentum blandit est sed mollitia libero pharetra aenean ...</p>
                                         </div>
                                         <footer class="post_readmore">
                                             <a href="{{ route('frontend.blogs.detail',['id' => $post->id]) }}">Chi Tiết Bài Viết</a>

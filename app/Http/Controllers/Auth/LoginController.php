@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
+use Laravel\Socialite\Facades\Socialite;
 class LoginController extends Controller
 {
     //
@@ -29,17 +30,48 @@ class LoginController extends Controller
             return redirect()->intended('/');
         }else {
             $request->session()->flash('error', 'Tài khoản hoặc mật khẩu không tồn tại!');
-            // dd(1);
         }
         return back()->withErrors([
             'email' => 'the provided credentials do not math our records'
         ]);
     }
     public function logout(Request $request) {
-        // dd(1);
         Auth::guard('web')->logout();
         $request->session()->invalidate();//vô hiệu hóa session cũ tránh việc sử dụng lại session
         $request->session()->regenerateToken();//regen lại Token khác cho session
         return redirect('/');
+    }
+    // Google login
+    public function redirectToGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    // Google callback
+    public function handleGoogleCallback()
+    {
+        $user = Socialite::driver('google')->user();
+
+        $this->_registerOrLoginUser($user);
+
+        // Return home after login
+        return redirect()->route('home');
+    }
+
+    // Facebook login
+    public function redirectToFacebook()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+
+    // Facebook callback
+    public function handleFacebookCallback()
+    {
+        $user = Socialite::driver('facebook')->user();
+
+        $this->_registerOrLoginUser($user);
+
+        // Return home after login
+        return redirect()->route('home');
     }
 }

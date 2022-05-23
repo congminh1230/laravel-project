@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\App;
-
+use Laravel\Socialite\Facades\Socialite;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,7 +45,7 @@ Route::prefix('backend')->name('backend.')->namespace('Backend')->middleware('au
     ]);
     Route::resource('categories',CategoryControler::class);
 });
-
+// auth
 Route::prefix('/')->name('auth.')->namespace('Auth')->group(function() {
     Route::get('/register', 'RegisteredUserController@create')
     ->middleware('guest')
@@ -64,6 +64,17 @@ Route::prefix('/')->name('auth.')->namespace('Auth')->group(function() {
 
 
 });
+
+Route::get('login/google', 'Auth\LoginController@redirectToGoogle')->name('login.google');
+Route::get('login/google/callback', [App\Http\Controllers\Auth\LoginController::class, 'handleGoogleCallback']);
+
+// Facebook login
+Route::get('login/facebook', [App\Http\Controllers\Auth\LoginController::class, 'redirectToFacebook'])->name('login.facebook');
+Route::get('login/facebook/callback', [App\Http\Controllers\Auth\LoginController::class, 'handleFacebookCallback']);
+
+
+
+
 
 // frontend
 Route::get('/post/show/{id}', 'PostController@show')->name('post.show');

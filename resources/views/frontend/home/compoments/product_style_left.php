@@ -26,7 +26,7 @@
                                                                 </div>
                                                                 <div class="price_box"> 
                                                                     <!-- <span class="old_price">$420.00</span>  -->
-                                                                    <span class="current_price">{{$product->price_origin}}$</span>
+                                                                    <span class="current_price">{{number_format($product->price_origin,0,'.',',')}}</span>
                                                                 </div>
                                                             </div> 
                                                             <div class="action_links">

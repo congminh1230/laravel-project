@@ -22,20 +22,17 @@ class ProductController extends Controller
     }
     public function blog() {
         $posts = Post::get();
-        // dd($posts);
         return view('frontend.posts.index')->with([
             'posts' => $posts
         ]);
     }
     public function detail($id) {
         $post = Post::find($id);
-        // dd($post->id);
         return view('frontend.blog.index')->with([
             'post' => $post
         ]);
     }
     public function show($id) {
-        // dd($id);
         $images = Image::where('product_id',$id)->get();
         $product = Product::find($id);
         $products = Product::get();
@@ -54,7 +51,6 @@ class ProductController extends Controller
         $posts = Post::get();
         $categories = Category::get();
         $products = $products_query;
-        // dd(1);
         return view('frontend.product.search')->with([
             'products'=>$products,
             'posts'=>$posts,
@@ -62,14 +58,12 @@ class ProductController extends Controller
         ]);
     }
     public function searchCategory($id) {
-        // dd($id);
         if(!empty($id)){
             $products_query = Product::where('category_id','LIKE',"%$id%")->paginate(3);
         }
         $posts = Post::get();
         $categories = Category::get();
         $products = $products_query;
-        // dd(1);
         return view('frontend.product.search')->with([
             'products'=>$products,
             'posts'=>$posts,

@@ -91,7 +91,7 @@
                                                     {{$product->image->path}}
                                                 @endif" alt="">
                                         </a>
-                                        <a class="secondary_img" href="product-details.html"><img src="@if(!empty($product->image))
+                                        <a class="secondary_img" href="{{ route('frontend.product.show',[ 'slug' => $product->id]) }}"><img src="@if(!empty($product->image))
                                                     {{$product->image->path}}
                                                 @endif" alt=""></a>
                                         <div class="label_product">
@@ -103,7 +103,7 @@
                                     </div>
                                     <div class="product_content grid_content">
                                         <div class="product_content_inner">
-                                            <p class="manufacture_product"><a href="#">{{ $product->name }}</a></p>
+                                            <p class="manufacture_product"><a href="{{ route('frontend.product.show',[ 'slug' => $product->id]) }}">{{ $product->name }}</a></p>
                                             <h4 class="product_name"><a href="product-details.html">{{ $product->description }}</a></h4>
                                             <div class="product_rating">
                                                <ul>
@@ -129,7 +129,7 @@
                                     </div>
                                     <div class="product_content list_content">
                                         <div class="left_caption">
-                                           <p class="manufacture_product"><a href="#">{{ $product->name }}</a></p>
+                                           <p class="manufacture_product"><a href="{{ route('frontend.product.show',[ 'slug' => $product->id]) }}">{{ $product->name }}</a></p>
                                             <!-- <h4 class="product_name"><a href="product-details.html">{{ $product->description }}</a></h4> -->
                                             <div class="product_rating">
                                                <ul>

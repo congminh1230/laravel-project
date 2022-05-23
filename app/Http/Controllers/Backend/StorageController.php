@@ -21,9 +21,6 @@ class StorageController extends Controller
         // dd(1);\
         $files = Storage::disk('public')->allFiles();
         unset($files[0]);
-        // s
-        // dd($files);
-        // $posts = Post::get();
         return view('backend.storage.index')->with([
             'files' => $files,
         ]);

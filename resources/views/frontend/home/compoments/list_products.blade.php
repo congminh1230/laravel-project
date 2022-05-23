@@ -32,7 +32,7 @@
                                                         </div>
                                                         <div class="price_box"> 
                                                             <span class="old_price"></span> 
-                                                            <span class="current_price">{{$product->price_origin}}$</span>
+                                                            <span class="current_price">{{number_format($product->price_origin,0,'.',',')}}</span>
                                                         </div>
                                                     </div> 
                                                     <div class="action_links">
@@ -41,7 +41,7 @@
                                                             @if(auth()->check())
                                                                     {{ route('frontend.carts.add',[ 'id' => $product->id ]) }}
                                                             @else
-                                                                    {{ route('auth.login') }}
+                                                                    {{ route('auth.login') }}`
                                                             @endif
 
                                                             " title="Add to cart">Add to cart</a></li>

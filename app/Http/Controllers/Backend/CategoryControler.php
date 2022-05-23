@@ -23,7 +23,6 @@ class CategoryControler extends Controller
     {
         //
         $name = request()->get('name');
-        // dd($name);
         $categories_query = Category::orderBy('name','desc')->select('*')->paginate(5);
         
         if(!empty($name)){
@@ -60,29 +59,26 @@ class CategoryControler extends Controller
     {
         // dd($request);
         $validated = $request->validate([
-            'name' => 'required|unique:posts|min:2|max:255',
+            'name' => 'required|unique:categories|min:2|max:255',
             ]);
 
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:posts|min:3|max:255',
+            'name' => 'required|unique:categories|min:3|max:255',
         ],
         [
             'required' => 'Thuộc tính :attribute là bắt buộc.',
             'name.require' => 'Tên không được để trống',
 
-
         ]
 
         );
         $data = $request->all();
-        // dd($data['category_parent']);
         $category = new Category();
         $category->name = $data['name'];
         $category->slug = Str::slug($data['name']);
         $category->category_parent = $data['category_parent'];
 
         $category->save();
-        // $request->session()->flash('success', 'Task was successful!');
         Toastr::success('Tạo Thành Công Danh Mục', 'Thành Công', ["positionClass" => "toast-top-right"]);
         return redirect()->route('backend.categories.index');
     }
@@ -108,22 +104,12 @@ class CategoryControler extends Controller
     public function edit($id)
     {
         //
-            // $categories = DB::table('categories')->select(['id','name'])->find($id);
-            // dd($id);
             $category = Category::find($id);
             $categories = Category::get();
-            // dd($categories);
-            // dd($categories);
-            // foreach($categories as $category) {
-            //     dd($category);
-            // }
             return view('Backend.categories.edit')->with([
                 'category'=>$category,
                 'categories' => $categories
             ]);
-           
-
-       
     }
 
     /**
@@ -141,7 +127,6 @@ class CategoryControler extends Controller
         $category->slug = Str::slug($data['name']);
         $category->category_parent = $data['category_parent'];
         $category->save();
-        // $request->session()->flash('success', 'Update  successful!');
         Toastr::success('Chỉnh Sửa Thành Công Danh Mục', 'Thành Công', ["positionClass" => "toast-top-right"]);
         return redirect()->route('backend.categories.index');
     }

@@ -168,16 +168,10 @@
                                         <li><a class="active"  href="{{ route('home') }}">Trang Chủ</a>
                                         </li>
                                         <li class="mega_items"><a href="{{ route('frontend.product.shop') }}">Cửa Hàng<i class="fa fa-angle-down"></i></a> 
-                                            <div class="mega_menu">
+                                            <!-- <div class="mega_menu">
                                                 <ul class="mega_menu_inner">
                                                     <li><a href="#">Shop Layouts</a>
-                                                        <ul>
-                                                            <li><a href="shop-fullwidth.html">Full Width</a></li>
-                                                            <li><a href="shop-fullwidth-list.html">Full Width list</a></li>
-                                                            <li><a href="shop-right-sidebar.html">Right Sidebar </a></li>
-                                                            <li><a href="shop-right-sidebar-list.html"> Right Sidebar list</a></li>
-                                                            <li><a href="shop-list.html">List View</a></li>
-                                                        </ul>
+                                                        
                                                     </li>
                                                     <li><a href="#">other Pages</a>
                                                         <ul>
@@ -199,15 +193,15 @@
                                                         </ul>
                                                     </li>
                                                 </ul>
-                                            </div>
+                                            </div> -->
                                         </li>
                                         <li><a href="{{ route('frontend.posts.index')}}">Bài Viết<i class="fa fa-angle-down"></i></a>
-                                            <ul class="sub_menu pages">
+                                            <!-- <ul class="sub_menu pages">
                                                 <li><a href="blog-details.html">blog details</a></li>
                                                 <li><a href="blog-fullwidth.html">blog fullwidth</a></li>
                                                 <li><a href="blog-sidebar.html">blog sidebar</a></li>
                                                 <li><a href="blog-no-sidebar.html">blog no sidebar</a></li>
-                                            </ul>
+                                            </ul> -->
                                         </li>
                                         <li><a href="{{route('frontend.info.index')}}">Liên Hệ</a></li>
                                     </ul>  

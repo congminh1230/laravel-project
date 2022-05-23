@@ -7,8 +7,8 @@
                 <div class="col-12">
                     <div class="breadcrumb_content">
                         <ul>
-                            <li><a href="index.html">home</a></li>
-                            <li>product details</li>
+                            <li><a href="{{route('home')}}">Trang Chủ</a></li>
+                            <li>Chi Tiết Sản Phẩm</li>
                         </ul>
                     </div>
                 </div>
@@ -49,13 +49,12 @@
                         <div class="product_d_right">
                            <form action="#">
 
-                                <h3><a href="#">{{$product->name}}</a></h3>
-                                <div class="product_nav">
-                                    <ul>
-                                        <li class="prev"><a href="product-details.html"><i class="fa fa-angle-left"></i></a></li>
-                                        <li class="next"><a href="variable-product.html"><i class="fa fa-angle-right"></i></a></li>
-                                    </ul>
-                                </div>
+                                <h3><a href=" @if(auth()->check())
+                                                                    {{ route('frontend.carts.add',[ 'id' => $product->id ]) }}
+                                                            @else
+                                                                    {{ route('auth.login') }}
+                                                            @endif">{{$product->name}}</a></h3>
+                                                            
                                <div class="product_rating">
                                   <ul>
                                        <li><a href="#"><i class="ion-android-star-outline"></i></a></li>
@@ -67,7 +66,7 @@
                                    </ul>
                                 </div>
                                 <div class="price_box">
-                                    <span class="current_price">{{ $product->price_origin }}$</span>
+                                    <span class="current_price">{{number_format($product->price_origin,0,'.',',')}}vnd</span>
                                 </div>
                                 <!-- <div class="product_desc">
                                     <p>eget velit. Donec ac tempus ante. Fusce ultricies massa massa. Fusce aliquam, purus eget sagittis vulputate, sapien libero hendrerit est, sed commodo augue nisi non neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor, lorem et placerat vestibulum, metus nisi posuere nisl, in </p>
@@ -76,17 +75,16 @@
                                 <div class="product_variant quantity">
                                     <label>quantity</label>
                                     <input min="1" max="100" value="1" type="number">
-                                    <a class="button" href="{{ route('frontend.carts.add',[ 'id' => $product->id ]) }}"  >add to cart</a>  
+                                    <a class="button" href="{{ route('frontend.carts.add',[ 'id' => $product->id ]) }}"  >Thêm Vào Giỏ Hàng</a>  
 
                                 </div>
                                 <div class=" product_d_action">
                                    <ul>
-                                       <li><a href="#" title="Add to wishlist">+ Add to Wishlist</a></li>
-                                       <li><a href="#" title="Add to wishlist">+ Compare</a></li>
+                                       <li><a href="#" title="Add to wishlist">+ Thêm Vào Danh Sách Yêu Thích</a></li>
                                    </ul>
                                 </div>
                                 <div class="product_meta">
-                                    <span>Category: <a href="#">Clothing</a></span>
+                                    <span>Danh Mục <a href="#">{{ $product->category->name }}</a></span>
                                 </div>
 
                             </form>
@@ -178,7 +176,7 @@
                                         </div>
                                         <div class="product_content">
                                             <div class="product_content_inner">
-                                                <p class="manufacture_product"><a href="#">{{ $product->name }}</a></p>
+                                                <p class="manufacture_product"><a href=" {{ route('frontend.product.show',[ 'product' => $product->id  ,'slug' => $product->id]) }}">{{ $product->name }}</a></p>
                                                 <h4 class="product_name"><a href="product-details.html">Nunc Neque Eros</a></h4>
                                                 <div class="product_rating">
                                                    <ul>

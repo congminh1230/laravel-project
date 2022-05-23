@@ -13,15 +13,12 @@ class OrderController extends Controller
     //
     public function index() {
         $orders = Order::get();
-        // dd($orders);
         return view('backend.orders.index')->with([
             'orders' => $orders,
         ]);
     }
     public function updateStatus(Request $request,$id) {
-            // dd($id);
             $data = $request->all();
-            // dd( $data['status']);
             $order=Order::find($id);
             $order->status = $data['status'];
             $order->update();

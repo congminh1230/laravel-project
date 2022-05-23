@@ -18,9 +18,7 @@ class LogoController extends Controller
     public function index(Request $request)
     {
         $name = request()->get('name');
-        // dd($name);
         $logos_query = Logo::orderBy('name','desc')->select('*')->paginate(5);
-        
         if(!empty($name)){
             $logos_query = Logo::where('name','LIKE',"%$name%")->paginate(2);
         }
@@ -56,13 +54,10 @@ class LogoController extends Controller
         $logo = new Logo();
         $data = $request->all();
         $logo->name = $data['name'];
-        // dd($data['name']);
         if($request->hasFile('logo'))
         {
-            // dd($request->file('logo'));
             $disk = 'public';
             $path = $request->file('logo')->store('logos', $disk);
-            // dd($path);
             $logo->disk = $disk;
             $logo->path = $path;
         }
@@ -92,7 +87,6 @@ class LogoController extends Controller
     public function edit($id)
     {
         $logo = Logo::find($id);
-        // dd($logo);
         return view('backend.logos.edit')->with([
             'logo' => $logo,
         ]);
@@ -113,10 +107,8 @@ class LogoController extends Controller
         $logo->name = $data['name'];
         if($request->hasFile('logo'))
         {
-            // dd($request->file('logo'));
             $disk = 'public';
             $path = $request->file('logo')->store('logos', $disk);
-            // dd($path);
             $logo->disk = $disk;
             $logo->path = $path;
         }

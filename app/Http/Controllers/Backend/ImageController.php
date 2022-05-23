@@ -111,12 +111,9 @@ class ImageController extends Controller
         $image = Image::find($id);
         if($request->hasFile('product'))
         {
-            // dd($request->file('logo'));
             $disk = 'public';
             $path = $request->file('product')->store('logos', $disk);
             $url = Storage::disk($disk)->url($path);
-            // dd($url);
-            // dd($path);
             $image->disk = $disk;
             $image->path = $url;
         }
@@ -134,7 +131,6 @@ class ImageController extends Controller
     public function destroy($id)
     {
         //
-        // dd($id);
         $image = Image::find($id);
         $image->delete();
         return redirect()->route('backend.images.index');

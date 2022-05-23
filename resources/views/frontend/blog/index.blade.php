@@ -117,7 +117,7 @@
                                 </div>
                                 <ul>
                                     @foreach($categories as $category)
-                                    <li><a href="#">{{$category->name}}</a></li>
+                                    <li><a href="{{ route('frontend.product.searchCategory',[ 'id' => $category->id,'name' => $category->name,]) }}">{{$category->name}}</a></li>
                                     @endforeach
                                 </ul>
                             </div>

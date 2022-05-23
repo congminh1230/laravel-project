@@ -17,11 +17,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        //
-        // dd(1);
-        // $users = DB::table('users')->count();
-        // $price = DB::table('users')->min('id');
-        // dd($price);
+       
         $name = request()->get('name');
         $email = request()->get('email');
         $users_query = User::orderBy('created_at','desc')->select('*')->paginate(5);
@@ -32,9 +28,6 @@ class UserController extends Controller
             $users_query = $users_query->where('name',$name);
         }
         $users = $users_query;
-        // foreach($users as $user) {
-        //     dd($user->posts->name);
-        // }
         return view('backend.users.index')->with([
             'users' => $users
         ]);;
@@ -47,7 +40,6 @@ class UserController extends Controller
      */
     public function create()
     {
-        // dd(1);
         return view('backend.users.create');
     }
 
@@ -70,31 +62,14 @@ class UserController extends Controller
         
         if($request->hasFile('avatar'))
         {
-            // dd( $request->file('image'));
             $disk = 'public';
             $path = $request->file('avatar')->store('users', $disk);
             $user->disk = $disk;
             $user->avatar = $path;
         }
         $user->save();
-
-        // // dd($data);
-        // DB::table('users')->insert([
-        //     'name' => 'min',
-        //     'address' => 'sdsd',
-        //     'avatar' => $data['avatar'],
-        //     // 'phone' => $data['phone'],
-        //     'email' => $data['email'],
-        //     'password' => $data['password'],
-        //     'created_at' => now(),
-        //     'updated_at' => now()
-
-        // ]);
         Toastr::success('Tạo Người Dùng Thành Công', 'Thành Công', ["positionClass" => "toast-top-right"]);
-
         return redirect()->route('backend.users.index');
-
-     
     }
 
     /**
@@ -108,11 +83,6 @@ class UserController extends Controller
         //
         if($id !== null) {
             $users = User::find($id);
-            // dd($posts);
-            // $users = User::find($id)->posts;
-            // // dd($users);
-            // // $userInfo = $users->userInfo;
-            // // // dd($userInfo->phone );
             return view('Backend.users.show')->with([
                 'users'=>$users
             ]);
@@ -155,13 +125,10 @@ class UserController extends Controller
      */
     public function update(Request $request,User $user)
     {
-        // dd($request->all());
         $data = $request->all();
         $user = new User();
-        // dd($request->hasFile('avatar'));
         if($request->hasFile('avatar'))
         {
-            // dd('có');
             $disk = 'public';
             $path = $request->file('avatar')->store('users', $disk);
             $user->disk = $disk;
@@ -183,30 +150,17 @@ class UserController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-       
-        if($id  ===  'true') {
-            $users = User::onlyTrashed()->get();
-            // dd($users);
-            return view('backend.users.delete')->with([
-                'users'=>$users
-            ]);
-        }else {
-            $user = User::onlyTrashed()->where('id', $id)->find($id);
-            $user->restore();
+        $user = User::find($id);
+        $user->delete();
         Toastr::success('Xóa Thành Công', 'Xóa', ["positionClass" => "toast-top-right"]);
-            return redirect()->route('backend.users.index');
-        }
+        return redirect()->route('backend.users.index');
  
     }
     public function updateAvatar(Request $request, $id) {
-        // dd(1);
         $data = $request->all();
         $user = User::find($id);
-        // dd($user->name);
-        // dd($request->hasFile('avatar'));
         if($request->hasFile('avatar'))
         {
-            // dd('có');
             $disk = 'public';
             $path = $request->file('avatar')->store('users', $disk);
             $user->disk = $disk;

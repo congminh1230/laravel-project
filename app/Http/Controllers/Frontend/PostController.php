@@ -15,8 +15,6 @@ class PostController extends Controller
         $posts= Post::orderBy('created_at','desc')->select('*')->paginate(3);
         $categories = Category::get();
         $logos = Logo::get();
-
-        // dd($categories);
         return view('frontend.blog.list')->with([
             'posts'=>$posts,
             'categories'=>$categories,
@@ -27,14 +25,12 @@ class PostController extends Controller
     public function show($id) {
         $post = Post::find($id);
         $categories = Category::paginate(5);
-        // dd($categories);
         $posts = Post::paginate(4);
         return view('frontend.blog.index')->with([
             'post' => $post,
             'posts'=>$posts,
             'categories'=>$categories
         ]);
-        // return view('frontend.posts.index');
     }
     public function searchPosts(Request $request) {
         $categories = Category::get();

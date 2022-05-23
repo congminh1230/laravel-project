@@ -45,7 +45,6 @@ class OrderController extends Controller
         return redirect()->route('frontend.order.index');
     }
     public function listOrder() {
-        // dd(auth()->user()->id);
         $id = auth()->user()->id;
         $orders = Order::where('user_id', $id )->get();
         return view('frontend.order.index')->with([
@@ -53,7 +52,6 @@ class OrderController extends Controller
         ]);
     }
     public function destroy($id) {
-        // dd($id);
         $order = Order::find($id);
         $order->delete();
         return redirect()->route('frontend.order.index');

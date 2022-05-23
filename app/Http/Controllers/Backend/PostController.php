@@ -51,9 +51,6 @@ class PostController extends Controller
         }
 
         $posts = $posts_query;
-        // foreach($posts as $post) {
-        //     dd($post->user);
-        // }
         return view('backend.posts.index', ['posts' => $posts , 'categories' => $categories ]);
     }
 
@@ -107,7 +104,6 @@ class PostController extends Controller
 
         $data = $request->all();
         $tags = $request->get('tags');
-        // dd($tags);
         $post = new Post();
         $post->title = $data['title'];
         $post->user_created_id = 1;
@@ -119,7 +115,6 @@ class PostController extends Controller
         {
             $disk = 'public';
             $path = $request->file('image')->store('blogs', $disk);
-            // dd($path);
             $post->disk = $disk;
             $post->image = $path;
         }
@@ -141,23 +136,9 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
-        // $post = DB::table('posts')->find($id);
-    //    $tag = Tag::find(1);
-    //    foreach($tag->posts as $post) {
-    //         echo $post->id . $post->title . "</br>";
-    //    };
-        // $post = Post::find($id);
-        // dd($post->tags);
-        // foreach($post->tags as $tag) {
-        //     echo $tag->name;
-        // };
         $post = Post::find($id);
-        // dd($post);
-        // return view('backend.posts.show');
         return view('backend.posts.show', ['post' => $post ],compact('post'));
-        // return view('show', compact('post'));
-        // return view('backend.posts.show');
+      
     }
 
     /**
@@ -169,12 +150,9 @@ class PostController extends Controller
     public function edit($id)
     {
         //
-       
         $categories=Category::get();
         $post = DB::table('posts')->find($id);
         $tags = Tag::get();
-
-
         return view('backend.posts.edit',
         [
             'post' => $post,
@@ -194,7 +172,6 @@ class PostController extends Controller
     public function update(Request $request,Post $post)
     {
        
-        // dd($request);
         if($request->user()->cannot('update',$post)){
             abort(403);
         }
@@ -215,7 +192,6 @@ class PostController extends Controller
         
         $post -> save();
         $post -> tags()-> sync($tags);
-        // $request->session()->flash('success', 'Update  successful!');
         Toastr::success('Update Thành Công', 'Updata', ["positionClass" => "toast-top-right"]);
         return redirect()->route('backend.posts.index');
     }

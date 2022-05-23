@@ -25,7 +25,7 @@
                    <!--sidebar widget start-->
                     <aside class="sidebar_widget">
                         <div class="widget_list widget_categories">
-                            <h3>Categories</h3>
+                            <h3>Danh Mục</h3>
                             <ul>
                                 @foreach($categories as $category)
                                   <li><a>{{$category->name}}</a></li>
@@ -33,7 +33,7 @@
                             </ul>
                         </div>
                         <div class="widget_list widget_filter">
-                            <h3>Price</h3>
+                            <h3>Giá</h3>
                             <form action="#"> 
                                 <div id="slider-range"></div>   
                                 <button type="submit">Filter</button>

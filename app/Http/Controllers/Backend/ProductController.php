@@ -36,9 +36,6 @@ class ProductController extends Controller
                 'products' => $products,
                 'images' => $images
             ]);
-            
-        // dd($products);
-        
     }
 
     /**
@@ -113,15 +110,12 @@ class ProductController extends Controller
                     'product_id' => $product_id,
                     'disk' => $disk,
                     'path' => $url
-
                 ]);
 
             }
           
         }
 
-        // $user = User::find(1);
-        // $user->products()->save($product);
         Toastr::success('Tạo Thành Công Sản Phẩm', 'Thành Công', ["positionClass" => "toast-top-right"]);
         return redirect()->route('backend.products.index');
 
@@ -147,7 +141,6 @@ class ProductController extends Controller
     public function edit($id)
     {
         //
-        // dd($id);
         $product = Product::find($id);
         $categories=Category::get();
         
@@ -168,7 +161,6 @@ class ProductController extends Controller
     {
         //
         $data = $request->all();
-        // dd($id);
         $product = Product::find($id);
         $product->name = $data['name'];
         $product->description = $data['description'];
@@ -177,7 +169,6 @@ class ProductController extends Controller
         $product->price_sale = $data['price_sale'];
         $product->status = $data['status'];
         $product->category_id = $data['category_name'];
-        // $product->category_id = $data[''];
         $product->update();
         Toastr::success('Update Thành Công', 'Updata', ["positionClass" => "toast-top-right"]);
         return redirect()->route('backend.products.index');
@@ -200,37 +191,5 @@ class ProductController extends Controller
         Toastr::success('Xóa Thành Công', 'Xóa', ["positionClass" => "toast-top-right"]);
 
     }
-    // public function createImage()
-    // {
-    //     //
-    //     // dd(1);
-    //     $products=Product::get();
-    //     // $tags = Tag::get();
-    //     return view('backend.images.index')->with([
-    //         'products' =>$products
-    //     ]);
-    // }
-    // public function storeImage(Request $request)
-    // {
-    //     //
-        
-    //     // dd($request->hasFile('image'));
-    //     $products=Product::get();
-    //     $image=Image::get();
-    //     $data = $request->all();
-    //     $image->name = $data['name'];
-    //     $image->product_id = $data['category_name'];
-    //     if($request->hasFile('product'))
-    //     {
-    //         $disk = 'public';
-    //         $path = $request->file('product')->store('products', $disk);
-    //         $image->disk = $disk;
-    //         $image->image = $path;
-    //     }
-    //     $image->save();
-    //     return view('backend.products.create')->with([
-    //         'products' =>$products
-    //     ]);
-    // }
 
 }
