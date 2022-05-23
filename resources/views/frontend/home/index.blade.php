@@ -320,7 +320,7 @@
                             <article class="single_blog">
                                 <figure>
                                     <div class="blog_thumb">
-                                        <a href="{{ route('frontend.blogs.detail',['id' => $post->id]) }}"><img src="{{ Illuminate\Support\Facades\Storage::disk($post->disk)->url($post->image)}}" alt=""></a>
+                                        <a href="{{ route('frontend.blogs.detail',['id' => $post->id]) }}"><img style="height:200px" src="{{ Illuminate\Support\Facades\Storage::disk($post->disk)->url($post->image)}}" alt=""></a>
                                     </div>
                                     <figcaption class="blog_content">
                                         <h4><a href="{{ route('frontend.blogs.detail',['id' => $post->id]) }}">{{ $post->title}}</a></h4> 

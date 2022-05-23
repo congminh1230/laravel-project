@@ -43,7 +43,7 @@
                                                       <td><a href="{{ route('frontend.order.destroy',['id' => $order->id]) }}">X</a></td>
                                                       <td>{{$order->customer_name}}</td>
                                                       <td>{{$order->quantity}}</td>
-                                                      <td>{{$order->total_price}}</td>
+                                                      <td>{{ number_format($order->total_price,0,'.',',')}}</td>
                                                       <td>{{$order->status_text}}</td>
                                                 </tr>
                                                 @endforeach

@@ -116,7 +116,7 @@
                                                </ul>
                                             </div>
                                             <div class="price_box"> 
-                                                <span class="old_price">{{$product->price_origin}}$</span> 
+                                                <span class="old_price">{{number_format($product->price_origin,0,'.',',')}}</span> 
                                                 <!-- <span class="current_price">$120.00</span> -->
                                             </div>
                                         </div>

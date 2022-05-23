@@ -50,7 +50,7 @@
                                                     <td class="product_quantity"><label></label>
                                                      <input min="1" max="100" name="qty"value="{{ $product->qty }}" type="number">
                                                     </td>
-                                                    <td class="product_total">{{ number_format($product->qty * $product->price , 0, '.', ',')}}</td>
+                                                    <td class="product_total">{{ number_format($product->qty * $product->price ,0,'.',',')}}</td>
                                                 </tr>
                                                 @endif
                                                 @endforeach

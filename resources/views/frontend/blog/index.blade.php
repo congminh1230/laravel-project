@@ -102,7 +102,7 @@
                                 @foreach($posts as $post)
                                 <div class="post_wrapper">
                                     <div class="post_thumb">
-                                        <a href="{{ route('frontend.blogs.detail',['id' => $post->id])}}"><img src="{{ Illuminate\Support\Facades\Storage::disk($post->disk)->url($post->image)}}" alt=""></a>
+                                        <a href="{{ route('frontend.blogs.detail',['id' => $post->id])}}"><img style="height:200px" src="{{ Illuminate\Support\Facades\Storage::disk($post->disk)->url($post->image)}}" alt=""></a>
                                     </div>
                                     <div class="post_info">
                                         <h4><a href="{{ route('frontend.blogs.detail',['id' => $post->id])}}">{{$post->name}}</a></h4>

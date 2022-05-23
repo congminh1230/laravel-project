@@ -65,17 +65,6 @@ Route::prefix('/')->name('auth.')->namespace('Auth')->group(function() {
 
 });
 
-Route::get('login/google', 'Auth\LoginController@redirectToGoogle')->name('login.google');
-Route::get('login/google/callback', [App\Http\Controllers\Auth\LoginController::class, 'handleGoogleCallback']);
-
-// Facebook login
-Route::get('login/facebook', [App\Http\Controllers\Auth\LoginController::class, 'redirectToFacebook'])->name('login.facebook');
-Route::get('login/facebook/callback', [App\Http\Controllers\Auth\LoginController::class, 'handleFacebookCallback']);
-
-
-
-
-
 // frontend
 Route::get('/post/show/{id}', 'PostController@show')->name('post.show');
 Route::post('/comment/store', 'CommentController@store')->name('comment.add');

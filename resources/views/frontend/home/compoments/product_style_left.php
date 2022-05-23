@@ -35,7 +35,8 @@
                                                                     {{ route('frontend.carts.add',[ 'id' => $product->id ]) }}
                                                             @else
                                                                     {{ route('auth.login') }}
-                                                            @endif" title="Add to cart">Add to cart</a></li>
+                                                            @endif" 
+                                                                    title="Add to cart">Add to cart</a></li>
                                                                     <li class="wishlist"><a href="wishlist.html"  title="Add to Wishlist"><i class="icon-heart"></i></a></li>
                                                                     <li class="compare"><a href="compare.html" title="Add to Compare"><i class="icon-rotate-cw"></i></a></li>  
                                                                 </ul>
